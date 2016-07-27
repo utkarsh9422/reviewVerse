@@ -1,0 +1,175 @@
+<!-- Register Screen Starts -->
+
+<div class="marginBottom100">
+	<header>
+		<div class="col-xs-12">
+			<a href="#login"><img src="img/back-icon.png" width="20" height="24" alt="Back" align="left" class="paddingTop6"></a> Register
+		</div>
+	</header>
+	<div class="container">
+		<form name="form" class="register">
+			<br>
+			<div class="row" id="rForm">
+				<div class="col-xs-6 paddingLftRit10" ng-class="{ 'has-error': form.firstname.$dirty && form.firstname.$error.required}">
+					<label>First Name</label>
+					<input type="text" id="firstname" ng-model="firstname" class="form-control"  placeholder="{{ 'FIRSTNAME' | translate}}" ng-required="true">
+				</div>
+				<div class="col-xs-6 paddingLftRit10">
+					<label>Last Name</label>
+					<input type="text" id="lastname" ng-model="lastname" class="form-control"  placeholder="{{ 'LASTNAME' | translate}}" >
+				</div>
+
+				<div class="col-xs-12 paddingLftRit10" ng-class="{ 'has-error': form.mobile.$dirty && form.mobile.$error.required}">
+					<label>Mobile Number</label>
+					<input type="number" ng-model="mobile" class="form-control"  placeholder="{{ 'MOBILENO' | translate}}"  ng-required="true">
+				</div>
+				<div class="col-xs-12 paddingLftRit10" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required}">
+					<label>Email Address</label>
+					<input type="email" ng-model="email" name="email"  class="form-control"  placeholder="{{ 'EMAILID' | translate}}"  ng-required="true" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
+					<div ng-messages="form.email.$error">
+						<div ng-message="pattern">
+							{{ 'Not_valid_emailId' | translate}}
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 paddingLftRit10" ng-class="{ 'has-error': form.nationalID.$dirty && form.nationalID.$error.required}">
+					<label>National or IQAMA ID</label>
+					<input type="text" ng-model="nationalID" class="form-control"  placeholder="{{ 'NATIONALID' | translate}}"  ng-required="true">
+				</div>
+
+				<!-- Address 1 -->
+				<div class="addressfst" id="addDiv1" >
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label>{{'ADDRESS' | translate}}1</label>
+						<select id="city1" ng-model="selectedCity1" ng-options="city.name for city in cities" >
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label ng-click="openMap1()">&nbsp;<span class="floatRit"><i class="fa fa-map-marker"></i> <a style="display:inline!important;">MAP VIEW</a></span></label>
+
+						<select id="area1"  ng-model="selectedArea1"  ng-options="selectedArea1 for selectedArea1 in selectedCity1.areas">
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="street1" placeholder="{{ 'STREET' | translate}}">
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="number" ng-model="pincode1" placeholder="{{ 'POBOX' | translate}}">
+					</div>
+					<div class="col-xs-12 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="address1" placeholder="{{ 'ADDRESS' | translate}}">
+					</div>
+					<!-- Radio Button -->
+
+					<div class="custom-radio">
+						<label class="btn active marginLft10">
+							<input type="radio" name='gender1' checked>
+							<i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span> Make this as Default Address</span> </label>
+					</div>
+				</div>
+
+				<!-- Address 2 -->
+				<div class="addressfst" id="addDiv2" ng-show = "counter>=2">
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label>{{'ADDRESS' | translate}}2</label>
+						<select id="city2" ng-model="selectedCity2" ng-options="city.name for city in cities" >
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label ng-click="openMap2()">&nbsp;<span class="floatRit"><i class="fa fa-map-marker"></i> <a style="display:inline!important;">MAP VIEW</a></span></label>
+
+						<select id="area2"  ng-model="selectedArea2"  ng-options="selectedArea2 for selectedArea2 in selectedCity2.areas">
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="street2" placeholder="{{ 'STREET' | translate}}">
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="number" ng-model="pincode2" placeholder="{{ 'POBOX' | translate}}">
+					</div>
+					<div class="col-xs-12 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="address2" placeholder="{{ 'ADDRESS' | translate}}">
+					</div>
+
+					<!-- Radio Button -->
+
+					<div class="custom-radio">
+						<label class="btn active marginLft10">
+							<input type="radio" name='gender1' checked>
+							<i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span> Make this as Default Address</span> </label>
+					</div>
+				</div>
+
+				<!-- Address 3 -->
+				<div class="addressfst" id="addDiv3" ng-show = "counter>=3">
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label>{{'ADDRESS' | translate}}3</label>
+						<select id="city3" ng-model="selectedCity3" ng-options="city.name for city in cities" >
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10  marginBot10">
+						<label ng-click="openMap3()">&nbsp;<span class="floatRit"><i class="fa fa-map-marker"></i> <a style="display:inline!important;">MAP VIEW</a></span></label>
+
+						<select id="area3"  ng-model="selectedArea3"  ng-options="selectedArea3 for selectedArea3 in selectedCity3.areas">
+							<option value=''>{{'Select' |translate }}</option>
+						</select>
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="street3" placeholder="{{ 'STREET' | translate}}">
+					</div>
+					<div class="col-xs-6 paddingLftRit10 marginBot10">
+						<input type="number" ng-model="pincode3" placeholder="{{ 'POBOX' | translate}}">
+					</div>
+					<div class="col-xs-12 paddingLftRit10 marginBot10">
+						<input type="text" ng-model="address3" placeholder="{{ 'ADDRESS' | translate}}">
+					</div>
+					<!-- Radio Button -->
+
+					<div class="custom-radio">
+						<label class="btn active marginLft10">
+							<input type="radio" name='gender1' checked>
+							<i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span> Make this as Default Address</span> </label>
+					</div>
+				</div>
+
+			</div>
+		</form>
+		<!-- Add More button -->
+		<div class="addmore" ng-click="incrementCounter()">
+			<a><strong>+</strong> ADD MORE ADDRESS</a>
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+
+<footer>
+	<button ng-click= "registerUser()">
+		{{ 'SUBMIT' | translate }}
+	</button>
+</footer>
+
+<!-- Login Screen Ends -->
+
+<!--
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+var counter = 2;
+$(".addmore").click(function() {
+if(counter <= 3 ){
+var html = '<div class="addressfst"><div class="col-xs-6 paddingLftRit10  marginBot10"><label>Delivery Address 0'+counter+'</label><select><option>ABCD</option><option>EFGH</option></select></div><div class="col-xs-6 paddingLftRit10 marginBot10"><label>&nbsp;<span class="floatRit"><i class="fa fa-map-marker"></i> <a href="#" style="display:inline!important;">MAP VIEW</a></span></label><select><option>ABCD</option><option>EFGH</option></select></div><div class="col-xs-6 paddingLftRit10 marginBot10"><input type="text" placeholder="Sreet"></div><div class="col-xs-6 paddingLftRit10 marginBot10"><input type="text" placeholder="PO Box"></div><div class="col-xs-12 paddingLftRit10 marginBot10"><input type="text" placeholder="Address"></div><label class="btn active marginLft10"><input type="radio" name="gender1"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-check-circle-o fa-2x"></i> <span>  Make this as Default Address</span></label></div>';
+$("#rForm").append(html);
+html = "";
+}
+counter++;
+});
+});
+</script>-->
+

@@ -1,0 +1,35 @@
+<div id="myModal" class="height100" style="padding-right:0px!important;">
+    <div class="height100">
+        <div class="modal-content height100">
+            <div class="modal-header">
+                <i><img src="img/back-icon.png"  ng-click="doTheBack()" width="29" height="26" alt="Back"></i>
+                <h4 class="modal-title">Sign in <span id="title">{{user}}</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="height100">
+    <div>
+        {{test}}<br>
+    </div>
+      <form ng-submit="addPost()">
+  <input type="text" ng-model="title" />
+  <button type="submit">Post</button>
+</form>
+<div ng-repeat="post in posts | orderBy:'-upvotes'">
+  <button ng-click="incrementUpvotes(post)">Like</button>  
+  {{post.title}} - upvotes: {{post.upvotes}}
+<div class="star-rating" star-rating rating-value="post.rating" data-max="5" on-rating-selected="rateFunction(post.rating)"></div>
+</div>
+                </div>                    
+            </div>            
+        </div>
+    </div>
+</div> 
+
+
+
+
+
+<!--  </body>
+  <script src="lib/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</html>-->
