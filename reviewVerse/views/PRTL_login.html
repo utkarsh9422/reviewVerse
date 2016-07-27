@@ -1,0 +1,43 @@
+<div id="myModal" class="height100" style="padding-right:0px!important;">
+    <div class="height100">
+        <div class="modal-content height100">
+            <div class="modal-header">
+                <i><img src="img/back-icon.png"  ng-click="doTheBack()" width="29" height="26" alt="Back"></i>
+                <h4 class="modal-title">Sign in <span id="title">{{user}}</span></h4>
+            </div>
+            <div class="modal-body">
+            	<form method="post" name="loginform">
+                    <div class="marginBot35">
+                    	<input type="text" name="username" ng-model="username" class="form-control" placeholder="UserName"
+						ng-minlength="8" ng-maxlength="14" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+			            <div ng-messages="loginform.username.$error">
+							<div ng-message="required">
+								This field is required
+							</div>							
+						</div>
+                    </div>
+                    <div>
+                    	<input type="password" name="password" ng-model="password" class="form-control" placeholder="Password"
+						ng-minlength="6" ng-maxlength="6" ng-pattern="/^0|[1-9][0-9]*$/"  required>
+				            <div ng-messages="loginform.password.$error">
+								<div ng-message="required">
+									This field is required
+								</div>
+								<div ng-message="minlength">
+									Password is too short
+								</div>
+							</div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-xs-6" ng-click="forgetPassword()"><a>FORGOT_PASSWORD</a></div>
+                        <div class="col-xs-6 textRit" ng-click="forgetConsumerID()"><a>FORGOT&nbsp;Username</a></div>
+                    </div>
+                    <div><button type="button" class="btn btn-success" ng-click="userLogin()">LOGIN</button></div>
+                    
+                </form>
+                <div class="dilog-footer">MEMBER<a href="#register">SIGN_UP</a></div>
+            </div>
+            
+        </div>
+    </div>
+</div> 
