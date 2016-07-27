@@ -9,7 +9,13 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var mongoose = require('mongoose');
+require('./models/InternationalString');
+require('./models/Category');
+require('./models/Topic');
+require('./models/Review');
 
+mongoose.connect('mongodb://localhost/reviewDB');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
