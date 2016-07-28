@@ -10,7 +10,7 @@ var users = require('./routes/users');
 
 var app = express();
 var mongoose = require('mongoose');
-require('./models/InternationalString');
+//require('./models/InternationalString');
 require('./models/Category');
 require('./models/Topic');
 require('./models/Review');
