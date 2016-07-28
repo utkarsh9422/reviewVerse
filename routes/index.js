@@ -1,15 +1,18 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var router = express.Router();
+var app = express();
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 var Review = mongoose.model('Review');
 var Topic = mongoose.model('Topic');
+app.use(bodyParser());
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/categories', function(req, res, next) {
+app.get('/categories', function(req, res, next) {
   Category.find(function(err, categories){
     if(err){ return next(err); }
 
@@ -17,13 +20,15 @@ router.get('/categories', function(req, res, next) {
   });
 });
 
-router.post('/categories', function(req, res, next) {
-  var category = new Category(req.body);
+app.post('/categories', function(request, response,next) {
+	console.log(request.body);
+  var category = new Category(request.body);
 
   category.save(function(err, category){
     if(err){ return next(err); }
 
-    res.json(category);
+    response.json(category);
   });
 });
 module.exports = router;
+app.listen(3001);
