@@ -6,7 +6,7 @@ var TopicSchema = new mongoose.Schema({
   description: String,
   upvotes: {type: Number, default: 0},
   avgRating:{type: Number, default: 0},
-  parentCategoryId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }
+  parentCategoryId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 });
 
