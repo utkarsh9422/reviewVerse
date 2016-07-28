@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 
 var CategorySchema = new mongoose.Schema({
   creation: { type: Date, default: Date.now },
-  name: [InternationalStringSchema],
-  description: [InternationalStringSchema],
+  name: String,
+  description: String,
   topics: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Topics' }]
 });
 
