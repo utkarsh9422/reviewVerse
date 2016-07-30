@@ -30,5 +30,24 @@ app.post('/categories', function(request, response,next) {
     response.json(category);
   });
 });
+
+app.post('/topics', function(request, response,next) {
+	console.log(request.body);
+  var topic = new Topic(request.body);
+
+  topic.save(function(err, topic){
+    if(err){ return next(err); }
+
+    response.json(topic);
+  });
+});
+
+app.get('/topics', function(req, res, next) {
+  Topic.find(function(err, topics){
+    if(err){ return next(err); }
+
+    res.json(topics);
+  });
+});
 module.exports = router;
 app.listen(3001);
