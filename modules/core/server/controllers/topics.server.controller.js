@@ -9,7 +9,7 @@
   Topic = mongoose.model('Topic'),
   _ = require('lodash');
 
-/**
+ /**
  * Create a Topic
  */
 exports.create = function (req, res) {
@@ -92,7 +92,10 @@ var topic = req.topic;
  */
 exports.list = function(req, res) {
 	console.log("Fetching Topics");
-	Topic.find().sort('name').exec(function(err, topics) {
+	var categoryId=req.query.categoryId;
+	if(categoryId !== null){
+		console.log("Fetching Topics by categoryId="+categoryId);
+	Topic.find({category: categoryId}).exec(function(err, topics) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -101,6 +104,18 @@ exports.list = function(req, res) {
 			res.json(topics);
 		}
 	});
+	}
+	else{
+		Topic.find().sort('name').exec(function(err, topics) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(topics);
+		}
+	});
+	}
 };
 
 /**

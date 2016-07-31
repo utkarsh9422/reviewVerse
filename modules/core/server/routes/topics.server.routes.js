@@ -10,7 +10,6 @@ module.exports = function(app) {
 	  .post(topics.create);  
 	  
 	app.route('/topics/:topicId')
-   	.get(topics.read)
 	.put(topics.update)
 	.delete(topics.delete);
 	
