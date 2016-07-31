@@ -7,13 +7,15 @@ module.exports = function(app) {
   var topics = require('../controllers/topics.server.controller');
 
 	app.route('/topics')
-	.get(topics.list)
 	  .post(topics.create);  
 	  
 	app.route('/topics/:topicId')
    	.get(topics.read)
 	.put(topics.update)
 	.delete(topics.delete);
+	
+	app.route('/topics/:topicId/upvote')
+	.put(topics.upvote);
 	
 	// Finish by binding the article middleware
 	// What's this? Where the topicId is present in the URL
