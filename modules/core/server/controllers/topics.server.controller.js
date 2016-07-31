@@ -93,7 +93,7 @@ var topic = req.topic;
 exports.list = function(req, res) {
 	console.log("Fetching Topics");
 	var categoryId=req.query.categoryId;
-	if(categoryId !== null){
+	if(categoryId != null){
 		console.log("Fetching Topics by categoryId="+categoryId);
 	Topic.find({category: categoryId}).exec(function(err, topics) {
 		if (err) {
