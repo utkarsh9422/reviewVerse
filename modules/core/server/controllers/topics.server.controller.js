@@ -53,6 +53,24 @@ var topic = req.topic;
 };
 
 /**
+ * Upvote a Topic
+ */
+exports.upvote = function (req, res) {
+var topic = req.topic;
+
+	topic.upvotes+=1;
+
+	topic.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(topic);
+		}
+	});
+};
+/**
  * Delete an Topic
  */
 exports.delete = function (req, res) {
