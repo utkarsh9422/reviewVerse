@@ -8,6 +8,7 @@
   var mongoose = require('mongoose'),
   errorHandler = require('./errors.server.controller'),
   Topic = mongoose.model('Topic'),
+  Review = mongoose.model('Review'),
   _ = require('lodash');
 
  /**
@@ -117,6 +118,25 @@ exports.list = function(req, res) {
 		}
 	});
 	}
+};
+
+/**
+ * List of Reviews for a topic
+ */
+exports.getReviews = function(req, res) {
+	console.log("Fetching Topic Reviews");
+	var topicId = req.topic;
+
+	console.log("Fetching Reviews by TopicId="+topicId);
+	Review.find({ownerTopicId: topicId}).exec(function(err, reviews) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(reviews);
+		}
+	});
 };
 
 /**

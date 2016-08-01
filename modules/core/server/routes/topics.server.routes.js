@@ -5,7 +5,7 @@ module.exports = function(app) {
   // Routing logic   
   // ...
   var topics = require('../controllers/topics.server.controller');
-
+var reviews = require('../controllers/reviews.server.controller');
 	app.route('/topics')
 	  .post(topics.create);  
 	  
@@ -16,6 +16,8 @@ module.exports = function(app) {
 	app.route('/topics/:topicId/upvote')
 	.put(topics.upvote);
 	
+	app.route('/topics/:topicId/reviews')
+	.post(reviews.create);
 	// Finish by binding the article middleware
 	// What's this? Where the topicId is present in the URL
 	// the logic to 'get by id' is handled by this single function
