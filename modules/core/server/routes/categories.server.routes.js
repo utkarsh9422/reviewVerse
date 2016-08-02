@@ -10,13 +10,13 @@ module.exports = function(app) {
 var topics = require('../controllers/topics.server.controller');
  var reviews = require('../controllers/reviews.server.controller');
  
- app.all('/', function(req, res, next) {
+ /*app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
    // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   next();
- });
+ });*/
  
 	app.route('/categories')
 	  .get(categories.list)
