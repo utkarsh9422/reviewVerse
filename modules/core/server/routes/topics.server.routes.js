@@ -6,6 +6,7 @@ module.exports = function(app) {
   // Routing logic   
   // ...
   app.use(cors());
+  app.options('*', cors());
   var topics = require('../controllers/topics.server.controller');
 var reviews = require('../controllers/reviews.server.controller');
 	app.route('/topics')
