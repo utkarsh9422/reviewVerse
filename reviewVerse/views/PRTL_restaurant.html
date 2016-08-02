@@ -1,0 +1,116 @@
+<div class="height100" >
+
+            <div class="modal-header">
+                <i><img src="img/back-icon.png"  ng-click="doTheBack()" width="29" height="26" alt="Back"></i>
+                <h4 class="modal-title">Sign in <span id="title">{{user}}</span></h4>
+                {{to}}
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div>
+                        {{test}}<br>
+                    </div>
+
+                    <div class="fixed-action-btn" style="bottom: 45px; right: 25px;">
+                        <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
+                    </div>
+
+                    <!--Post Topic Details-->
+                    <div class="row" id="topic" ng-repeat="t in topics">
+                        <div class="col-sm-6 ">
+                            <div class="event-title">
+                                <h3>{{t.name}}</h3></div>
+                            <div class="event-content">
+                                <p>{{t.description}}</p></div>
+                            <div class="topicUpvotes"><button class="btn btn-primary" ng-click="incrementUpvotes(t)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                                Upvotes: {{t.upvotes}}
+                                    <div class="star-rating" star-rating rating-value="t.avgRating" data-max="5" on-rating-selected="rateFunction(t.avgRating)"></div>
+
+                                <!--                                Post Reviews-->
+                                <form ng-submit="addReview()">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Post Review" ng-model="body" />
+                                        <div class="star-rating" star-rating rating-value="review.reviewRating" data-max="5" on-rating-selected="rateFunction(review.reviewRating)"></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Post Review</button>
+                                </form>    
+                                    
+                                <!--Show Previous Reviews-->
+                                <h4>Reviews</h4>
+<!--                                <ul ng-repeat="review in t.reviews">                      
+                                    <li><p><span>{{review.body}}</span> by {{review.author}} <span> Upvotes ->{{review.reviewUpvotes}}</span>
+                                        <div  class="star-rating" star-rating rating-value="review.reviewRating" data-max="5" on-rating-selected="rateFunction(topic.review.reviewRating)"></div></li></p>
+                                </ul>-->
+                                
+
+                            </div>
+{{message}}
+                        </div>
+                        <div class="col-sm-6 event-thumb">
+                            <img class="img-responsive" ng-src="{{topic.image}}" width="400" height="300"/>
+                        </div><br>
+                        <div class="col-sm-12 emptySpace">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--    <div ng-hide = "IsHidden" ng-repeat="comment in comments " >            
+                              <span class="glyphicon glyphicon-thumbs-up"
+                                ng-click="incrementUpvotes(comment)">+</span>
+                              {{comment.upvotes}} - by {{comment.author}}
+                              <span style="font-size:20px; margin-left:10px;">{{comment.body}}</span>
+                              <form ng-submit="addComment()">
+                              <h3>Add a new comment</h3>
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Comment" ng-model="body" />
+                              </div>
+                              <button type="submit" class="btn btn-primary">Post</button>
+                            </form>
+                            </div>-->
+
+            </div>
+       
+</div>        
+
+<!--Post Modal-->
+<div class="modal fade" id="postTopic" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add new Topic</h4>
+        </div>
+        <div class="modal-body">
+            <form >
+                <input type="text" ng-model="newName" placeholder="Title"/>
+                <input type="text" ng-model="newDescription" placeholder="Topic"/>
+                <input type="file" accept="image/*" multiple
+                       ng-src="{{newImage}}"
+                       resize-max-height="300"
+                       resize-max-width="250"
+                       resize-quality="0.7" />
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" ng-click="addTopic()" style="margin-right:10px;" class="btn btn-default" data-dismiss="modal">Post</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  </body>
+  <script src="lib/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</html>-->
