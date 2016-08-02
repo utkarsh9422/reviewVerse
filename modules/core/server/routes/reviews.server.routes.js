@@ -5,8 +5,9 @@ var cors = require('cors');
 module.exports = function(app) {
   // Routing logic   
   // ...
-  app.use(cors());
   app.options('*', cors());
+  app.use(cors());
+  
   var reviews = require('../controllers/reviews.server.controller');
     
 	app.route('/reviews/:reviewId')
