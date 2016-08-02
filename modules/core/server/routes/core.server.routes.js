@@ -1,7 +1,10 @@
 'use strict';
 
+var cors = require('cors');
+
 module.exports = function (app) {
   // Root routing
+  app.use(cors());
   var core = require('../controllers/core.server.controller');
 
   // Define error pages
