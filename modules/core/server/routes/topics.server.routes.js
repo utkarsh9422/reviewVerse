@@ -1,9 +1,11 @@
 /* eslint-disable */
 'use strict';
+var cors = require('cors');
 
 module.exports = function(app) {
   // Routing logic   
   // ...
+  app.use(cors());
   var topics = require('../controllers/topics.server.controller');
 var reviews = require('../controllers/reviews.server.controller');
 	app.route('/topics')
