@@ -35,9 +35,9 @@ var review = new Review(req.body);
 			console.log("Total Rating:"+totalRating);
 			review.save(function(err) {
 				if (err) {
+					console.log(err);
 					return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
-					console.log(err);
 				});
 			  } else {
 					totalRating+=req.body.rating;
