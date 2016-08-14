@@ -22,8 +22,8 @@ var totalRating = 0;
 var ratingCount = 0;
 var review = new Review(req.body);
 	averageRating=req.topic.avgRating;
-	console.log("Current Avg Rating of TopicId="+req.topic._id+"is"+averageRating);
-	console.log("Fetching Reviews Count by TopicId="+req.topic._id);
+	console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
+	console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
 	Review.count({ownerTopicId: req.topic._id}, function(err, count){
 		if (err) {
 			console.log("error",err);
@@ -37,6 +37,7 @@ var review = new Review(req.body);
 				if (err) {
 					return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
+					console.log(err);
 				});
 			  } else {
 					totalRating+=req.body.rating;
