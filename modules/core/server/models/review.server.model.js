@@ -51,7 +51,7 @@ var ReviewSchema = new Schema({
 	rating: {
 		type: Number,
 		default: 0,
-		min: 0
+		required: 'rating cannot be null'
 	}
 });
 
