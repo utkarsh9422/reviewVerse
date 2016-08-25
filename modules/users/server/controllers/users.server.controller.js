@@ -98,7 +98,7 @@ exports.login = function(req, res) {
 			}
 			else{
 				// all is well, return successful user
-				var token = jwt.sign(user, cfg.jwtSecret, {
+				var token = jwt.sign(user, cfg.sessionSecret, {
 				expiresInMinutes: 5 // expires in 24 hours
         });
 				res.json({token: token});
