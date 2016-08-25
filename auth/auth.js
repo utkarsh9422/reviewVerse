@@ -1,9 +1,11 @@
 /* eslint-disable */
 'use strict';
 // auth.js
+var mongoose = require('mongoose');
 var passport = require("passport");
+var path = require('path');
 var passportJWT = require("passport-jwt");
-var users = require("./users.js");
+var users = mongoose.model('User');
 var cfg = require("./config/config.js");
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
