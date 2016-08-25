@@ -97,9 +97,9 @@ exports.login = function(req, res) {
 		});
 			}
 			else{
-				console.log(user);
+				console.log(user._id);
 				// all is well, return successful user
-				var token = jwt.sign(user, cfg.sessionSecret, {
+				var token = jwt.sign(user._id, cfg.sessionSecret, {
 				expiresInMinutes: 5 // expires in 24 hours
         });
 				res.json({token: token});
