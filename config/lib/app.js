@@ -8,7 +8,7 @@ var config = require('../config'),
   express = require('./express'),
   chalk = require('chalk'),
   seed = require('./seed'),
-  auth = require("../../auth/auth.js")();;
+  auth = require("../../auth/auth.js")();
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
