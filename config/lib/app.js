@@ -7,8 +7,7 @@ var config = require('../config'),
   mongoose = require('./mongoose'),
   express = require('./express'),
   chalk = require('chalk'),
-  seed = require('./seed'),
-  auth = require("../../auth/auth.js")();
+  seed = require('./seed');
 
 function seedDB() {
   if (config.seedDB && config.seedDB.seed) {
@@ -37,7 +36,6 @@ module.exports.start = function start(callback) {
   var _this = this;
  
   _this.init(function (app, db, config) {
-    app.use(auth.initialize());
     // Start the app by listening on <port>
     app.listen(config.port, function () {
 
