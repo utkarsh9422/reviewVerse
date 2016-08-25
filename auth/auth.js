@@ -18,8 +18,8 @@ jwtFromRequest: ExtractJwt.fromAuthHeader()
 module.exports = function() {
 	
 var strategy = new Strategy(params, function(payload, done) {
-	console.log(payload.sub);
-User.findOne({_id:payload.sub}, function(err, user) {
+	console.log(payload.id);
+User.findOne({_id:payload.id}, function(err, user) {
         if (err) {
             return done(err, false);
         }
