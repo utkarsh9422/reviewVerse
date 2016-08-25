@@ -35,10 +35,9 @@ module.exports.init = function init(callback) {
 
 module.exports.start = function start(callback) {
   var _this = this;
-  var app = express();
- app.use(auth.initialize());
+ 
   _this.init(function (app, db, config) {
-
+    app.use(auth.initialize());
     // Start the app by listening on <port>
     app.listen(config.port, function () {
 
