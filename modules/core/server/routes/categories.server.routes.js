@@ -1,7 +1,7 @@
 /* eslint-disable */
 'use strict';
 var cors = require('cors');
-
+var auth= require(path.resolve('./auth/auth.js'))();
 module.exports = function(app) {
   // Routing logic   
   // ...
@@ -18,7 +18,7 @@ var topics = require('../controllers/topics.server.controller');
   next();
  });*/
  
-	app.route('/categories')
+	app.route('/categories',auth.authenticate())
 	  .get(categories.list)
 	  .post(categories.create);
 	  

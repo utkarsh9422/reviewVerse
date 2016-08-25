@@ -1,0 +1,38 @@
+// auth.js
+var passport = require("passport");
+var passportJWT = require("passport-jwt");
+var users = require("./users.js");
+var cfg = require("./config/config.js");
+var ExtractJwt = passportJWT.ExtractJwt;
+var Strategy = passportJWT.Strategy;
+var params = {
+secretOrKey: cfg.sessionSecret,
+jwtFromRequest: ExtractJwt.fromAuthHeader()
+//jwtFromRequest: ExtractJwt.fromHeader("Authorization")
+};
+
+module.exports = function() {
+	
+var strategy = new Strategy(params, function(payload, done) {
+User.findOne({_id: jwt_payload.sub}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            done(null, user);
+        } else {
+            done(null, false);
+            // or you could create a new account
+        }
+    });
+});
+passport.use(strategy);
+return {
+initialize: function() {
+return passport.initialize();
+},
+authenticate: function() {
+return passport.authenticate("jwt", cfg.sessionSecret);
+}
+};
+};

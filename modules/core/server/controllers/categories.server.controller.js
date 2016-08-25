@@ -5,6 +5,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	auth = require(path.resolve('./auth/auth.js'))();
 	errorHandler = require('./errors.server.controller'),
 	Category = mongoose.model('Category'),
     _ = require('lodash');

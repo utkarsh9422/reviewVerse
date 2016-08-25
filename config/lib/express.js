@@ -17,8 +17,8 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path');
-
+  path = require('path'),
+auth = require("./auth/auth.js')();
 /**
  * Initialize local variables
  */
@@ -84,7 +84,7 @@ module.exports.initMiddleware = function (app) {
   }));
   app.use(bodyParser.json());
   app.use(methodOverride());
-
+app.use(auth.initialize());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());
