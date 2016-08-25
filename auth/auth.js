@@ -19,7 +19,7 @@ module.exports = function() {
 	
 var strategy = new Strategy(params, function(payload, done) {
 	console.log(payload._id);
-User.findOne({_id:payload._id}, function(err, user) {
+User.findById(payload._id).exec(function(err, user) {
         if (err) {
             return done(err, false);
         }
