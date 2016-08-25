@@ -18,8 +18,7 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
-  path = require('path'),
-  auth = require("../../auth/auth.js")();
+  path = require('path');
 /**
  * Initialize local variables
  */
@@ -252,6 +251,6 @@ module.exports.init = function (db) {
 
   // Configure Socket.io
   app = this.configureSocketIO(app, db);
- app.use(auth.initialize());
+
   return app;
 };
