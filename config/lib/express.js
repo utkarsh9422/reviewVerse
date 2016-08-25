@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 /**
@@ -84,7 +85,7 @@ module.exports.initMiddleware = function (app) {
   }));
   app.use(bodyParser.json());
   app.use(methodOverride());
-app.use(auth.initialize());
+  app.use(auth.initialize());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());

@@ -1,6 +1,7 @@
 /* eslint-disable */
 'use strict';
 var cors = require('cors');
+var path = require('path');
 var auth= require(path.resolve('./auth/auth.js'))();
 module.exports = function(app) {
   // Routing logic   
