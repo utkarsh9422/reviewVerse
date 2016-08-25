@@ -20,8 +20,8 @@ var topics = require('../controllers/topics.server.controller');
   next();
  });*/
  
-	app.route('/categories',auth.authenticate())
-	  .get(categories.list)
+	app.route('/categories')
+	  .get(auth.authenticate(),categories.list)
 	  .post(categories.create);
 	  
 	app.route('/categories/:categoryId')
