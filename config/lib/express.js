@@ -85,7 +85,6 @@ module.exports.initMiddleware = function (app) {
   }));
   app.use(bodyParser.json());
   app.use(methodOverride());
-  app.use(auth.initialize());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
   app.use(flash());
@@ -253,6 +252,6 @@ module.exports.init = function (db) {
 
   // Configure Socket.io
   app = this.configureSocketIO(app, db);
-
+ app.use(auth.initialize());
   return app;
 };
