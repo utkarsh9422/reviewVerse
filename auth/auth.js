@@ -1,3 +1,5 @@
+/* eslint-disable */
+'use strict';
 // auth.js
 var passport = require("passport");
 var passportJWT = require("passport-jwt");

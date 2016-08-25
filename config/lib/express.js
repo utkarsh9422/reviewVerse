@@ -18,7 +18,7 @@ var config = require('../config'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
   path = require('path'),
-auth = require("./auth/auth.js')();
+  auth = require("./auth/auth.js')();
 /**
  * Initialize local variables
  */
