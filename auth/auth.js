@@ -18,6 +18,7 @@ jwtFromRequest: ExtractJwt.fromAuthHeader()
 module.exports = function() {
 	
 var strategy = new Strategy(params, function(payload, done) {
+	console.log(jwt_payload.sub);
 User.findOne({_id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);
