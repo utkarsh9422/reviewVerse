@@ -12,8 +12,7 @@ var userSchema = mongoose.Schema({
         email        : { type: String, require: true, unique: true },
         password     : { type: String, require:true },
 		name         : { type: String }
-    }
-	,
+    },
     facebook         : {
         fid           : String,
         f_token        : String,
