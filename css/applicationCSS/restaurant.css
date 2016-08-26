@@ -1,0 +1,98 @@
+/*TextStyle CSS*/
+h1 {
+    font-size:40px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.5) 3px 2px 3px;
+}
+h2 {
+    font-size:30px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.5) 3px 2px 3px;
+}
+h3{
+    font-size:25px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.8) -1px -1px 1px,rgba(0,0,0,.5) 1px 1px 1px;
+}
+h4{
+    font-size:22px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+}
+.add-on .input-group-btn > .btn {
+  border-left-width:0;left:-2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+ box-shadow:none;
+ -webkit-box-shadow:none; 
+ border-color:#cccccc; 
+}
+.form-control{width:20%}
+.btn-logout{
+    height:34px;
+    font-size:14px;
+    color:rgba(0,0,0,0.8);
+    background:#388e3c;
+    margin-top:10px;
+    margin-left:-20px;
+    border-radius: 4px;    
+}
+.btn-small{
+    color:rgba(0,0,0,0.8);
+    background:#4db6ac;
+    border-radius: 4px;
+}
+.btn-small-2{
+    color:rgba(0,0,0,0.8);
+    background:#80cbc4;
+    border-radius: 4px;
+}
+/*rating CSS*/
+.rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.rating li {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.rating li :hover:before {
+    color:#6699ff;
+}
+.rating li.filled {
+    color: #fd0;
+}
+
+.rating.readonly li.filled {
+    color: #666;
+}
+
+.average-rating-container {
+    position: relative;
+    height: 31px;
+    width: 103px;
+    overflow: hidden;
+}
+
+.average-rating-container .background,
+.average-rating-container .foreground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media screen and (min-width: 768px) {
+
+}
