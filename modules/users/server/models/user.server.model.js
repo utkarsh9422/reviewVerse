@@ -13,7 +13,7 @@ var userSchema = mongoose.Schema({
         password     : { type: String, require:true },
 		name         : { type: String }
     }
-	/*,
+	,
     facebook         : {
         fid           : String,
         f_token        : String,
@@ -31,7 +31,7 @@ var userSchema = mongoose.Schema({
         g_token        : String,
         google_email        : String,
         gname         : String
-    }*/
+    }
 
 });
 
