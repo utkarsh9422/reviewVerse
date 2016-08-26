@@ -47,20 +47,22 @@ exports.createUser = function(req, res) {
 
 				// if there is no user with that email
                 // create the user
+                var newUser            = new User();
+
                 // set the user's local credentials
 				user.local.name= name;
                 user.local.email    = email;
-                user.local.password = user.generateHash(password); // use the generateHash function in our user model
-				console.log(user);
+                user.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+				console.log(newUser);
 				// save the user
-                user.save(function(err) {
+                newUser.save(function(err) {
                     if (err){
 						return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 					}
                else{
-				   res.status(201).json(user);
+				   res.status(201).json(newUser);
 			   }
                 });
             }
