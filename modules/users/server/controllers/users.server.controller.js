@@ -53,7 +53,7 @@ exports.createUser = function(req, res) {
 				newUser.local.name= name;
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
-
+				console.log(newUser);
 				// save the user
                 newUser.save(function(err) {
                     if (err){
