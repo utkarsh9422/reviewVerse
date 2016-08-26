@@ -12,7 +12,8 @@ var userSchema = mongoose.Schema({
         email        : { type: String, require: true, unique: true },
         password     : { type: String, require:true },
 		name         : { type: String }
-    },
+    }
+	/*,
     facebook         : {
         fid           : String,
         f_token        : String,
@@ -30,7 +31,7 @@ var userSchema = mongoose.Schema({
         g_token        : String,
         google_email        : String,
         gname         : String
-    }
+    }*/
 
 });
 
