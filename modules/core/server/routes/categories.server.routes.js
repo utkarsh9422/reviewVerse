@@ -32,10 +32,10 @@ var topics = require('../controllers/topics.server.controller');
 	
 	//ToDo Code to be moved to Topics Route
 	app.route('/topics')
-	.get(topics.list);
+	.get(auth.authenticate(),topics.list);
 	
 	app.route('/topics/:topicId')
-   	.get(topics.read);
+   	.get(auth.authenticate(),topics.read);
 	
 	app.route('/topics/:topicId/reviews')
    	.get(topics.getReviews);
