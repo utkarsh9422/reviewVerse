@@ -9,6 +9,9 @@ var User = mongoose.model('User');
 var cfg = require("../config/config.js");
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;  
+var TwitterStrategy = require('passport-twitter').Strategy;  
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var params = {
 secretOrKey: cfg.sessionSecret,
 jwtFromRequest: ExtractJwt.fromAuthHeader()
@@ -31,6 +34,37 @@ User.findById(payload._id).exec(function(err, user) {
         }
     });
 });
+
+var facebookStrategy = new FacebookStrategy({  
+    clientID: cfg.facebook.clientID,
+    clientSecret: cfg.facebook.clientSecret,
+    callbackURL: cfg.facebook.callbackURL,
+    profileFields: ['id', 'email', 'first_name', 'last_name'],
+  },
+  function(token, refreshToken, profile, done) {
+    process.nextTick(function() {
+      User.findOne({ 'facebook.id': profile.id }, function(err, user) {
+        if (err)
+          return done(err);
+        if (user) {
+          return done(null, user);
+        } else {
+          var newUser = new User();
+          newUser.facebook.id = profile.id;
+          newUser.facebook.token = token;
+          newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+          newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
+
+          newUser.save(function(err) {
+            if (err)
+              throw err;
+            return done(null, newUser);
+          });
+        }
+      });
+    });
+  });
+passport.use(facebookStrategy);  
 passport.use(strategy);
 return {
 initialize: function() {

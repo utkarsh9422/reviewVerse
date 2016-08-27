@@ -98,18 +98,12 @@ exports.login = function(req, res) {
 		});
 			}
 			else{
-				
-				var data = {
-					_id: user._id,
-					name: user.local.name,
-					email: user.local.email
-				};
-				console.log(data);
-				// all is well, return successful user
-				var token = jwt.sign(data, cfg.sessionSecret, {
-				expiresInMinutes: 5 // expires in 24 hours
-        });
-				res.json({token: token});
+				 var token;
+	             token = user.generateJwt();
+                 res.status(200);
+                 res.json({
+                    "token" : token
+                  });
 			}
             
         });
