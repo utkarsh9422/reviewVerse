@@ -53,7 +53,9 @@ var facebookStrategy = new FacebookStrategy({
 			console.log("User Found");
           return done(null, user);
         } else {
+			console.log("Creating user");
           var newUser = new User();
+		  console.log("Token: "+ token);
           newUser.facebook.id = profile.id;
           newUser.facebook.token = token;
           newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
