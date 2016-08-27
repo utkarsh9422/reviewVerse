@@ -124,6 +124,7 @@ exports.list = function(req, res) {
 	});
 };
 
+
 /**
  * Delete an User
  */
@@ -163,7 +164,19 @@ exports.userByID = function(req, res, next, id) {
 		next();
 	});
 }; 
- 
+
+
+/**
+ * Generate JWT Token 
+ */
+exports.generateJWT = function(req, res) {
+	var token;
+	             token = req.user.generateJwt();
+                 res.status(200);
+                 res.json({
+                    "token" : token
+                  });
+}; 
   /**
  * Require login routing middleware
  */

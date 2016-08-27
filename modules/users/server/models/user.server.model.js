@@ -23,16 +23,16 @@ var userSchema = mongoose.Schema({
         name         : String
     },
     twitter          : {
-        tid           : String,
-        t_token        : String,
+        id           : String,
+        token        : String,
         displayName  : String,
         username     : String
     },
     google           : {
-        gid           : String,
-        g_token        : String,
-        google_email        : String,
-        gname         : String
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
     }
 
 });
@@ -52,10 +52,21 @@ userSchema.methods.validPassword = function(password) {
 userSchema.methods.generateJwt = function(){
 var data = {
     _id: this._id,
-    email: this.email,
-  name: this.name};
-  return jwt.sign(data,cfg.sessionSecret,{
-  expiresInMinutes : 1440
+	local:{
+		email: this.local.email,
+		name: this.local.name},
+	facebook:{
+		email: this.facebook.email,
+		name: this.facebook.name},
+	twitter:{
+		displayName: this.twitter.displayName,
+		username: this.twitter.username},
+	google:{
+		email: this.google.email,
+		name: this.google.name}
+};
+    return jwt.sign(data,cfg.sessionSecret,{
+    expiresInMinutes : 1440
   }); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
