@@ -20,7 +20,9 @@ module.exports = function (app) {
   //Facebook Login
   app.route('/auth/facebook')
   .get(passport.authenticate('facebook', { scope: 'email' }));
-  
+  // Callback
+  app.route('/auth/facebook/callback')
+  .get(passport.authenticate('facebook');
 
   
  app.route('/users/:userId')

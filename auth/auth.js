@@ -39,15 +39,26 @@ var facebookStrategy = new FacebookStrategy({
     clientID: cfg.facebook.clientID,
     clientSecret: cfg.facebook.clientSecret,
     callbackURL: cfg.facebook.callbackURL,
-    profileFields: ['id', 'email', 'first_name', 'last_name'],
+    profileFields: ['id', 'email', 'first_name', 'last_name']
+	console.log("Entered Strategy");
   },
   function(token, refreshToken, profile, done) {
+	  console.log("Token: "+ token);
+	  console.log("RefreshToken: "+ refreshToken);
+	  console.log("profile: "+ profile);
     process.nextTick(function() {
       User.findOne({ 'facebook.id': profile.id }, function(err, user) {
         if (err)
           return done(err);
         if (user) {
-          return done(null, user);
+			console.log("User Found");
+			var token;
+	             token = user.generateJwt();
+                 res.status(200);
+                 res.json({
+                    "token" : token
+                  });
+          //return done(null, user);
         } else {
           var newUser = new User();
           newUser.facebook.id = profile.id;
