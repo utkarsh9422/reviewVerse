@@ -2,6 +2,7 @@
 'use strict';
 var express = require("express");
 var bodyParser = require("body-parser");
+var passport = require('passport');
 var jwt    = require('jsonwebtoken');
 var cors = require('cors');
 module.exports = function (app) {
@@ -15,6 +16,12 @@ module.exports = function (app) {
   app.route('/signup').post(users.createUser);
 
   app.route('/users').get(users.list);
+  
+  //Facebook Login
+  app.route('/auth/facebook')
+  .get(passport.authenticate('facebook', { scope: 'email' }));
+  
+
   
  app.route('/users/:userId')
  .delete(users.delete);
