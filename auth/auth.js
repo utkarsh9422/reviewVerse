@@ -44,18 +44,14 @@ var facebookStrategy = new FacebookStrategy({
   function(token, refreshToken, profile, done) {
 	  console.log("Token: "+ token);
 	  console.log("RefreshToken: "+ refreshToken);
-	  console.log("profile: "+ profile.id);
+	  console.log("profile: "+ profile);
     process.nextTick(function() {
       User.findOne({ 'facebook.id': profile.id }, function(err, user) {
         if (err)
           return done(err);
         if (user) {
 			console.log("User Found");
-			var jwttoken;
-	             jwttoken = user.generateJwt();
-          return done(null, {
-                    "token" : jwttoken
-                  });
+          return done(null, user);
         } else {
           var newUser = new User();
           newUser.facebook.id = profile.id;
