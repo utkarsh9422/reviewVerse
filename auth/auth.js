@@ -40,7 +40,6 @@ var facebookStrategy = new FacebookStrategy({
     clientSecret: cfg.facebook.clientSecret,
     callbackURL: cfg.facebook.callbackURL,
     profileFields: ['id', 'email', 'first_name', 'last_name']
-	console.log("Entered Strategy");
   },
   function(token, refreshToken, profile, done) {
 	  console.log("Token: "+ token);
