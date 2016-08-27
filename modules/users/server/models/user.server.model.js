@@ -50,13 +50,13 @@ userSchema.methods.validPassword = function(password) {
 
 // Create JWT 
 userSchema.methods.generateJwt = function(){
-
-  return jwt.sign({
+var data = {
     _id: this._id,
     email: this.email,
-  name: this.name},
-  cfg.sessionSecret,
-  expiresInMinutes : 1440); // DO NOT KEEP YOUR SECRET IN THE CODE!
+  name: this.name};
+  return jwt.sign(data,cfg.sessionSecret,{
+  expiresInMinutes : 1440
+  }); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
 // create the model for users and expose it to our app
