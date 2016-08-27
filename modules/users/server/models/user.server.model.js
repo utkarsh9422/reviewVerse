@@ -54,8 +54,8 @@ userSchema.methods.generateJwt = function(){
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.name),
-  }, cfg.sessionSecret,
+  name: this.name},
+  cfg.sessionSecret,
   expiresInMinutes : 1440); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
