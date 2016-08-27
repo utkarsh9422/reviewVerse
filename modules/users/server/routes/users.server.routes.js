@@ -22,7 +22,15 @@ module.exports = function (app) {
   .get(passport.authenticate('facebook', { scope: 'email' }));
   // Callback
   app.route('/auth/facebook/callback')
-  .get(passport.authenticate('facebook'));
+  .get(passport.authenticate('facebook'),function(req, res) {
+ // Create JWT Token 
+	            var token;
+	             token = user.generateJwt();
+                 res.status(200);
+                 res.json({
+                    "token" : token
+                  });
+});
 
   
  app.route('/users/:userId')
