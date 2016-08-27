@@ -25,7 +25,7 @@ module.exports = function (app) {
   .get(passport.authenticate('facebook'),function(req, res) {
  // Create JWT Token 
 	            var token;
-	             token = user.generateJwt();
+	             token = req.user.generateJwt();
                  res.status(200);
                  res.json({
                     "token" : token
