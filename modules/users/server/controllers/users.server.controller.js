@@ -107,44 +107,6 @@ exports.login = function(req, res) {
 			}
             
         });
-		
-**
- * Login a User
- */
-exports.login = function(req, res) {
-	var email = req.body.email,
-        password = req.body.password;
-// find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
-            // if there are any errors, return the error before anything else
-            if (err){
-				return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-			}
-            // if no user is found, return the message
-            if (!user){
-                return res.status(400).send({
-			message: 'User Not found'
-		}); // req.flash is the way to set flashdata using connect-flash
-			}
-            // if the user is found but the password is wrong
-            if (!user.validPassword(password)){
-				return res.status(400).send({
-			message: 'Oops! Wrong password.'
-		});
-			}
-			else{
-				 var token;
-	             token = user.generateJwt();
-                 res.status(200);
-                 res.json({
-                    "token" : token
-                  });
-			}
-            
-        });
 };
   
 /**
