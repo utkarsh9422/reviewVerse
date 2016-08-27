@@ -35,9 +35,9 @@ module.exports = {
     title: defaultEnvConfig.app.title + ' - Development Environment'
   },
   facebook: {
-    clientID: '1612190055745092',
-    clientSecret: '4cdff3c92e6c158d6a4cf9e2a80ab6e5',
-    callbackURL: 'http://localhost/auth/facebook/callback'
+    clientID: '137611703353949',
+    clientSecret: '4f8c5f38e89a3d3a52d4adc0edca3494',
+    callbackURL: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/callback'
   },
   twitter: {
     clientID: process.env.TWITTER_KEY || 'CONSUMER_KEY',
