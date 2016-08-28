@@ -12,7 +12,7 @@ var cfg = require(path.resolve('./config/config.js'));
 var userSchema = mongoose.Schema({
 
     local            : {
-        email        : { type: String, require: true, unique: true },
+        email        : { type: String },
         password     : { type: String, require:true },
 		name         : { type: String }
     },
