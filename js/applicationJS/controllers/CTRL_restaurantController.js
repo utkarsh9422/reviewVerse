@@ -1,12 +1,16 @@
 app.controller("restaurantController", [
-    '$scope', '$http',
-    function($scope, $http) {
+    '$scope', '$http','authentication',
+    function($scope, $http,authentication) {
         $scope.isDisabled = false;
         $scope.user = "Anurag Parihar";
         $scope.test = 'Hi Guys';
 //Get Topics
-        $scope.getTopics = function() {
-            $http({method: 'GET', url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics"}).
+        console.log(authentication.getjwtToken());
+        $scope.getTopics = function() { 
+            var headers = {'Authorization': authentication.getjwtToken()};
+            $http({method: 'GET', 
+                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics", 
+                headers:headers}).
                     then(function(response) {
                         $scope.status = response.status;
                         $scope.topics = response.data;

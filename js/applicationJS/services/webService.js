@@ -1,4 +1,3 @@
-﻿
 app.factory('webservice', ['$http', '$q', '$rootScope', '$location', '$timeout',
 function($http, $q, $rootScope, $location, $timeout) {
 	

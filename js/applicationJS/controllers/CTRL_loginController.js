@@ -1,45 +1,80 @@
-app.controller("loginController", ['$scope', '$rootScope', '$location', '$http', 'webservice', 'sharedService', '$modal',
-function($scope, $rootScope, $location, $http, webservice, sharedService, $modal) {
-    $scope.username;
-	$scope.password;
-	$scope.consumerProfile = {};
-	//object saving the user profile
-	$rootScope.AILoading = false;
-	//loading indicator to be false as the page loads.
-	/*
-	 * to add active class for the current language selection
-	 */
-	$('.language button').click(function() {
-		$(this).closest('.language').find('.active').removeClass('active');
-		$(this).parent().addClass('active');
-	});
-	//on selection of consumer or distributor ,show corresponding login page.
-	
+app.controller("loginController", ['$scope', '$rootScope', '$location', '$http', 'authentication', '$modal', '$localStorage',
+    function($scope, $rootScope, $location, $http, authentication, $modal, $localStorage) {
+//      *************Register****************    
 
-	$scope.userLogin = function() {
+        $scope.signUp = function() {
+            if ($scope.credentials.name == "" || $scope.credentials.email == "" || $scope.credentials.password == "") {
+                alert("Please fill in the required information.");
+            }
+            var credentials = {
+                name: $scope.credentials.name,
+                email: $scope.credentials.email,
+                password: $scope.credentials.password
+            };
+            authentication.register(credentials)
+                    .error(function(err) {
+                        alert(err);
+                    })
+                    .then(function() {
+                        alert("User Resgitered");
+                        $location.path('/login');
+                    });
+        };
+
+        $scope.login = function() {
+            var credentials = {
+                email: $scope.login.email,
+                password: $scope.login.password
+            };
+            authentication.login(credentials)
+                    .error(function(err) {
+                        alert(err);
+                    })
+                    .then(function() {
+                        $location.path('/restaurant');
+                        alert("Logged In");
+                    });
+        };
+
+        $scope.loginFB = function() {
+            authentication.loginFB()
+                    .error(function(err) {
+                        alert(err);
+                    })
+                    .then(function() {
+                        $location.path('/restaurant');
+                        alert("Logged In Through FB");
+                    });
+        };
+
+        $scope.register = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/PRTL_register.html',
+                controller: 'loginController'
+            });
+        }
+        $scope.userLogin = function() {
             $location.path('/restaurant');
 //		loginRequest();
-	}
+        }
 
-	$scope.forgetPassword = function() {
-		var modalInstance = $modal.open({
-			templateUrl : 'views/PRTL_forgetPassword.html',
-			controller : 'forgetPasswordController'
-		});
+        $scope.forgetPassword = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/PRTL_forgetPassword.html',
+                controller: 'forgetPasswordController'
+            });
+        }
 
-	}
-
-	$scope.forgetConsumerID = function() {
-		var modalInstance = $modal.open({
-			templateUrl : 'views/PRTL_forgetConsumerID.html',
-			controller : 'forgetConsumerIDController'
-		});
-
-	}
-	/*
-	 * Login Request to the server
-	 */
-	function loginRequest() {
+        $scope.forgetConsumerID = function() {
+            var modalInstance = $modal.open({
+                templateUrl: 'views/PRTL_forgetConsumerID.html',
+                controller: 'forgetConsumerIDController'
+            });
+        }
+        /*
+         * Login Request to the server
+         */
+        function loginRequest() {
             $location.path('/restaurant');
 //		$rootScope.AILoading = true;
 //		var successCallback = function(response) {
@@ -97,30 +132,29 @@ function($scope, $rootScope, $location, $http, webservice, sharedService, $modal
 //		
 //		//posting the Login data for authentication
 //		webservice.callPostMethod(verify_user, inputParam, successCallback, errorCallback);
-	}
-$scope.parallax = function () {
- $(document).ready(function(){           //Parallax
-     $('.button-collapse').sideNav();
-    $('.parallax').parallax();
-    });
-          
-          };
-$scope.parallax();
-$scope.slider = function () {
-              $(document).ready(function(){           //Team carousel
-      $(' .carousel').carousel();
-    });
-          };
-$scope.slider();
-$scope.easySlide=function(){
-                jQuery('a[href^="#"]').click(function(e) {
-                    jQuery('html,body').animate({scrollTop: jQuery(this.hash).offset().top}, 1000);
-                    return false;
-                    e.preventDefault();
-                });
-};
-$scope.easySlide();
-}]);
+        }
+        $scope.parallax = function() {
+            $(document).ready(function() {           //Parallax
+                $('.button-collapse').sideNav();
+                $('.parallax').parallax();
+            });
+        };
+        $scope.parallax();
+        $scope.slider = function() {
+            $(document).ready(function() {           //Team carousel
+                $(' .carousel').carousel();
+            });
+        };
+        $scope.slider();
+        $scope.easySlide = function() {
+            jQuery('a[href^="#"]').click(function(e) {
+                jQuery('html,body').animate({scrollTop: jQuery(this.hash).offset().top}, 1000);
+                return false;
+                e.preventDefault();
+            });
+        };
+        $scope.easySlide();
+    }]);
 
 
 

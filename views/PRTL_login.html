@@ -1,125 +1,120 @@
 <div class=""> 
     <div class="row" id="header">
         <div id="navbar" class="navbar navbar-default">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="logo" href="index.html"><img src="img/logo1.png" alt="logo"/></a>
-                </div>
-                <div class="collapse navbar-collapse ">
-                    <ul class="nav navbar-nav textRit">
-                        <li class="active "><a  href="#home">Home</a></li>
-                        <li><a href="#team">Team</a></li>
-                        <li><a href="#aboutUs">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="index.html"><img src="img/logo1.png" alt="logo"/></a>
             </div>
-        
+            <div class="collapse navbar-collapse ">
+                <ul class="nav navbar-nav textRit">
+                    <li class="active "><a  href="#home">Home</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#aboutUs">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+        </div>
+
     </div>
 
-<div class="container " id="home">
-    <div class="row">
-            	<form method="post" name="loginform" class="col s12 m12 l4 right animated bounceInDown">
-                    <div class="marginBot35">
-                    	<input type="text" name="username" ng-model="username" class="form-control" placeholder="UserName"
-						ng-minlength="8" ng-maxlength="14" ng-pattern="/^[a-zA-Z0-9]*$/" required>
-			            <div ng-messages="loginform.username.$error">								
-						</div>
-                    </div>
-                    <div>
-                    	<input type="password" name="password" ng-model="password" class="form-control" placeholder="Password"
-						ng-minlength="6" ng-maxlength="6" ng-pattern="/^0|[1-9][0-9]*$/"  required>
-				            <div ng-messages="loginform.password.$error">			
-<!--								<div ng-message="minlength">
-									Password is too short
-								</div>-->
-							</div>
-                    </div>
-                    <div class="row" ng-click="forgetPassword()"><a>Forgot Password</a></div>
-                    <div><button type="button" class="btn btn-success" ng-click="userLogin()">LOGIN</button></div>
-                    <div class="row" style="margin-top: 20px;">
-                        <button class="btn btn-fb" type="submit">Login With  <i class="fa fa-facebook"></i></button></div>
-                    <div class="row" style="margin-top: 20px;"><button class="btn btn-google" type="submit">Login With  <i class="fa fa-google"></i></button></div>
-                    
-                    <div class="row">
-                    <div class="col-xs-6">Not a Member? </div>
-                    <div class="col-xs-6 textRit"><a  href="#register">Sign Up</a></div>
-                    </div>
-                </form>  
-                <div class="col s12 m12 l8 left animated pulse">
-                    <img height="400" width="500" class="img-responsive frontImg" src="img/frontImg.png" />
+    <div class="container " id="home">
+        <div class="row">
+            <form  name="loginform" class="col s12 m12 l4 right animated bounceInDown">
+                <input type="text"  ng-model="login.email" class="form-control" placeholder="Email" >
+                <div ng-messages="loginform.username.$error">								
                 </div>
+                <input type="password"  ng-model="login.password" class="form-control" placeholder="Password" >
+                <div ng-messages="loginform.password.$error">			
+                    <!--								<div ng-message="minlength">
+                                                                                            Password is too short
+                                                                                    </div>-->
+                </div>
+
+                <div class="row" ng-click="forgetPassword()"><a>Forgot Password</a></div>
+                <div class="row"><button ng-click="login()" class="btn btn-success" >LOGIN</button></div>
+                <div class="row" style="margin-top: 20px;">
+                    <button class="btn btn-fb" ng-click="loginFB()">Login With  <i class="fa fa-facebook"></i></button></div>
+                <div class="row" style="margin-top: 20px;"><button class="btn btn-google" >Login With <i class="fa fa-google"></i></button></div>
+
+                <div class="row">
+                    <div class="col-xs-6">Not a Member? </div>
+                    <div class="col-xs-6 textRit" ng-click="register()"><a >Register</a></div>
+                </div>
+            </form>  
+            <div class="col s12 m12 l8 left animated pulse">
+                <img height="400" width="500" class="img-responsive frontImg" src="img/frontImg.png" />
             </div>
+        </div>
     </div> <!--/#home-->
     <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-          <div class="container">
-        <div class="row center overlay animated bounceInDown">
-          <h5 class="col s12 animated bounceInUp">ReviewVerse - Every Opinion Counts</h5>
-        </div>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="img/bg.jpeg" alt="Parallax" /></div>
-  </div> <!--/#parallax-->
-  <div id="aboutUs">   <!--#About--> 
-            <h2 class="center">Why we created ReviewVerse</h2>
+        <div class="section no-pad-bot">
             <div class="container">
-      <div class="section tilted ">
-          <p class="animated zoomInLeft">Intrested to know about the college you are applying to?
-Wanna get in touch with the alumini to get a fairer more details? 
-OR maybe 
-It is a friday night and you want to know about the best restaurants in the area you would be travelling to..</p>
-      <p class="animated zoomInRight">We at reviewVerse have been through the same at each stage of our life and that is why we have come up with the this awesome new platform . Decison making is anyways difficult 
-and worse of all if you have no one to ask questions too, ReviewVerse aims at easying you out with your decision helping you to connect to people where you can ask for their 
-opinion.Looking for a coaching institute to help you with your aim of JEE you rush to the many names suggested in the newspaper advertisments and are satisfied at none, why not check out
-a former student had reviewed about it on reviewVerse, Let's save that energy for your studies, ok ?! . We do suggest you to pick out your favourites and then go for a personal visit .</p>
-      <p class="animated zoomInLeft">
-There is nothing worse than going out for dinner and then having to eat substander food, what could be even worse is being charged exorbitant amount for the fish 
-on your plate which was stinky and stale. We at reviewVerse want you to have a great meal so whenever you step out , do check out the start rating of the restaurant you are  visiting 
-and incase you do not find the restaurant we'll be happy to welcome your opinion on the restaurant you just visited! You can add a topic of your choice and categorise it in whichever
-field it belongs and BAZINGA you have helped a lot people looking for the review of that particular topic !</p>
-      <p class="animated zoomInRight">Every opinion counts folks! so lets get going and start with a journey towards less drama and more value for money.
-          Create a free account and start with rating and writing a review for your previous institution or the most recent cafe you visited.<br>
-          Lets help the community be better<br>
-Invite your friends and family today :)</p>
-      </div>
+                <div class="container">
+                    <div class="row center overlay animated bounceInDown">
+                        <h5 class="col s12 animated bounceInUp">ReviewVerse - Every Opinion Counts</h5>
+                    </div>
                 </div>
-  </div>            <!--/#About-->
+            </div>
+        </div>
+        <div class="parallax"><img src="img/bg.jpeg" alt="Parallax" /></div>
+    </div> <!--/#parallax-->
+    <div id="aboutUs">   <!--#About--> 
+        <h2 class="center">Why we created ReviewVerse</h2>
+        <div class="container">
+            <div class="section tilted ">
+                <p class="animated zoomInLeft">Intrested to know about the college you are applying to?
+                    Wanna get in touch with the alumini to get a fairer more details? 
+                    OR maybe 
+                    It is a friday night and you want to know about the best restaurants in the area you would be travelling to..</p>
+                <p class="animated zoomInRight">We at reviewVerse have been through the same at each stage of our life and that is why we have come up with the this awesome new platform . Decison making is anyways difficult 
+                    and worse of all if you have no one to ask questions too, ReviewVerse aims at easying you out with your decision helping you to connect to people where you can ask for their 
+                    opinion.Looking for a coaching institute to help you with your aim of JEE you rush to the many names suggested in the newspaper advertisments and are satisfied at none, why not check out
+                    a former student had reviewed about it on reviewVerse, Let's save that energy for your studies, ok ?! . We do suggest you to pick out your favourites and then go for a personal visit .</p>
+                <p class="animated zoomInLeft">
+                    There is nothing worse than going out for dinner and then having to eat substander food, what could be even worse is being charged exorbitant amount for the fish 
+                    on your plate which was stinky and stale. We at reviewVerse want you to have a great meal so whenever you step out , do check out the start rating of the restaurant you are  visiting 
+                    and incase you do not find the restaurant we'll be happy to welcome your opinion on the restaurant you just visited! You can add a topic of your choice and categorise it in whichever
+                    field it belongs and BAZINGA you have helped a lot people looking for the review of that particular topic !</p>
+                <p class="animated zoomInRight">Every opinion counts folks! so lets get going and start with a journey towards less drama and more value for money.
+                    Create a free account and start with rating and writing a review for your previous institution or the most recent cafe you visited.<br>
+                    Lets help the community be better<br>
+                    Invite your friends and family today :)</p>
+            </div>
+        </div>
+    </div>            <!--/#About-->
     <div id="team">
-    <div class="section">
-        <h2 class="center">Meet the Team</h2>
-        <div class="row">
-            <div class="carousel center">
-                <a class="carousel-item" href="#one!">
-                      <div class="member animated rotateIn">
-                             <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
-                             <p>Anurag Parihar<small class="designation"> CEO &amp; Founder</small></p>
-                       </div>
-                </a>
-                <a class="carousel-item" href="#two!">
-                    <div class="member animated rotateIn">
-                             <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
-                             <p>Navneet Kumar<small class="designation"> CPO &amp; Co-Founder</small></p>
-                       </div></a>
-                <a class="carousel-item" href="#three!">
-                    <div class="member animated rotateIn">
-                             <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
-                             <p>Utkarsh Markanday<small class="designation"> Technical Head &amp; Co-Founder</small></p>
-                       </div>
-                </a>    
-  </div>
-        </div>   
-    </div>
-</div><!--/#Team-->
-        <div>
+        <div class="section">
+            <h2 class="center">Meet the Team</h2>
+            <div class="row">
+                <div class="carousel center">
+                    <a class="carousel-item" href="#one!">
+                        <div class="member animated rotateIn">
+                            <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
+                            <p>Anurag Parihar<small class="designation"> CEO &amp; Founder</small></p>
+                        </div>
+                    </a>
+                    <a class="carousel-item" href="#two!">
+                        <div class="member animated rotateIn">
+                            <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
+                            <p>Navneet Kumar<small class="designation"> CPO &amp; Co-Founder</small></p>
+                        </div></a>
+                    <a class="carousel-item" href="#three!">
+                        <div class="member animated rotateIn">
+                            <p><img class="responsive-img" src="img/background3.jpg" alt="" /></p>
+                            <p>Utkarsh Markanday<small class="designation"> Technical Head &amp; Co-Founder</small></p>
+                        </div>
+                    </a>    
+                </div>
+            </div>   
+        </div>
+    </div><!--/#Team-->
+    <div>
         <div id="contact">
             <div class="container box last">
                 <div class="row">
@@ -195,15 +190,15 @@ Invite your friends and family today :)</p>
         </div><!--/#contact-->
         <footer>
             <div class="container">
-            <div class="row left footer animated pulse">&copy; Developed by WeDev</div>
+                <div class="row left footer animated pulse">&copy; Developed by WeDev</div>
             </div>
         </footer>
-  </div>
+    </div>
 </div>
 <script>
-                jQuery('a[href^="#"]').click(function(e) {
-                    jQuery('html,body').animate({scrollTop: jQuery(this.hash).offset().top}, 1000);
-                    return false;
-                    e.preventDefault();
-                });
-        </script>
+    jQuery('a[href^="#"]').click(function(e) {
+        jQuery('html,body').animate({scrollTop: jQuery(this.hash).offset().top}, 1000);
+        return false;
+        e.preventDefault();
+    });
+</script>
