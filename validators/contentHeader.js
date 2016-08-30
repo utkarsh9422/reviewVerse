@@ -2,6 +2,6 @@ var Joi = require('joi');
 
 module.exports = {
   headers: {
-    contenttype: Joi.string().required()
+    "Content-Type": Joi.string().required()
   }
 };
