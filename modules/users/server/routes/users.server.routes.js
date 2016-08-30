@@ -15,7 +15,7 @@ module.exports = function (app) {
 
   // Setting up the users profile api
   //app.route('/profile').get(users.readUserProfile);
-  app.route('/login',validate(validation.headers)).post(users.login);
+  app.route('/login').post(validate(validation.headers),users.login);
   app.route('/signup').post(users.createUser);
 
   app.route('/users').get(users.list);
