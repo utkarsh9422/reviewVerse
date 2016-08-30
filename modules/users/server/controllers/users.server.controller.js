@@ -76,6 +76,8 @@ exports.createUser = function(req, res) {
 exports.login = function(req, res) {
 	var email = req.body.email,
         password = req.body.password;
+		console.log(req.get('Content-Type'));
+		console.log("Email: "+email);
 // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
