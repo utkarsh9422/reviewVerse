@@ -7,7 +7,7 @@ var passport = require('passport');
 var jwt    = require('jsonwebtoken');
 var cors = require('cors');
 var validate = require('express-validation');
-var validation= require(path.resolve('./validators/contentHeader.js'))
+var validation= require(path.resolve('./validators/contentHeader.js'));
 module.exports = function (app) {
 	app.use(cors());
   // User Routes
