@@ -78,6 +78,7 @@ exports.login = function(req, res) {
         password = req.body.password;
 		console.log(req.get('Content-Type'));
 		console.log("Email: "+email);
+		
 // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -167,6 +168,30 @@ exports.userByID = function(req, res, next, id) {
 	});
 }; 
 
+/**
+ * Generate JWT Token 
+ */
+exports.facebookCallback = function(req, res) {
+	var token;
+	             token = req.user.generateJwt();
+    var returnString = '' +
+          '<!DOCTYPE html>\n' +
+          '<html>\n' +
+            '<head>\n' +
+              '<meta charset="UTF-8">\n' +
+              '<title>Login</title>\n' +
+            '</head>\n' +
+            '<body>\n' +
+            '<script type="text/javascript">\n' +
+              'window.localStorage[\'mean-token\']  = \''+token+'\';\n' +
+              'window.opener.location.reload(false);\n' +
+              'window.close();\n' +
+            '</script>\n' +
+            '</body>\n' +
+          '</html>'; 
+
+  res.send(returnString);				  
+}; 
 
 /**
  * Generate JWT Token 

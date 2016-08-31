@@ -22,8 +22,10 @@ module.exports = function (app) {
   app.route('/auth/facebook')
   .get(passport.authenticate('facebook', { scope: 'email' }));
   // Callback
-  app.route('/auth/facebook/callback')
-  .get(passport.authenticate('facebook'),users.generateJWT);
+ // app.route('/auth/facebook/callback').get(passport.authenticate('facebook'),users.generateJWT);
+  
+   app.route('/auth/facebook/callback')
+  .get(passport.authenticate('facebook'),users.facebookCallback);
 
   
  app.route('/users/:userId')
