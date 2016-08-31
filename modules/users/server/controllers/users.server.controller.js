@@ -185,7 +185,7 @@ exports.facebookCallback = function(req, res) {
             '<script type="text/javascript">\n' +
               'window.localStorage[\'mean-token\']  = \''+token+'\';\n' +
               'window.opener.location.reload(false);\n' +
-              'window.close();\n' +
+              'self.close();\n' +
             '</script>\n' +
             '</body>\n' +
           '</html>'; 
