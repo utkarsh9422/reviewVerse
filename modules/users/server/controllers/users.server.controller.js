@@ -167,6 +167,30 @@ exports.userByID = function(req, res, next, id) {
 	});
 }; 
 
+/**
+ * FB call back 
+ */
+exports.postFBLogin = function(req, res) {
+	var token;
+	             token = req.user.generateJwt();
+               var returnString = '' +
+          '<!DOCTYPE html>\n' +
+          '<html>\n' +
+            '<head>\n' +
+              '<meta charset="UTF-8">\n' +
+              '<title>Login</title>\n' +
+            '</head>\n' +
+            '<body>\n' +
+            '<script type="text/javascript">\n' +
+              'window.localStorage[\'mean-token\']  = \''+token+'\';\n' +
+              'window.opener.location.reload(false);\n' +
+              'window.close();\n' +
+            '</script>\n' +
+            '</body>\n' +
+          '</html>'; 
+
+  res.send(returnString);
+}; 
 
 /**
  * Generate JWT Token 
