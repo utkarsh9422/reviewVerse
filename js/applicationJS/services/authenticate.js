@@ -63,9 +63,11 @@
         }; 
         
         loginFB= function() {
-            return $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/').success(function(data) {
-                saveToken(data.token);
-            });
+			$popupWindow = $window.open('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/');
+            //return $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/').success(function(data) {
+               // saveToken(data.token);
+            //});
+
         };
         logout = function() {
             $window.localStorage.removeItem('mean-token');
