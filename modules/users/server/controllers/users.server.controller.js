@@ -199,6 +199,7 @@ exports.generateJWT = function(req, res) {
 	var token;
 	             token = req.user.generateJwt();
                  res.status(200);
+				 app.set('jsonp callback name', 'code');
                  res.jsonp({
                     "token" : token
                   });
