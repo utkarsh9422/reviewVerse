@@ -200,10 +200,9 @@ exports.generateJWT = function(req, res) {
 	var token;
 	             token = req.user.generateJwt();
                  res.status(200);
-				 req.app.set('jsonp callback name', 'code');
-                 res.jsonp({
-                    "token" : token
-                  });
+				 res.setHeader('content-type', 'application/javascript');
+                 var tokenJSON='{"token" : '+token+'}';
+				 res.end(req.query.callback + "('" + tokenJSON + "')");
 				  //res.setHeader('content-type', 'text/javascript');
 				  //var JS_Script = 'function token(){ 			  }';
 				  //res.end(JS_Script);
