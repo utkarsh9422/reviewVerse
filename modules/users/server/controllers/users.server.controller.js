@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
 	cfg = require("../../../../config/config.js"),
 	errorHandler = require('./errors.server.controller'),
 	User = mongoose.model('User'),
-	app= require('../app');
+	app= require('../app'),
     _ = require('lodash');
 
 /**
