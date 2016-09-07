@@ -199,12 +199,12 @@ exports.generateJWT = function(req, res) {
 	var token;
 	             token = req.user.generateJwt();
                  res.status(200);
-                 /*res.json({
+                 res.jsonp({
                     "token" : token
-                  });*/
-				  res.setHeader('content-type', 'text/javascript');
-				  var JS_Script = token;
-				  res.end(JS_Script);
+                  });
+				  //res.setHeader('content-type', 'text/javascript');
+				  //var JS_Script = 'function token(){ 			  }';
+				  //res.end(JS_Script);
 }; 
   /**
  * Require login routing middleware
