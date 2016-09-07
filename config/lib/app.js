@@ -60,4 +60,3 @@ module.exports.start = function start(callback) {
 
 };
 
-module.exports = app;

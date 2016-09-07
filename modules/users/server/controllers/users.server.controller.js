@@ -8,11 +8,9 @@ var mongoose = require('mongoose'),
 	jwt    = require('jsonwebtoken'),
 	cfg = require("../../../../config/config.js"),
 	errorHandler = require('./errors.server.controller'),
-	User = mongoose.model('User'),
-	path = require('path'),	
+	User = mongoose.model('User'),	
     _ = require('lodash');
 	
-var app = require(path.resolve('./app'));
 
 /**
  * Extend user's controller
@@ -202,7 +200,7 @@ exports.generateJWT = function(req, res) {
 	var token;
 	             token = req.user.generateJwt();
                  res.status(200);
-				 app.set('jsonp callback name', 'code');
+				 req.app.set('jsonp callback name', 'code');
                  res.jsonp({
                     "token" : token
                   });
