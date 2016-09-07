@@ -202,7 +202,7 @@ exports.generateJWT = function(req, res) {
                  res.status(200);
 				 res.setHeader('content-type', 'application/javascript');
                  var tokenJSON='{"token" : '+token+'}';
-				 res.end(req.query.callback + "('" + tokenJSON + "')");
+				 res.end(JWTToken + "('" + tokenJSON + "')");
 				  //res.setHeader('content-type', 'text/javascript');
 				  //var JS_Script = 'function token(){ 			  }';
 				  //res.end(JS_Script);
