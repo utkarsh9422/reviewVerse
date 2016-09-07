@@ -201,7 +201,7 @@ exports.generateJWT = function(req, res) {
 	             token = req.user.generateJwt();
                  res.status(200);
 				 res.setHeader('content-type', 'application/javascript');
-                 var tokenJSON='{"token" : '+token+'}';
+                 var tokenJSON='{"token" : "'+token+'"}';
 				 res.end('JWTToken' + "('" + tokenJSON + "')");
 				  //res.setHeader('content-type', 'text/javascript');
 				  //var JS_Script = 'function token(){ 			  }';
