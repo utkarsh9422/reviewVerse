@@ -1,10 +1,10 @@
 'use strict';
 // Declare app level module which depends on filters, and services
 
-var app = angular.module('gascoApp', ['ngRoute', 'ngMessages', 'pascalprecht.translate', 'ui.bootstrap', 'ngMap', 'ngStorage']);
+var app = angular.module('gascoApp', ['ngRoute', 'ngMessages', 'pascalprecht.translate', 'ui.bootstrap', 'ngMap', 'ngStorage', 'satellizer']);
 
-app.config(['$routeProvider', '$httpProvider',
-    function($routeProvider, $activityIndicatorProvider, $httpProvider) {
+app.config(['$routeProvider', '$httpProvider', '$authProvider',
+    function($routeProvider, $activityIndicatorProvider, $httpProvider, $authProvider) {
 
         $routeProvider.when('/restaurant', {
             templateUrl: 'views/PRTL_restaurant.html',
@@ -17,6 +17,10 @@ app.config(['$routeProvider', '$httpProvider',
         $routeProvider.otherwise({
             redirectTo: '/login'
         });
+        
+        
+        
+
 
         function run($rootScope, $location, authentication) {
             $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {

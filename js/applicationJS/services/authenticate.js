@@ -63,10 +63,16 @@
         }; 
         
         loginFB= function() {
-            return $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/').success(function(data) {
+            var url = "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook";
+//            $window.open(url);
+            $window.open(url, "popup", "width=800,height=500,left=200,top=150");
+            $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook' ).success(function(data) {
                 saveToken(data.token);
             });
+//            saveToken(data.token);
+//            $window.close();
         };
+        
         logout = function() {
             $window.localStorage.removeItem('mean-token');
         };

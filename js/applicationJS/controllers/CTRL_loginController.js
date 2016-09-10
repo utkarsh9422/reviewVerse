@@ -1,6 +1,26 @@
-app.controller("loginController", ['$scope', '$rootScope', '$location', '$http', 'authentication', '$modal', '$localStorage',
-    function($scope, $rootScope, $location, $http, authentication, $modal, $localStorage) {
-//      *************Register****************    
+app.controller("loginController", ['$scope', '$rootScope', '$location', '$http', 'authentication', '$modal', '$localStorage', '$auth',
+    function($scope, $rootScope, $location, $http, authentication, $modal, $localStorage, $auth) {
+        //  *********Satellizer*************8
+        $scope.authenticate = function(provider) {
+            $auth.authenticate(provider)
+                    .then(function() {
+//                        toastr.success('You have successfully signed in with ' + provider + '!');
+                        $location.path('/restaurant');
+                    })
+                    .catch(function(error) {
+                        if (error.message) {
+                            // Satellizer promise reject error.
+                            alert(error.message);
+                        } else if (error.data) {
+                            // HTTP response error from server
+                            alert(error.data.message, error.status);
+                        } else {
+                            alert(error);
+                        }
+                    });
+        };
+
+        //      *************Register****************    
 
         $scope.signUp = function() {
             if ($scope.credentials.name == "" || $scope.credentials.email == "" || $scope.credentials.password == "") {
