@@ -182,13 +182,13 @@ exports.loginWithFacebook = function(req, res) {
     redirect_uri: req.body.redirectUri
   };
   // Step 1. Exchange authorization code for access token.
-  request.get({ url: accessTokenUrl, qs: params, json: true }, function(err, response, accessToken) {
+  request.get({ url: accessTokenUrl, qs: params, json: true }, function(request,err, response, accessToken) {
     if (response.statusCode !== 200) {
       return res.status(500).send({ message: accessToken.error.message });
     }
 
     // Step 2. Retrieve profile information about the current user.
-    request.get({ url: graphApiUrl, qs: accessToken, json: true }, function(err, response, profile) {
+    request.get({ url: graphApiUrl, qs: accessToken, json: true }, function(request,err, response, profile) {
       if (response.statusCode !== 200) {
         return res.status(500).send({ message: profile.error.message });
       }
@@ -207,7 +207,7 @@ exports.loginWithFacebook = function(req, res) {
             user.facebook.picture = user.facebook.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
             user.facebook.name = profile.name;
             user.save(function() {
-              var token = createJWT(user);
+              var token = user.generateJwt();
               res.send({ token: token });
             });
           });
