@@ -183,6 +183,7 @@ exports.loginWithFacebook = function(req, res) {
     client_secret: cfg.facebook.clientSecret,
     redirect_uri: req.body.redirectUri
   };
+  console.log('Request1: '+ accessTokenUrl + "params"+params);
   // Step 1. Exchange authorization code for access token.
   request.get({ url: accessTokenUrl, qs: params, json: true }, function(err, response, accessToken) {
     if (response.statusCode !== 200) {
@@ -195,7 +196,7 @@ exports.loginWithFacebook = function(req, res) {
         return res.status(500).send({ message: profile.error.message });
       }
       if (req.header('Authorization')) {
-        User.findOne({ 'facebook.id': 'profile.id' }, function(err, existingUser) {
+        User.findOne({ 'facebook.id': profile.id }, function(err, existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Facebook account that belongs to you' });
           }
@@ -207,6 +208,7 @@ exports.loginWithFacebook = function(req, res) {
             }
             user.facebook.id = profile.id;
             user.facebook.picture = user.facebook.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
+			user.facebook.email = profile.email;
             user.facebook.name = profile.name;
             user.save(function() {
               var token = user.generateJwt();
@@ -216,7 +218,7 @@ exports.loginWithFacebook = function(req, res) {
         });
       } else {
         // Step 3. Create a new user account or return an existing one.
-        User.findOne({ facebook: profile.id }, function(err, existingUser) {
+        User.findOne({ 'facebook.id': profile.id }, function(err, existingUser) {
           if (existingUser) {
             var token = existingUser.generateJwt();
             return res.send({ token: token });
@@ -225,6 +227,7 @@ exports.loginWithFacebook = function(req, res) {
           user.facebook.id = profile.id;
           user.facebook.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.facebook.name = profile.name;
+		  user.facebook.email = profile.email;
           user.save(function() {
             var token = user.generateJwt();
             res.send({ token: token });
