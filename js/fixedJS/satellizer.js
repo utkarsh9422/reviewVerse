@@ -40,7 +40,8 @@
                 },
                 google: {
                     name: 'google',
-                    url: '/auth/google',
+                    url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/google',
+					clientId: '1092102028684-og9iveejbd6qqscde9bl5emtv38gfvna.apps.googleusercontent.com',
                     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
                     redirectUri: window.location.origin + '/reviewVerse/',
                     requiredUrlParams: ['scope'],
