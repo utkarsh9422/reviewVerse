@@ -61,25 +61,7 @@
              var str2 =getToken();
             return str1.concat(str2);
         }; 
-        
-        loginFB= function() {
-<<<<<<< HEAD
-            var url = "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook";
-//            $window.open(url);
-            $window.open(url, "popup", "width=800,height=500,left=200,top=150");
-            $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook' ).success(function(data) {
-                saveToken(data.token);
-            });
-//            saveToken(data.token);
-//            $window.close();
-=======
-			$popupWindow = $window.open('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/');
-            //return $http.get('http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook/').success(function(data) {
-               // saveToken(data.token);
-            //});
 
->>>>>>> origin/AnuragParihar-front-end
-        };
         
         logout = function() {
             $window.localStorage.removeItem('mean-token');
@@ -110,7 +92,6 @@
             isLoggedIn: isLoggedIn,
             register: register,
             login: login,
-            loginFB:loginFB,
             getjwtToken: getjwtToken,
             logout: logout
         };
