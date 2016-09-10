@@ -193,7 +193,7 @@ exports.loginWithFacebook = function(req, res) {
         return res.status(500).send({ message: profile.error.message });
       }
       if (req.header('Authorization')) {
-        User.findOne({ facebook.id: profile.id }, function(err, existingUser) {
+        User.findOne({ 'facebook.id': 'profile.id' }, function(err, existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Facebook account that belongs to you' });
           }
