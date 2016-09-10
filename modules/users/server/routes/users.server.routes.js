@@ -21,12 +21,12 @@ module.exports = function (app) {
   //Facebook Login
   app.route('/auth/facebook')
   .post(users.loginWithFacebook);
-  // Callback
-  app.route('/auth/facebook/callback').get(passport.authenticate('facebook'),users.generateJWT);
   
-  //app.route('/auth/facebook/callback').get(passport.authenticate('facebook'),users.postFBLogin);
-
-  
+  //Google Login
+  app.route('/auth/google')
+  .post(users.loginWithGoogle);
+ 
+ 
  app.route('/users/:userId')
  .delete(users.delete);
   // Finish by binding the user middleware
