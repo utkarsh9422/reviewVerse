@@ -226,7 +226,7 @@ exports.loginWithFacebook = function(req, res) {
           user.facebook.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
           user.facebook.name = profile.name;
           user.save(function() {
-            var token = user.generateJWT();
+            var token = user.generateJwt();
             res.send({ token: token });
           });
         });
