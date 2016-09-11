@@ -21,7 +21,7 @@ var topics = require('../controllers/topics.server.controller');
  });*/
  
 	app.route('/categories')
-	  .get(auth.authenticate(),categories.list)
+	  .get(auth.ensureAuthenticated(),categories.list)
 	  .post(categories.create);
 	  
 	app.route('/categories/:categoryId')
@@ -32,10 +32,10 @@ var topics = require('../controllers/topics.server.controller');
 	
 	//ToDo Code to be moved to Topics Route
 	app.route('/topics')
-	.get(auth.authenticate(),topics.list);
+	.get(auth.ensureAuthenticated(),topics.list);
 	
 	app.route('/topics/:topicId')
-   	.get(auth.authenticate(),topics.read);
+   	.get(auth.ensureAuthenticated(),topics.read);
 	
 	app.route('/topics/:topicId/reviews')
    	.get(topics.getReviews);
