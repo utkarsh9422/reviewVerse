@@ -2,7 +2,7 @@
 'use strict';
 var cors = require('cors');
 var path = require('path');
-var auth= require(path.resolve('./auth/auth.js'))();
+var auth= require(path.resolve('./auth/auth.js'));
 module.exports = function(app) {
   // Routing logic   
   // ...
@@ -21,7 +21,7 @@ var topics = require('../controllers/topics.server.controller');
  });*/
  
 	app.route('/categories')
-	  .get(auth.ensureAuthenticated(),categories.list)
+	  .get(auth.ensureAuthenticated,categories.list)
 	  .post(categories.create);
 	  
 	app.route('/categories/:categoryId')
@@ -32,10 +32,10 @@ var topics = require('../controllers/topics.server.controller');
 	
 	//ToDo Code to be moved to Topics Route
 	app.route('/topics')
-	.get(auth.ensureAuthenticated(),topics.list);
+	.get(auth.ensureAuthenticated,topics.list);
 	
 	app.route('/topics/:topicId')
-   	.get(auth.ensureAuthenticated(),topics.read);
+   	.get(auth.ensureAuthenticated,topics.read);
 	
 	app.route('/topics/:topicId/reviews')
    	.get(topics.getReviews);
