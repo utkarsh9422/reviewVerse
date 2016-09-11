@@ -1,4 +1,4 @@
-/* eslint-disable */
+	/* eslint-disable */
 'use strict';
 
 /**
@@ -84,7 +84,6 @@ module.exports.initMiddleware = function (app) {
     extended: true
   }));
   app.use(bodyParser.json());
-  app.use(expressValidator([options]));
   app.use(methodOverride());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
