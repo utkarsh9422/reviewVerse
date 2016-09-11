@@ -22,50 +22,62 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
 
         //      *************Register****************    
 
+//        $scope.signUp = function() {
+//            if ($scope.credentials.name == "" || $scope.credentials.email == "" || $scope.credentials.password == "") {
+//                alert("Please fill in the required information.");
+//            }
+//            var credentials = {
+//                name: $scope.credentials.name,
+//                email: $scope.credentials.email,
+//                password: $scope.credentials.password
+//            };
+//            authentication.register(credentials)
+//                    .error(function(err) {
+//                        alert(err);
+//                    })
+//                    .then(function() {
+//                        alert("User Resgitered");
+//                        $location.path('/login');
+//                    });
+//        };
+
         $scope.signUp = function() {
-            if ($scope.credentials.name == "" || $scope.credentials.email == "" || $scope.credentials.password == "") {
-                alert("Please fill in the required information.");
-            }
-            var credentials = {
-                name: $scope.credentials.name,
-                email: $scope.credentials.email,
-                password: $scope.credentials.password
-            };
-            authentication.register(credentials)
-                    .error(function(err) {
-                        alert(err);
+            $auth.signup($scope.user)
+                    .then(function(response) {
+                        $auth.setToken(response);
+                        $location.path('/restaurant');
+                        alert('You have successfully created a new account and have been signed-in');
                     })
-                    .then(function() {
-                        alert("User Resgitered");
-                        $location.path('/login');
+                    .catch(function(response) {
+                        alert(response.data.message);
                     });
         };
 
         $scope.login = function() {
-            var credentials = {
-                email: $scope.login.email,
-                password: $scope.login.password
-            };
-            authentication.login(credentials)
-                    .error(function(err) {
-                        alert(err);
-                    })
+            $auth.login($scope.user)
                     .then(function() {
+                        alert('You have successfully signed in!');
                         $location.path('/restaurant');
-                        alert("Logged In");
+                    })
+                    .catch(function(error) {
+                        alert(error.data.message, error.status);
                     });
         };
 
-        $scope.loginFB = function() {
-            authentication.loginFB()
-                    .error(function(err) {
-                        alert(err);
-                    })
-                    .then(function() {
-                        $location.path('/restaurant');
-                        alert("Logged In Through FB");
-                    });
-        };
+//        $scope.login = function() {
+//            var credentials = {
+//                email: $scope.login.email,
+//                password: $scope.login.password
+//            };
+//            authentication.login(credentials)
+//                    .error(function(err) {
+//                        alert(err);
+//                    })
+//                    .then(function() {
+//                        $location.path('/restaurant');
+//                        alert("Logged In");
+//                    });
+//        };
 
         $scope.register = function() {
             var modalInstance = $modal.open({

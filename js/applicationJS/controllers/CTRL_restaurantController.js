@@ -1,16 +1,24 @@
 app.controller("restaurantController", [
-    '$scope', '$http','authentication',
-    function($scope, $http,authentication) {
+    '$scope', '$http', 'authentication', '$auth','$location',
+    function($scope, $http, authentication, $auth, $location) {
         $scope.isDisabled = false;
         $scope.user = "Anurag Parihar";
         $scope.test = 'Hi Guys';
+        //Logout
+        $scope.logout = function() {
+            $auth.logout()
+                    .then(function() {
+                        alert('You have been logged out');
+                        $location.path('/login');
+                    });
+        };
 //Get Topics
         console.log(authentication.getjwtToken());
-        $scope.getTopics = function() { 
+        $scope.getTopics = function() {
             var headers = {'Authorization': authentication.getjwtToken()};
-            $http({method: 'GET', 
-                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics", 
-                headers:headers}).
+            $http({method: 'GET',
+                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics",
+                headers: headers}).
                     then(function(response) {
                         $scope.status = response.status;
                         $scope.topics = response.data;
@@ -76,9 +84,9 @@ app.controller("restaurantController", [
         };
 //Topic Upvote          
         $scope.incrementUpvotes = function(topicId) {
-            $scope.disable = function(topic){
-              return true;
-          };
+            $scope.disable = function(topic) {
+                return true;
+            };
             var settings = {
                 "async": true,
                 "crossDomain": true,
@@ -164,37 +172,42 @@ app.controller("restaurantController", [
         }
     };
 }).directive("averageStarRating", function() {
-  return {
-    restrict : "EA",
-    template : "<div class='average-rating-container'>" +
-               "  <ul class='rating background' class='readonly'>" +
-               "    <li ng-repeat='star in stars' class='star'>" +
-               "      <i class='fa fa-star'></i>" + //&#9733
-               "    </li>" +
-               "  </ul>" +
-               "  <ul class='rating foreground' class='readonly' style='width:{{filledInStarsContainerWidth}}%'>" +
-               "    <li ng-repeat='star in stars' class='star filled'>" +
-               "      <i class='fa fa-star'></i>" + //&#9733
-               "    </li>" +
-               "  </ul>" +
-               "</div>",
-    scope : {
-      averageRatingValue : "=ngModel",
-      max : "=?", //optional: default is 5
-    },
-    link : function(scope, elem, attrs) {
-      if (scope.max == undefined) { scope.max = 5; }
-      function updateStars() {
-        scope.stars = [];
-        for (var i = 0; i < scope.max; i++) {
-          scope.stars.push({});
+    return {
+        restrict: "EA",
+        template: "<div class='average-rating-container'>" +
+                "  <ul class='rating background' class='readonly'>" +
+                "    <li ng-repeat='star in stars' class='star'>" +
+                "      <i class='fa fa-star'></i>" + //&#9733
+                "    </li>" +
+                "  </ul>" +
+                "  <ul class='rating foreground' class='readonly' style='width:{{filledInStarsContainerWidth}}%'>" +
+                "    <li ng-repeat='star in stars' class='star filled'>" +
+                "      <i class='fa fa-star'></i>" + //&#9733
+                "    </li>" +
+                "  </ul>" +
+                "</div>",
+        scope: {
+            averageRatingValue: "=ngModel",
+            max: "=?", //optional: default is 5
+        },
+        link: function(scope, elem, attrs) {
+            if (scope.max == undefined) {
+                scope.max = 5;
+            }
+            function updateStars() {
+                scope.stars = [];
+                for (var i = 0; i < scope.max; i++) {
+                    scope.stars.push({});
+                }
+                var starContainerMaxWidth = 100; //%
+                scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
+            }
+            ;
+            scope.$watch("averageRatingValue", function(oldVal, newVal) {
+                if (newVal) {
+                    updateStars();
+                }
+            });
         }
-        var starContainerMaxWidth = 100; //%
-        scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
-      };
-      scope.$watch("averageRatingValue", function(oldVal, newVal) {
-        if (newVal) { updateStars(); }
-      });
-    }
-  };
+    };
 });
