@@ -74,7 +74,7 @@ exports.createUser = function(req, res) {
  * Login a User
  */
 exports.login = function(req, res) {
-	req.headers('Content-Type','application/json');
+	//req.headers('Content-Type','application/json');
 	var email = req.body.email,
         password = req.body.password;
 		console.log(req.get('Content-Type'));
