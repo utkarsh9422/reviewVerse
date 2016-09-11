@@ -18,6 +18,7 @@ var config = require('../config'),
   helmet = require('helmet'),
   flash = require('connect-flash'),
   consolidate = require('consolidate'),
+  expressValidator = require('express-validator'),
   path = require('path');
 /**
  * Initialize local variables
@@ -83,6 +84,7 @@ module.exports.initMiddleware = function (app) {
     extended: true
   }));
   app.use(bodyParser.json());
+  app.use(expressValidator([options]));
   app.use(methodOverride());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
