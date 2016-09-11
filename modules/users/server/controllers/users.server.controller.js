@@ -62,7 +62,7 @@ exports.createUser = function(req, res) {
 						res.status(500).send({ message: err.message });
 					}
                 res.json({
-                    "token" : result.generateJwt();
+                    "token" : result.generateJwt()
                   });
                 });
             }
