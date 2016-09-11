@@ -43,7 +43,7 @@ exports.createUser = function(req, res) {
 			}
             // check to see if theres already a user with that email
             if (user) {
-                return res.status(400).send({
+                return res.status(409).send({
 					message: 'User already exists'
 				});
             } else {
@@ -51,22 +51,19 @@ exports.createUser = function(req, res) {
 				// if there is no user with that email
                 // create the user
                 var newUser            = new User();
-
                 // set the user's local credentials
 				newUser.local.name= name;
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
 				console.log(newUser);
 				// save the user
-                newUser.save(function(err) {
-                    if (err){
-						return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
+                newUser.save(function(err,result) {
+                     if (err) {
+						res.status(500).send({ message: err.message });
 					}
-               else{
-				   res.status(201).json(newUser);
-			   }
+                res.json({
+                    "token" : result.generateJwt();
+                  });
                 });
             }
 
@@ -81,8 +78,8 @@ exports.login = function(req, res) {
         password = req.body.password;
 		console.log(req.get('Content-Type'));
 		console.log("Email: "+email);
-// find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
+			// find a user whose email is the same as the forms email
+			// we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err){

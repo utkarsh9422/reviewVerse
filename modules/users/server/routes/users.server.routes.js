@@ -13,8 +13,8 @@ module.exports = function (app) {
 
   // Setting up the users profile api
   //app.route('/profile').get(users.readUserProfile);
-  app.route('/login').post(users.login);
-  app.route('/signup').post(users.createUser);
+  app.route('/auth/login').post(users.login);
+  app.route('auth/signup').post(users.createUser);
 
   app.route('/users').get(users.list);
   
