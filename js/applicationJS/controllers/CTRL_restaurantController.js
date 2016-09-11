@@ -6,6 +6,7 @@ app.controller("restaurantController", [
         $scope.test = 'Hi Guys';
         //Logout
         $scope.logout = function() {
+			console.log("Logout Button Clicked");
             $auth.logout()
                     .then(function() {
                         alert('You have been logged out');
