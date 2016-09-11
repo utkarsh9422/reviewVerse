@@ -25,7 +25,7 @@
 
     <div class="container " id="home">
         <div class="row">
-            <form ng-submit="login()" name="loginform" class="col s12 m12 l4 right animated bounceInDown">
+            <form name="loginform" class="col s12 m12 l4 right animated bounceInDown">
                 <input type="text"  ng-model="user.email" class="form-control" placeholder="Email" >
                 <div ng-messages="loginform.username.$error">								
                 </div>
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="row" ng-click="forgetPassword()"><a>Forgot Password</a></div>
-                <div class="row"><button type="submit" class="btn btn-success" >LOGIN</button></div>
+                <div class="row"><button ng-click = "login()" class="btn btn-success" >LOGIN</button></div>
                 <div class="row" style="margin-top: 20px;">
                     <button class="btn btn-fb" ng-click="authenticate('facebook')">Login With  <i class="fa fa-facebook"></i></button></div>
                 <div class="row" style="margin-top: 20px;"><button class="btn btn-google" ng-click="authenticate('google')" >Login With <i class="fa fa-google"></i></button></div>

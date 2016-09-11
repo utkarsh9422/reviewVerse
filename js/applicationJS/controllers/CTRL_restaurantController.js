@@ -14,7 +14,7 @@ app.controller("restaurantController", [
                     });
         };
 //Get Topics
-        console.log(authentication.getjwtToken());
+        //console.log(authentication.getjwtToken());
         $scope.getTopics = function() {
             var headers = {'Authorization': authentication.getjwtToken()};
             $http({method: 'GET',
