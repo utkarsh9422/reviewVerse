@@ -5,8 +5,9 @@
 var mongoose = require('mongoose');
 var path = require('path');
 var bcrypt   = require('bcrypt-nodejs');
-var jwt    = require('jsonwebtoken');
+var jwt = require('jwt-simple');
 var cfg = require(path.resolve('./config/config.js'));
+var moment = require('moment');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
@@ -51,24 +52,13 @@ userSchema.methods.validPassword = function(password) {
 
 // Create JWT 
 userSchema.methods.generateJwt = function(){
-var data = {
-    _id: this._id,
-	local:{
-		email: this.local.email,
-		name: this.local.name},
-	facebook:{
-		email: this.facebook.email,
-		name: this.facebook.name},
-	twitter:{
-		displayName: this.twitter.displayName,
-		username: this.twitter.username},
-	google:{
-		email: this.google.email,
-		name: this.google.name}
+var payload = {
+	
+    sub: this._id,
+	iat: moment().unix(),
+    exp: moment().add(14, 'days').unix()
 };
-    return jwt.sign(data,cfg.sessionSecret,{
-    expiresInMinutes : 1440
-  }); // DO NOT KEEP YOUR SECRET IN THE CODE!
+    return jwt.encode(payload,cfg.sessionSecret); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
 // create the model for users and expose it to our app

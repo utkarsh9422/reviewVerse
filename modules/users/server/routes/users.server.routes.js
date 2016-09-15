@@ -28,9 +28,10 @@ module.exports = function (app) {
   app.route('/auth/google')
   .post(users.loginWithGoogle);
  
+  app.route('/profile/me')
+ .get(auth.ensureAuthenticated,users.read);
  
  app.route('/users/:userId')
- .get(auth.ensureAuthenticated,users.read)
  .delete(users.delete);
   // Finish by binding the user middleware
   app.param('userId', users.userByID);

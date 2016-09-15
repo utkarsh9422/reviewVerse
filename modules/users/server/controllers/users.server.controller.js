@@ -132,8 +132,9 @@ exports.list = function(req, res) {
  */
 exports.read = function(req, res) {
 	console.log('Entered Read Route'+ req.user);
-	var user = req.user;
-	res.json(user);
+	User.findById(req.user, function(err, user) {
+    res.json(user);
+  });
 };
 
 /**
