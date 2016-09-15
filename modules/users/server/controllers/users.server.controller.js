@@ -131,6 +131,7 @@ exports.list = function(req, res) {
  * Show the current Category
  */
 exports.read = function(req, res) {
+	console.log('Entered Read Route'+ req.user);
 	res.json(req.user);
 };
 
