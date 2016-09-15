@@ -30,7 +30,7 @@ module.exports = function (app) {
  
  
  app.route('/users/:userId')
- .get(auth.ensureAuthenticated,users.read);
+ .get(auth.ensureAuthenticated,users.read)
  .delete(users.delete);
   // Finish by binding the user middleware
   app.param('userId', users.userByID);
