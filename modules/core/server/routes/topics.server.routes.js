@@ -1,7 +1,8 @@
 /* eslint-disable */
 'use strict';
 var cors = require('cors');
-
+var path = require('path');
+var auth= require(path.resolve('./auth/auth.js'));
 module.exports = function(app) {
   // Routing logic   
   // ...
@@ -11,17 +12,17 @@ module.exports = function(app) {
   var topics = require('../controllers/topics.server.controller');
 var reviews = require('../controllers/reviews.server.controller');
 	app.route('/topics')
-	  .post(topics.create);  
+	  .post(auth.ensureAuthenticated,topics.create);  
 	  
 	app.route('/topics/:topicId')
-	.put(topics.update)
-	.delete(topics.delete);
+	.put(auth.ensureAuthenticated,topics.update)
+	.delete(auth.ensureAuthenticated,topics.delete);
 	
 	app.route('/topics/:topicId/upvote')
-	.put(topics.upvote);
+	.put(auth.ensureAuthenticated,topics.upvote);
 	
 	app.route('/topics/:topicId/reviews')
-	.post(reviews.create);
+	.post(auth.ensureAuthenticated,reviews.create);
 	// Finish by binding the article middleware
 	// What's this? Where the topicId is present in the URL
 	// the logic to 'get by id' is handled by this single function

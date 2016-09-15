@@ -1,7 +1,8 @@
 /* eslint-disable */
 'use strict';
 var cors = require('cors');
-
+var path = require('path');
+var auth= require(path.resolve('./auth/auth.js'));
 module.exports = function(app) {
   // Routing logic   
   // ...
@@ -11,11 +12,11 @@ module.exports = function(app) {
   var reviews = require('../controllers/reviews.server.controller');
     
 	app.route('/reviews/:reviewId')
-	.put(reviews.update)
-	.delete(reviews.delete);
+	.put(auth.ensureAuthenticated,reviews.update)
+	.delete(auth.ensureAuthenticated,reviews.delete);
 	
 	app.route('/reviews/:reviewId/upvote')
-	.put(reviews.upvote);
+	.put(auth.ensureAuthenticated,reviews.upvote);
 	
 	app.param('reviewId', reviews.reviewByID);
 	

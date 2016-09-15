@@ -4,6 +4,8 @@ var express = require("express");
 var path = require('path');
 var bodyParser = require("body-parser");
 var passport = require('passport');
+var auth= require(path.resolve('./auth/auth.js'));
+var path = require('path');
 var jwt    = require('jsonwebtoken');
 var cors = require('cors');
 module.exports = function (app) {
@@ -28,6 +30,7 @@ module.exports = function (app) {
  
  
  app.route('/users/:userId')
+ .get(auth.ensureAuthenticated,users.read)
  .delete(users.delete);
   // Finish by binding the user middleware
   app.param('userId', users.userByID);

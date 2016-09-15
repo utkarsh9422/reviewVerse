@@ -127,6 +127,12 @@ exports.list = function(req, res) {
 	});
 };
 
+/**
+ * Show the current Category
+ */
+exports.read = function(req, res) {
+	res.json(req.user);
+};
 
 /**
  * Delete an User

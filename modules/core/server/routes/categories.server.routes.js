@@ -22,11 +22,11 @@ var topics = require('../controllers/topics.server.controller');
  
 	app.route('/categories')
 	  .get(auth.ensureAuthenticated,categories.list)
-	  .post(categories.create);
+	  .post(auth.ensureAuthenticated,categories.create);
 	  
 	app.route('/categories/:categoryId')
-   	.get(categories.read)
-	.put(categories.update)
+   	.get(auth.ensureAuthenticated,categories.read)
+	.put(auth.ensureAuthenticated,categories.update)
 	.delete(categories.delete);
 	
 	
@@ -38,13 +38,13 @@ var topics = require('../controllers/topics.server.controller');
    	.get(auth.ensureAuthenticated,topics.read);
 	
 	app.route('/topics/:topicId/reviews')
-   	.get(topics.getReviews);
+   	.get(auth.ensureAuthenticated,topics.getReviews);
 	
 	 app.route('/reviews')
-	.get(reviews.list);
+	.get(auth.ensureAuthenticated,reviews.list);
 	
 	app.route('/reviews/:reviewId')
-   	.get(reviews.read);
+   	.get(auth.ensureAuthenticated,reviews.read);
 	
 	// Finish by binding the article middleware
 	// What's this? Where the categoryId is present in the URL
