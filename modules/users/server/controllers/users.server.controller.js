@@ -132,7 +132,8 @@ exports.list = function(req, res) {
  */
 exports.read = function(req, res) {
 	console.log('Entered Read Route'+ req.user);
-	res.json(req.user);
+	var user = req.user;
+	res.json(user);
 };
 
 /**
@@ -171,6 +172,7 @@ exports.userByID = function(req, res, next, id) {
   			});
 		}
 		req.user = user;
+		console.log('Middleware::'+user);
 		next();
 	});
 }; 
