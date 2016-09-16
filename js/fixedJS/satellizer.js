@@ -357,7 +357,7 @@
                     return SatellizerLocal.signup(user, options);
                 },
                 logout: function() {
-                    return SatellizerShared.logout();
+                    return SatellizerShared.logout(); 
                 },
                 authenticate: function(name, data) {
                     return SatellizerOAuth.authenticate(name, data);

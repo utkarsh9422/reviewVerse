@@ -2,7 +2,6 @@ app.controller("restaurantController", [
     '$scope', '$http', 'authentication', '$auth','$location',
     function($scope, $http, authentication, $auth, $location) {
         $scope.isDisabled = false;
-        $scope.user = "Anurag Parihar";
         $scope.test = 'Hi Guys';
         //Logout
         $scope.logout = function() {
@@ -13,6 +12,34 @@ app.controller("restaurantController", [
                         $location.path('/login');
                     });
         };
+        $scope.getProfile = function() {
+//            var headers = {'Authorization': authentication.getjwtToken()};
+            
+            $http({method: 'GET',
+                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/profile/me"}).
+                    then(function(response) {
+                        if(response.data.google){
+                        $scope.status = response.status;
+                        $scope.username = response.data.google.name;
+                        $scope.img=response.data.google.picture;
+                        }
+                        else if(response.data.facebook){
+                        $scope.status = response.status;
+                        $scope.username = response.data.facebook.name;
+                        $scope.img=response.data.facebook.picture;
+                        }
+                        else{
+                        $scope.status = response.status;
+                        $scope.username = response.data.local.name;
+                    }
+                    }, function(response) {
+                        $scope.status = response.status;
+                        $scope.username = "Cannot Fetch Username";
+                        $scope.img="Cannot Fetch Profile Picture";
+                    });
+                
+        };
+        $scope.getProfile();
 //Get Topics
         //console.log(authentication.getjwtToken());
         $scope.getTopics = function() {

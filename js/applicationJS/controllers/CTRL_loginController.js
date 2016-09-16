@@ -19,7 +19,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
                         }
                     });
         };
-
+      
         //      *************Register****************    
 
 //        $scope.signUp = function() {
@@ -106,65 +106,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
         /*
          * Login Request to the server
          */
-        function loginRequest() {
-            $location.path('/restaurant');
-//		$rootScope.AILoading = true;
-//		var successCallback = function(response) {
-//			$rootScope.AILoading = false;
-//			if (response != undefined) {// if empty or undefined response
-//				var responseObj = response.data.MESSAGE.PAYLOAD.LOGIN.TABLE;
-//				if (responseObj.UMPERRORMSG == undefined) {//if user is authenticated'
-//					$scope.consumerProfile = responseObj;
-//					sharedService.setConsumerProfile($scope.consumerProfile);
-//						sharedService.setIsLoggedIn(true);
-//						$location.path('/dashboard');	//navigate to consumer dashboard
-//					
-//
-//				} else {
-//					
-//					alert(globalErrorMsg.entervalidCredentials);
-//				}
-//			}
-//			else{
-//				
-//				alert("The Server did not respond properly");
-//			}
-//		}
-//		
-//		var errorCallback = function() {
-//		alert("Could not connect with the Server");
-//
-//			$rootScope.AILoading = false;
-//		}
-//
-//		var inputParam = {
-//			"MESSAGE" : {
-//				"HEADER" : {
-//					"LOGIN" : "gr00107978@TechMGasco"
-//				},
-//				"PAYLOAD" : {
-//					"LOGIN" : {
-//						"CUSTOMER_ID" : $scope.username,
-//						"CUST_PASSWORD" : $scope.password,
-//						"CONSUMER_TYPE" : "consumer"
-//					}
-//				},
-//				"SESSION" : {
-//					"LATITUDE" : "0.0",
-//					"LONGITUDE" : "0.0",
-//					"APP" : "",
-//					"ORG" : "TechMGasco",
-//					"TRANSACTION" : "LOGIN",
-//					"KEY" : "LOGIN/ID",
-//					"TYPE" : "LOGIN",
-//					"CHANNEL" : "b2c"
-//				}
-//			}
-//		};
-//		
-//		//posting the Login data for authentication
-//		webservice.callPostMethod(verify_user, inputParam, successCallback, errorCallback);
-        }
+
         $scope.parallax = function() {
             $(document).ready(function() {           //Parallax
                 $('.button-collapse').sideNav();
