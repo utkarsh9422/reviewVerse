@@ -27,10 +27,7 @@ app.controller("restaurantController", [
                         $scope.status = response.status;
                         $scope.username = response.data.facebook.name;
                         var imgURL = response.data.facebook.picture;
-                        $http.get(imgURL)
-                        .success(function(response) {
-                        $scope.img=response.data;
-                    });
+                        $scope.img=response.data.facebook.picture;
                         }
                         else{
                         $scope.status = response.status;
