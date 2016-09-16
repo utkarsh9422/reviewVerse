@@ -29,7 +29,7 @@ app.controller("restaurantController", [
                         var imgURL = response.data.facebook.picture;
                         $http.get(imgURL, data, config)
                         .success(function(response) {
-                        $scope.img=response.data;
+                        $scope.img=response;
                     });
                         }
                         else{
