@@ -5,7 +5,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
             $auth.authenticate(provider)
                     .then(function() {
 //                        toastr.success('You have successfully signed in with ' + provider + '!');
-                        $location.path('/restaurant');
+                        $location.path('/home');
                     })
                     .catch(function(error) {
                         if (error.message) {
@@ -19,7 +19,12 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
                         }
                     });
         };
-      
+        $scope.direct=function(){
+            if(isAuthenticate()){
+                $location.path('/home');
+            }
+        };
+        $scope.direct
         //      *************Register****************    
 
 //        $scope.signUp = function() {
