@@ -84,6 +84,7 @@ module.exports.initMiddleware = function (app) {
     extended: true
   }));
   app.use(bodyParser.json());
+  app.use(expressValidator());
   app.use(methodOverride());
   // Add the cookie parser and flash middleware
   app.use(cookieParser());
