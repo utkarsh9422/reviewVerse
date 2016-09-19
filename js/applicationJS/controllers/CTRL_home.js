@@ -26,7 +26,7 @@ app.controller("homeController", [
                         else if (response.data.facebook) {
                             $scope.status = response.status;
                             $scope.username = response.data.facebook.name;
-                            $scope.email = response.data.google.email;
+                            $scope.email = response.data.facebook.email;
                             $scope.img = response.data.facebook.picture;
                         }
                         else {

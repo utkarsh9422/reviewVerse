@@ -24,7 +24,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
                 $location.path('/home');
             }
         };
-        $scope.direct
+        $scope.direct();
         //      *************Register****************    
 
 //        $scope.signUp = function() {
