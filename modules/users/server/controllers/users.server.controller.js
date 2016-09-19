@@ -31,15 +31,6 @@ exports.createUser = function(req, res) {
         password = req.body.password,
 		name=req.body.name;
 	console.log("email: "+email+"password: "+password);
-	if(!req.get('Content-Type')== 'application/json'){
-		return res.status(415);
-	}
-	else if(email == null && password == null && name == null){
-		return res.status(400).send({
-					message: 'User/Password/Name are mandatory'
-				});
-	}
-	else{
 	
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
@@ -78,7 +69,7 @@ exports.createUser = function(req, res) {
             }
 
         });
-	}
+	
 };
 
  /**
@@ -90,16 +81,6 @@ exports.login = function(req, res) {
         password = req.body.password;
 		
 		console.log("Email: "+email);
-		if(!req.get('Content-Type') === 'application/json'){
-			console.log(req.get('Content-Type'));
-			return res.status(415);
-		}
-		else if(email == null && password == null){
-		return res.status(400).send({
-					message: 'User/Password are mandatory'
-				});
-			}
-		else{
 			// find a user whose email is the same as the forms email
 			// we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -131,7 +112,7 @@ exports.login = function(req, res) {
 			}
             
         });
-	}	
+		
 };
   
 /**
