@@ -20,7 +20,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
                     });
         };
         $scope.direct=function(){
-            if(isAuthenticate()){
+            if(isAuthenticated()){
                 $location.path('/home');
             }
         };
