@@ -2,7 +2,6 @@ app.controller("restaurantController", [
     '$scope', '$http', 'authentication', '$auth','$location',
     function($scope, $http, authentication, $auth, $location) {
         $scope.isDisabled = false;
-        $scope.test = 'Hi Guys';
         //Logout
         $scope.logout = function() {
 			console.log("Logout Button Clicked");

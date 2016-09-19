@@ -45,7 +45,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
             $auth.signup($scope.user)
                     .then(function(response) {
                         $auth.setToken(response);
-                        $location.path('/restaurant');
+//                        $location.path('/home');
                         alert('You have successfully created a new account and have been signed-in');
                     })
                     .catch(function(response) {
@@ -57,7 +57,7 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
             $auth.login($scope.user)
                     .then(function() {
                         alert('You have successfully signed in!');
-                        $location.path('/restaurant');
+                        $location.path('/home');
                     })
                     .catch(function(error) {
                         alert(error.data.message, error.status);
