@@ -20,17 +20,19 @@ app.controller("homeController", [
                         if (response.data.google) {
                             $scope.status = response.status;
                             $scope.username = response.data.google.name;
+                            $scope.email = response.data.google.email;
                             $scope.img = response.data.google.picture;
                         }
                         else if (response.data.facebook) {
                             $scope.status = response.status;
                             $scope.username = response.data.facebook.name;
-                            var imgURL = response.data.facebook.picture;
+                            $scope.email = response.data.google.email;
                             $scope.img = response.data.facebook.picture;
                         }
                         else {
                             $scope.status = response.status;
                             $scope.username = response.data.local.name;
+                            $scope.email = response.data.local.email;
                         }
                     }, function(response) {
                         $scope.status = response.status;
