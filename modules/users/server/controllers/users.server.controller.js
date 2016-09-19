@@ -34,7 +34,7 @@ exports.createUser = function(req, res) {
 	if(!req.get('Content-Type')== 'application/json'){
 		return res.status(415);
 	}
-	else if(!email && !password && !name){
+	else if(email == null && password == null && name == null){
 		return res.status(400).send({
 					message: 'User/Password/Name are mandatory'
 				});
@@ -94,7 +94,7 @@ exports.login = function(req, res) {
 			console.log(req.get('Content-Type'));
 			return res.status(415);
 		}
-		else if(!email && !password){
+		else if(email == null && password == null){
 		return res.status(400).send({
 					message: 'User/Password are mandatory'
 				});
