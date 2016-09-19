@@ -90,7 +90,7 @@ exports.login = function(req, res) {
         password = req.body.password;
 		
 		console.log("Email: "+email);
-		if(!req.get('Content-Type')== 'application/json'){
+		if(!req.get('Content-Type') === 'application/json'){
 			console.log(req.get('Content-Type'));
 			return res.status(415);
 		}
