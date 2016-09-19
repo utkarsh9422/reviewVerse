@@ -5,6 +5,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+	util = require('util'),
 	jwt    = require('jsonwebtoken'),
 	cfg = require("../../../../config/config.js"),
 	errorHandler = require('./errors.server.controller'),
@@ -27,11 +28,17 @@ var request = require('request');
  * Create a User
  */
 exports.createUser = function(req, res) {
+	req.checkBody('email', 'Invalid Email').notEmpty();
+	req.checkBody('password', 'Invalid Password').notEmpty();
+	req.checkBody('name', 'Invalid name').notEmpty();
+	var errors = req.validationErrors();
+	if (errors) {
+		res.json(errors, 400);
+		return;
+	}
 	var email = req.body.email,
         password = req.body.password,
-		name=req.body.name;
-	console.log("email: "+email+"password: "+password);
-	
+		name=req.body.name;	
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
         User.findOne({ 'local.email' :  email }, function(err, user) {
@@ -76,6 +83,13 @@ exports.createUser = function(req, res) {
  * Login a User
  */
 exports.login = function(req, res) {
+	req.checkBody('email', 'Invalid Email').notEmpty();
+	req.checkBody('password', 'Invalid Password').notEmpty();
+	var errors = req.validationErrors();
+	if (errors) {
+		res.json(errors, 400);
+		return;
+	}
 	//req.headers('Content-Type','application/json');
 	var email = req.body.email,
         password = req.body.password;
