@@ -3,6 +3,7 @@
 var cors = require('cors');
 var path = require('path');
 var auth= require(path.resolve('./auth/auth.js'));
+var imageUpload= require(path.resolve('./auth/imageUpload.js'));
 module.exports = function(app) {
   // Routing logic   
   // ...
@@ -11,8 +12,10 @@ module.exports = function(app) {
   
   var topics = require('../controllers/topics.server.controller');
 var reviews = require('../controllers/reviews.server.controller');
+	//app.route('/topics').post(auth.ensureAuthenticated,topics.create);  
+	  
 	app.route('/topics')
-	  .post(auth.ensureAuthenticated,topics.create);  
+	  .post(imageUpload.upload.array('upl'),topics.create);
 	  
 	app.route('/topics/:topicId')
 	.put(auth.ensureAuthenticated,topics.update)
