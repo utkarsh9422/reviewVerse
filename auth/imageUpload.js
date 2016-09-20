@@ -8,11 +8,6 @@ var cfg = require("../config/config.js");
 var multer = require('multer');
 var multerS3 = require('multer-s3');
 var aws = require('aws-sdk');
-var params = {
-secretOrKey: cfg.sessionSecret,
-jwtFromRequest: ExtractJwt.fromAuthHeader()
-//jwtFromRequest: ExtractJwt.fromHeader("Authorization")
-};
 
 
 aws.config.update({accessKeyId: 'AKIAJN7IZ6XOLP6VT7FQ', secretAccessKey: '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', signatureVersion: 'v4'});
