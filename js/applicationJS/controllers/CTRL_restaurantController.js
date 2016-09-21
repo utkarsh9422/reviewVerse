@@ -1,10 +1,10 @@
 app.controller("restaurantController", [
-    '$scope', '$http', 'authentication', '$auth','$location',
+    '$scope', '$http', 'authentication', '$auth', '$location',
     function($scope, $http, authentication, $auth, $location) {
         $scope.isDisabled = false;
         //Logout
         $scope.logout = function() {
-			console.log("Logout Button Clicked");
+            console.log("Logout Button Clicked");
             $auth.logout()
                     .then(function() {
                         alert('You have been logged out');
@@ -13,31 +13,31 @@ app.controller("restaurantController", [
         };
         $scope.getProfile = function() {
 //            var headers = {'Authorization': authentication.getjwtToken()};
-            
+
             $http({method: 'GET',
                 url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/profile/me"}).
                     then(function(response) {
-                        if(response.data.google){
-                        $scope.status = response.status;
-                        $scope.username = response.data.google.name;
-                        $scope.img=response.data.google.picture;
+                        if (response.data.google) {
+                            $scope.status = response.status;
+                            $scope.username = response.data.google.name;
+                            $scope.img = response.data.google.picture;
                         }
-                        else if(response.data.facebook){
-                        $scope.status = response.status;
-                        $scope.username = response.data.facebook.name;
-                        var imgURL = response.data.facebook.picture;
-                        $scope.img=response.data.facebook.picture;
+                        else if (response.data.facebook) {
+                            $scope.status = response.status;
+                            $scope.username = response.data.facebook.name;
+                            var imgURL = response.data.facebook.picture;
+                            $scope.img = response.data.facebook.picture;
                         }
-                        else{
-                        $scope.status = response.status;
-                        $scope.username = response.data.local.name;
-                    }
+                        else {
+                            $scope.status = response.status;
+                            $scope.username = response.data.local.name;
+                        }
                     }, function(response) {
                         $scope.status = response.status;
                         $scope.username = "Cannot Fetch Username";
-                        $scope.img="Cannot Fetch Profile Picture";
+                        $scope.img = "Cannot Fetch Profile Picture";
                     });
-                
+
         };
         $scope.getProfile();
 //Get Topics
@@ -57,6 +57,48 @@ app.controller("restaurantController", [
         };
         $scope.getTopics();
 //Post Topics
+
+
+        // NOW UPLOAD THE FILES.
+        $scope.uploadFiles = function() {
+            var formData = new FormData();
+            formData.append("name", $scope.newName);
+            formData.append("description", $scope.newDescription);
+            formData.append("category", $scope.newCategory);
+           
+            $scope.getTheFiles = function($files) {
+                angular.forEach($files, function(value, key) {
+                    formData.append(key, value);
+                    consloe.log(key+value);
+                });
+                
+            };
+            console.log(formData);
+            var request = {
+                method: 'POST',
+                url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics',
+                data: formData,
+                headers: {
+                    'Content-Type': undefined
+                },
+                processData: false,
+                contentType: false,
+                mimeType: "multipart/form-data"
+            };
+
+            // SEND THE FILES.
+            $http(request)
+                    .success(function(response, request) {
+                        console.log(response);
+                        console.log(request);
+                    })
+                    .error(function(response, request) {
+                        console.log(response);
+                        console.log(request);
+                    });
+        };
+
+
         $scope.addTopic = function() {
             if ($scope.newName == "" || $scope.newDescription == "" || $scope.newcategory == "") {
                 alert("Please fill in the required information.");
@@ -64,12 +106,13 @@ app.controller("restaurantController", [
             var data = {
                 name: $scope.newName,
                 description: $scope.newDescription,
-                category: $scope.newCategory
+                category: $scope.newCategory,
+                image: $scope.newImage
             };
 
             var config = {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'undefined'
                 }
             };
             $http.post("http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics", data, config)

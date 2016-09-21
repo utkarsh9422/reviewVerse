@@ -1,17 +1,148 @@
 <!-- Page Wrapper -->
 <div>
- <ul id="slide-out" class="side-nav">
-    <li class="userView">
-      <a ><img class="img-circle img-responsive userImg" src={{img}}></a>
-      <a ><span style="color:black;">{{username}}</span></a>
-      <a ><span style="color:black;">{{email}}</span></a>
-</li>
-    <li><a ng-click="restaurant()"><i class="material-icons">cloud</i>Restaurant</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-    <li><button class="btn btn-logout right-aligned waves-effect" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button></li>
-  </ul>
-  <a  data-activates="slide-out" class="button-collapse menuSideBar"><i style="font-size:30px;" class="fa fa-bars"></i></a>
-</div>        
+    <ul id="slide-out" class="side-nav">
+        <li class="userView">
+            <a ><img class="img-circle img-responsive userImg" src={{img}}></a>
+            <a ><span style="color:black;">{{username}}</span></a>
+            <a ><span style="color:black;">{{email}}</span></a>
+        </li>
+        <li><a ng-click="restaurant()"><i class="fa fa-recycle"></i>Restaurant</a></li>
+        <li><a ng-click="hospitals()"><i class="fa fa-recycle"></i>Hospitals</a></li>
+        <li><a ng-click="coachingInstitutes()"><i class="fa fa-recycle"></i>Coaching Institutes</a></li>
+        <li><a ng-click="sportsAcademies()"><i class="fa fa-recycle"></i>Sports Academies</a></li>
+        <li><a ng-click="colleges()"><i class="fa fa-recycle"></i>Colleges</a></li>
+        <li><a ng-click="movies()"><i class="fa fa-recycle"></i>Movies</a></li>
+        <li><a ng-click="automobiles()"><i class="fa fa-recycle"></i>Automobiles</a></li>
+        <li><a ng-click="electronics()"><i class="fa fa-recycle"></i>Electronics</a></li>
+        <li><div class="divider"></div></li>
+        <li><a><button class="btn btn-logout right-aligned waves-effect" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button></a></li>
+    </ul>
+    <div id="header"> 
+        <a  data-activates="slide-out" class="button-collapse menuSideBar"><i style="font-size:30px;" class="fa fa-bars"></i></a>
+    </div>
+    <div class="container-fluid categories">
+        <div class="row">
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/restaurant1.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Restaurants<i class="fa fa-toggle-up right"></i></span>
+                        <p><a ng-click="restaurant()">Review or Add Restaurants</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Restaurant<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/hospitals.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Hospitals<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Restaurant<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/coachingInstitutes.jpeg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Coaching Institutes<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Coaching Institutes<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>  
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/sportsAcademies.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Sports Academies<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Sports Academies<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/colleges.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Colleges<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Colleges<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/movies.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Movies<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Movies<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>  
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col l4 s12 m6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/electronics.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Electronics<i class="fa fa-toggle-up right"></i></span>
+                        <p><a href="#">This is a link</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Electronics<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+
+        </div>
+    </div>  
+</div>
+

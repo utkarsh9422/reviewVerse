@@ -33,6 +33,7 @@ app.controller("homeController", [
                             $scope.status = response.status;
                             $scope.username = response.data.local.name;
                             $scope.email = response.data.local.email;
+                            $scope.img = "Profile Picture";
                         }
                     }, function(response) {
                         $scope.status = response.status;
@@ -42,14 +43,11 @@ app.controller("homeController", [
 
         };
         $scope.getProfile();
-        $scope.restaurant= function() {
-            $location.path('/restaurant');
-//		loginRequest();
-        }        
+        
         $scope.menu = function() {
             jQuery(document).ready(function($) {
                 $('.button-collapse').sideNav({
-                    menuWidth: 300, // Default is 240
+                    menuWidth: 250, // Default is 240
                     closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
                 }
                 );
@@ -60,6 +58,33 @@ app.controller("homeController", [
             });
         };
         $scope.menu();
+
+//Locations
+        $scope.restaurant= function() {
+            $location.path('/restaurant');
+        };
+        $scope.hospitals= function() {
+            $location.path('/hospitals');
+        };
+        $scope.coachingInstitutes= function() {
+            $location.path('/coachingInstitutes');
+        }
+        $scope.sportsAcademies= function() {
+            $location.path('/sportsAcademies');
+        }
+        $scope.colleges= function() {
+            $location.path('/colleges');
+        }
+        $scope.movies= function() {
+            $location.path('/movies');
+        }
+        $scope.automobiles= function() {
+            $location.path('/automobiles');
+        }
+        $scope.electronics= function() {
+            $location.path('/electronics');
+        }
+        
     }]);
 
 

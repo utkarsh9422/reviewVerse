@@ -7,19 +7,19 @@
         </div>
         <div class="col-md-5">
             <div class="row">
-            <div class="col-sm-8">
-            <form class="navbar-form right-aligned" role="search">
-    
-      <input class="form-control" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;float:right;height:34px;" ng-model="searchString" name="srch-term" id="srch-term" type="text">
-    
-  </form>
-    </div>
-            <div class="col-sm-4">
-                <button class="btn btn-logout right-aligned" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button>
-            </div>
+                <div class="col-sm-8">
+                    <form class="navbar-form right-aligned" role="search">
+
+                        <input class="form-control" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;float:right;height:34px;" ng-model="searchString" name="srch-term" id="srch-term" type="text">
+
+                    </form>
+                </div>
+                <div class="col-sm-4">
+                    <button class="btn btn-logout right-aligned" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <div class="modal-body">
@@ -28,7 +28,7 @@
             <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
         </div>
         <!--Post Topic Details-->
-        <div class="row" id="topic" ng-repeat="topic in topics | orderBy : '-created' | filter: searchString ">
+        <div class="row" id="topic" ng-repeat="topic in topics| orderBy : '-created' | filter: searchString ">
             <div class="col-sm-6 ">
                 <div class="event-title">
                     <h3>{{topic.name}}</h3></div>
@@ -86,11 +86,9 @@
                 <input type="text" ng-model="newName" placeholder="Title" required/>
                 <input type="text" ng-model="newDescription" placeholder="Topic" required/>
                 <input type="text" ng-model="newCategory" placeholder="Category" required/>
-                <input type="file" accept="image/*" multiple
-                       ng-src="{{newImage}}"
-                       resize-max-height="300"
-                       resize-max-width="250"
-                       resize-quality="0.7" />
+                <input type="file" name="upl" multiple
+                       ng-files="getTheFiles($files)" />
+                <input type="button" ng-click="uploadFiles()" value="Upload" />
             </form>
 
         </div>
