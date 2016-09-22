@@ -15,7 +15,13 @@
  * Create a Topic
  */
 exports.create = function (req, res) {
-var topic = new Topic(req.body);
+	var imageUrl='';
+	for(var i = 0, len = req.files.length; i < len; i++){
+		console.log(req.files[i].location);
+		imageUrl=req.files[i].location;
+	}
+	var topic = new Topic(req.body);
+	topic.imageArray = imageUrl;
 
 	topic.save(function(err) {
 		if (err) {
