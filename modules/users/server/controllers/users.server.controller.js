@@ -318,6 +318,7 @@ exports.loginWithGoogle = function(req, res) {
           user.google.id = profile.sub;
           user.google.picture = profile.picture.replace('sz=50', 'sz=200');
           user.google.name = profile.name;
+		  user.google.email=user.email || profile.email;
           user.save(function(err) {
             var token = user.generateJwt();
             res.send({ token: token });
