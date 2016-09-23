@@ -10,11 +10,13 @@
   Topic = mongoose.model('Topic'),
   Review = mongoose.model('Review'),
   _ = require('lodash');
+  const util = require('util')
 
  /**
  * Create a Topic
  */
 exports.create = function (req, res) {
+	console.log(util.inspect(req, {showHidden: false, depth: null}))
 	var imageUrl='';
 	for(var i = 0, len = req.files.length; i < len; i++){
 		console.log(req.files[i].location);
