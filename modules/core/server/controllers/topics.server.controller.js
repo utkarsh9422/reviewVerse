@@ -25,6 +25,7 @@ exports.create = function (req, res) {
 
 	topic.save(function(err) {
 		if (err) {
+			console.log(errorHandler.getErrorMessage(err));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
