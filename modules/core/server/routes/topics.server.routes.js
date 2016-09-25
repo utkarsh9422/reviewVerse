@@ -15,7 +15,7 @@ var reviews = require('../controllers/reviews.server.controller');
 	//app.route('/topics').post(auth.ensureAuthenticated,topics.create);  
 	  
 	app.route('/topics')
-	  .post(imageUpload.upload.array('upl'),topics.create);
+	  .post(imageUpload.upload.array('file'),topics.create);
 	  
 	app.route('/topics/:topicId')
 	.put(auth.ensureAuthenticated,topics.update)

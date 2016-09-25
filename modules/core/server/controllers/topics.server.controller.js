@@ -10,7 +10,7 @@
   Topic = mongoose.model('Topic'),
   Review = mongoose.model('Review'),
   _ = require('lodash');
-  const util = require('util')
+  var util = require('util')
 
  /**
  * Create a Topic
