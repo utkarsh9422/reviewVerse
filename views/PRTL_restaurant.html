@@ -82,20 +82,29 @@
             <h4 class="modal-title">Add new Topic</h4>
         </div>
         <div class="modal-body">
-            <form >
+            <form name="myForm">
                 <input type="text" ng-model="newName" placeholder="Title" required/>
                 <input type="text" ng-model="newDescription" placeholder="Topic" required/>
                 <input type="text" ng-model="newCategory" placeholder="Category" required/>
-                <input type="file" name="upl" multiple
-                       ng-files="getTheFiles($files)" />
-                <input type="button" ng-click="uploadFiles()" value="Upload" />
-            </form>
+                 <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+				<i ng-show="myForm.file.$error.required">*required</i><br>
+				<i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+				<img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+				<br>
+				<!--<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>-->
+				<span class="progress" ng-show="picFile.progress >= 0">
+					<div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+				</span>
+				<span ng-show="picFile.result">Upload Successful</span>
+				<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+            
 
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" ng-click="addTopic()" style="margin-right:10px;" class="btn btn-default" data-dismiss="modal">Post</button>
+            <button type="button" style="margin-right:10px;" class="btn btn-default" data-dismiss="modal" ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Post</button>
         </div>
+		</form>
     </div>
 </div>
 

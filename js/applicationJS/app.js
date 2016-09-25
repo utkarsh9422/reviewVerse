@@ -1,7 +1,7 @@
 'use strict';
 // Declare app level module which depends on filters, and services
 
-var app = angular.module('gascoApp', ['ngRoute', 'ngMessages', 'pascalprecht.translate', 'ui.bootstrap', 'ngMap', 'ngStorage', 'satellizer']);
+var app = angular.module('gascoApp', ['ngRoute', 'ngMessages', 'pascalprecht.translate', 'ui.bootstrap', 'ngMap', 'ngStorage', 'satellizer','ngFileUpload']);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider',
     function($routeProvider, $activityIndicatorProvider, $httpProvider, $authProvider) {

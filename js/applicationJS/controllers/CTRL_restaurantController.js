@@ -1,6 +1,6 @@
 app.controller("restaurantController", [
-    '$scope', '$http', 'authentication', '$auth', '$location',
-    function($scope, $http, authentication, $auth, $location) {
+    '$scope', '$http', 'authentication', '$auth', '$location','Upload', '$timeout',
+    function($scope, $http, authentication, $auth, $location,Upload, $timeout) {
         $scope.isDisabled = false;
         //Logout
         $scope.logout = function() {
@@ -60,7 +60,7 @@ app.controller("restaurantController", [
 
 
         // NOW UPLOAD THE FILES.
-        $scope.uploadFiles = function() {
+       /* $scope.uploadFiles = function() {
             var formData = new FormData();
             formData.append("name", $scope.newName);
             formData.append("description", $scope.newDescription);
@@ -78,9 +78,6 @@ app.controller("restaurantController", [
                 method: 'POST',
                 url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics',
                 data: formData,
-                headers: {
-                    'Content-Type': undefined
-                },
                 processData: false,
                 contentType: false,
                 mimeType: "multipart/form-data"
@@ -120,7 +117,39 @@ app.controller("restaurantController", [
                         alert("Topic Added");
                         $scope.getTopics();
                     });
-        };
+        };*/
+		
+	$scope.uploadPic = function(file) {
+		console.log("Entered Controller");
+		console.log(file);
+				
+		file.upload = Upload.upload({
+			url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics',		
+			data: {name: $scope.newName,
+				   description:$scope.newDescription,
+	               category: $scope.newCategory,
+	               file: file},
+			
+            processData: false,
+            contentType: false,
+           mimeType: "multipart/form-data"	   
+				   
+    });
+
+    file.upload.then(function (response) {
+		console.log(response);
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
+		
 //Get Reviews
         $http({method: 'GET', url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/reviews"}).
                 then(function(response) {
