@@ -16,7 +16,6 @@
  * Create a Topic
  */
 exports.create = function (req, res) {
-	console.log(util.inspect(req, {showHidden: false, depth: null}))
 	var imageUrl='';
 	for(var i = 0, len = req.files.length; i < len; i++){
 		console.log(req.files[i].location);
@@ -27,7 +26,7 @@ exports.create = function (req, res) {
 
 	topic.save(function(err) {
 		if (err) {
-			console.log(errorHandler.getErrorMessage(err));
+			console.log(util.inspect(req, {showHidden: false, depth: null}));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
