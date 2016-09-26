@@ -1,7 +1,16 @@
 app.controller("restaurantController", [
-    '$scope', '$http', 'authentication', '$auth', '$location',
-    function($scope, $http, authentication, $auth, $location) {
+    '$scope', '$http', 'authentication', '$auth', '$location', 'fileUpload',
+    function($scope, $http, authentication, $auth, $location, fileUpload) {
         $scope.isDisabled = false;
+        //File Upload
+        $scope.uploadFile = function() {
+            var file = $scope.myFile;
+            console.log('file is ');
+            console.dir(file);
+            var uploadUrl = getTopics;
+            fileUpload.uploadFileToUrl(file, uploadUrl);
+        };
+
         //Logout
         $scope.logout = function() {
             console.log("Logout Button Clicked");
@@ -15,7 +24,7 @@ app.controller("restaurantController", [
 //            var headers = {'Authorization': authentication.getjwtToken()};
 
             $http({method: 'GET',
-                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/profile/me"}).
+                url: getProfile}).
                     then(function(response) {
                         if (response.data.google) {
                             $scope.status = response.status;
@@ -45,7 +54,7 @@ app.controller("restaurantController", [
         $scope.getTopics = function() {
             var headers = {'Authorization': authentication.getjwtToken()};
             $http({method: 'GET',
-                url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics",
+                url: getTopics,
                 headers: headers}).
                     then(function(response) {
                         $scope.status = response.status;
@@ -65,13 +74,13 @@ app.controller("restaurantController", [
             formData.append("name", $scope.newName);
             formData.append("description", $scope.newDescription);
             formData.append("category", $scope.newCategory);
-           
+
             $scope.getTheFiles = function($files) {
                 angular.forEach($files, function(value, key) {
                     formData.append(key, value);
-                    consloe.log(key+value);
+                    consloe.log(key + value);
                 });
-                
+
             };
             console.log(formData);
             var request = {
@@ -109,20 +118,20 @@ app.controller("restaurantController", [
                 category: $scope.newCategory,
                 image: $scope.newImage
             };
-
+            var url = addTopic;
             var config = {
                 headers: {
                     'Content-Type': 'undefined'
                 }
             };
-            $http.post("http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics", data, config)
+            $http.post(url, data, config)
                     .success(function(response) {
                         alert("Topic Added");
                         $scope.getTopics();
                     });
         };
 //Get Reviews
-        $http({method: 'GET', url: "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/reviews"}).
+        $http({method: 'GET', url: getReviews}).
                 then(function(response) {
                     $scope.status = response.status;
                     $scope.reviews = response.data;
@@ -139,7 +148,8 @@ app.controller("restaurantController", [
                 authorId: "User Name",
                 rating: reviewRating
             };
-            var url = "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics/".concat(topicId, "/reviews");
+            var getTopics = getTopics;
+            var url = getTopics.concat(topicId, "/reviews");
             var config = {
                 headers: {
                     'Content-Type': 'application/json'
@@ -155,6 +165,8 @@ app.controller("restaurantController", [
         };
 //Topic Upvote          
         $scope.incrementUpvotes = function(topicId) {
+            var getTopics = getTopics;
+    //        var url = getTopics.concat(topicId, "/upvote");
             $scope.disable = function(topic) {
                 return true;
             };
@@ -281,4 +293,31 @@ app.controller("restaurantController", [
             });
         }
     };
-});
+}).directive('fileModel', ['$parse', function($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function() {
+                    scope.$apply(function() {
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        };
+    }]).service('fileUpload', ['$http', function($http) {
+        this.uploadFileToUrl = function(file, uploadUrl) {
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+                    .success(function() {
+                    })
+                    .error(function() {
+                    });
+        };
+    }]);
