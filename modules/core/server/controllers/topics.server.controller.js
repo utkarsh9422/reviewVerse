@@ -17,10 +17,12 @@
  */
 exports.create = function (req, res) {
 	var imageUrl='';
-	for(var i = 0, len = req.files.length; i < len; i++){
-		console.log(req.files[i].location);
-		imageUrl=req.files[i].location;
-	}
+	if(req.files){
+		for(var i = 0, len = req.files.length; i < len; i++){
+			console.log(req.files[i].location);
+			imageUrl=req.files[i].location;
+			}
+	}		
 	var topic = new Topic(req.body);
 	topic.imageArray = imageUrl;
 
