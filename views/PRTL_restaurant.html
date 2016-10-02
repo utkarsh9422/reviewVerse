@@ -62,7 +62,7 @@
 
             </div>
             <div class="col-sm-6 event-thumb">
-                <img class="img-responsive" ng-src="{{topic.image}}" width="400" height="300"/>
+                <img class="img-responsive" ng-src="{{topic.imageArray}}" width="400" height="300"/>
             </div><br>
             <div class="col-sm-12 emptySpace">
             </div>
@@ -72,24 +72,91 @@
 </div>     
 
 <!--Post Modal-->
-<div class="modal fade" id="postTopic" role="dialog">
+<!--<div class="modal fade" id="postTopic" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Add new Topic</h4>
         </div>
         <div class="modal-body">
-            <form>
-                <input type="text" ng-model="newName" placeholder="Title" required/>
-                <input type="text" ng-model="newDescription" placeholder="Topic" required/>
-                <input type="text" ng-model="newCategory" placeholder="Category" required/>
-                <input type="file" file-model="myFile" />
-                <input type="button" ng-click="uploadFile()" value="Upload" />
-            </form>
+            <form name="myForm">
+                <div class="input-field">
+                    <input type="text" ng-model="newName"  required />
+                    <label  data-success="right">Title</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" ng-model="newDescription"  required/>
+                    <label  data-success="right">Topic</label>
+                </div>
+                                <input type="text" ng-model="newCategory" placeholder="Category" required/>
+                <label>Category</label>
+                <div class="input-field">
+                                        <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
+                                            <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                                        </select> 
+                    <input type="text" ng-model="newCategory" placeholder="Category" required/>
+                </div>
+
+
+                <div class="input-field">
+                    <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                    <i ng-show="myForm.file.$error.required">*required</i><br>
+                    <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                    <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                    <br>
+                    <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
+                    <span class="progress" ng-show="picFile.progress >= 0">
+                        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+                    </span>
+                    <span ng-show="picFile.result">Upload Successful</span>
+                    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                </div>
+            </form>        
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" ng-click="addTopic()" style="margin-right:10px;" class="btn btn-default" data-dismiss="modal">Post</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--Post Modal-->
+<div class="modal fade" id="postTopic" role="dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add new Topic</h4>
         </div>
+        <form name="myForm">
+            <div class="modal-body">
+                <div class="input-field">
+                    <input type="text" ng-model="newName"  required />
+                    <label  data-success="right">Title</label>
+                </div>
+                <div class="input-field">
+                    <input type="text" ng-model="newDescription"  required/>
+                    <label  data-success="right">Topic</label>
+                </div>
+                <!--                <input type="text" ng-model="newCategory" placeholder="Category" required/>-->
+                <label>Category</label>
+                <div class="input-field">
+                <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
+                    <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                </select>
+                </div>
+                <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                <i ng-show="myForm.file.$error.required">*required</i><br>
+                <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                <br>
+                <!--<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>-->
+                <span class="progress" ng-show="picFile.progress >= 0">
+                    <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
+                </span>
+                <span ng-show="picFile.result">Upload Successful</span>
+                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" style="margin-right:10px;" class="btn btn-default" ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Post</button>
+            </div>
+        </form>
     </div>
 </div>

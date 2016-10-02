@@ -92,7 +92,7 @@ h4{
     overflow: hidden;
     white-space: nowrap;
 }
-
+select{display: block;}
 @media screen and (min-width: 768px) {
 
 }

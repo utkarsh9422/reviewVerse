@@ -14,8 +14,8 @@
     var Config = (function() {
         function Config() {
             this.baseUrl = '/';
-            this.loginUrl = 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/login';
-            this.signupUrl = 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/signup';
+            this.loginUrl = loginUrlSatellizer;
+            this.signupUrl = signupUrlSatellizer;
             this.unlinkUrl = '/auth/unlink/';
             this.tokenName = 'token';
             this.tokenPrefix = 'satellizer';
@@ -28,7 +28,7 @@
                 facebook: {
                     name: 'facebook',
                     clientId: '137611703353949',
-                    url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/facebook',
+                    url: loginFbSatellizer,
                     authorizationEndpoint: 'https://www.facebook.com/v2.5/dialog/oauth',
                     redirectUri: window.location.origin + '/reviewVerse/',
                     requiredUrlParams: ['display', 'scope'],
@@ -40,7 +40,7 @@
                 },
                 google: {
                     name: 'google',
-                    url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/auth/google',
+                    url: loginGoogleSatellizer,
                     clientId: '1092102028684-og9iveejbd6qqscde9bl5emtv38gfvna.apps.googleusercontent.com',
                     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/auth',
                     redirectUri: window.location.origin + '/reviewVerse/',

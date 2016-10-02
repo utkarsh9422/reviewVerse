@@ -1,15 +1,49 @@
 app.controller("restaurantController", [
-    '$scope', '$http', 'authentication', '$auth', '$location', 'fileUpload',
-    function($scope, $http, authentication, $auth, $location, fileUpload) {
+    '$scope', '$http', 'authentication', '$auth', '$location', 'Upload', '$timeout',
+    function($scope, $http, authentication, $auth, $location, Upload, $timeout) {
         $scope.isDisabled = false;
-        //File Upload
-        $scope.uploadFile = function() {
-            var file = $scope.myFile;
-            console.log('file is ');
-            console.dir(file);
-            var uploadUrl = getTopics;
-            fileUpload.uploadFileToUrl(file, uploadUrl);
-        };
+
+        $scope.categories = [
+            {id: '57f1603c2b86bbe72c0f4980', name: 'Restaurant'},
+            {id: '57e92adbc3d49d3247c2f53a', name: 'Hospitals'},
+            {id: '3', name: 'Coaching Institutes'},
+            {id: '4', name: 'Sports Academies'},
+            {id: '5', name: 'Colleges'},
+            {id: '6', name: 'Movies'},
+            {id: '7', name: 'Electronics'},
+        ];
+
+        //File Upload  or Topic P{ost      
+        $scope.uploadPic = function(file) {
+            console.log("Entered Controller");
+            console.log(file);
+
+            file.upload = Upload.upload({
+                url: getTopics,
+                data: {name: $scope.newName,
+                    description: $scope.newDescription,
+                    category: $scope.newCategory,
+                    file: file},
+                processData: false,
+                contentType: false,
+                mimeType: "multipart/form-data"
+
+            });
+
+            file.upload.then(function(response) {
+                console.log(response);
+                $timeout(function() {
+                    file.result = response.data;
+                });
+            }, function(response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function(evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                $scope.getTopics();
+            });
+        }
 
         //Logout
         $scope.logout = function() {
@@ -20,6 +54,7 @@ app.controller("restaurantController", [
                         $location.path('/login');
                     });
         };
+        
         $scope.getProfile = function() {
 //            var headers = {'Authorization': authentication.getjwtToken()};
 
@@ -68,7 +103,7 @@ app.controller("restaurantController", [
 //Post Topics
 
 
-        // NOW UPLOAD THE FILES.
+        // NOW UPLOAD THE FILES. Image Upload
         $scope.uploadFiles = function() {
             var formData = new FormData();
             formData.append("name", $scope.newName);
@@ -85,7 +120,7 @@ app.controller("restaurantController", [
             console.log(formData);
             var request = {
                 method: 'POST',
-                url: 'http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics',
+                url: getTopics,
                 data: formData,
                 headers: {
                     'Content-Type': undefined
@@ -107,30 +142,6 @@ app.controller("restaurantController", [
                     });
         };
 
-
-        $scope.addTopic = function() {
-            if ($scope.newName == "" || $scope.newDescription == "" || $scope.newcategory == "") {
-                alert("Please fill in the required information.");
-            }
-            var data = {
-                name: $scope.newName,
-                description: $scope.newDescription,
-                category: $scope.newCategory,
-                image: $scope.newImage
-            };
-            var url = addTopic;
-            var config = {
-                headers: {
-                    'Content-Type': 'undefined'
-                }
-            };
-            $http.post(url, data, config)
-                    .success(function(response) {
-                        alert("Topic Added");
-                        $scope.getTopics();
-                    });
-        };
-//Get Reviews
         $http({method: 'GET', url: getReviews}).
                 then(function(response) {
                     $scope.status = response.status;
@@ -166,7 +177,7 @@ app.controller("restaurantController", [
 //Topic Upvote          
         $scope.incrementUpvotes = function(topicId) {
             var getTopics = getTopics;
-    //        var url = getTopics.concat(topicId, "/upvote");
+            //        var url = getTopics.concat(topicId, "/upvote");
             $scope.disable = function(topic) {
                 return true;
             };
