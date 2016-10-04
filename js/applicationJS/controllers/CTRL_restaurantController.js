@@ -56,8 +56,6 @@ app.controller("restaurantController", [
         };
         
         $scope.getProfile = function() {
-//            var headers = {'Authorization': authentication.getjwtToken()};
-
             $http({method: 'GET',
                 url: getProfile}).
                     then(function(response) {
@@ -142,6 +140,7 @@ app.controller("restaurantController", [
                     });
         };
 
+//Get Reviews
         $http({method: 'GET', url: getReviews}).
                 then(function(response) {
                     $scope.status = response.status;
@@ -159,8 +158,8 @@ app.controller("restaurantController", [
                 authorId: "User Name",
                 rating: reviewRating
             };
-            var getTopics = getTopics;
-            var url = getTopics.concat(topicId, "/reviews");
+
+            var url = getTopics.concat(topicId, "/reviews/");
             var config = {
                 headers: {
                     'Content-Type': 'application/json'
@@ -176,7 +175,7 @@ app.controller("restaurantController", [
         };
 //Topic Upvote          
         $scope.incrementUpvotes = function(topicId) {
-            var getTopics = getTopics;
+//            var getTopics = getTopics;
             //        var url = getTopics.concat(topicId, "/upvote");
             $scope.disable = function(topic) {
                 return true;
@@ -184,7 +183,7 @@ app.controller("restaurantController", [
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/topics/".concat(topicId, "/upvote"),
+                "url": getTopics.concat(topicId, "/upvote"),
                 "method": "PUT",
                 "headers": {
                     "cache-control": "no-cache",
@@ -203,7 +202,7 @@ app.controller("restaurantController", [
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://ec2-52-66-112-123.ap-south-1.compute.amazonaws.com/reviews/".concat(reviewId, "/upvote"),
+                "url": getReviews.concat(reviewId, "/upvote"),
                 "method": "PUT",
                 "headers": {
                     "cache-control": "no-cache",
