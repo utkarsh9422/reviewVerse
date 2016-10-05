@@ -87,7 +87,7 @@ exports.upvote = function (req, res) {
 			else {
 				console.log("Topic already upvoted by this user:"+userId);
 				return res.status(409).send({
-				message: errorHandler.getErrorMessage(err)
+				message: "Topic already upvoted by this user:"+userId
 			});
 			}
 			
