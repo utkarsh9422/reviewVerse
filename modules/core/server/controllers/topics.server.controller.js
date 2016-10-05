@@ -87,6 +87,7 @@ exports.upvote = function (req, res) {
 			else {
 				return res.status(409).send({
 				message: errorHandler.getErrorMessage(err)
+				}
 			}
 			
 				
