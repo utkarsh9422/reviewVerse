@@ -73,7 +73,7 @@ exports.upvote = function (req, res) {
 		var userId = req.user;
 		Topic.findOneAndUpdate({"_id": topicId,"voters_up._id":{ $ne: userId }},
 		//Topic.findOneAndUpdate({"_id": topicId},
-		{$push: { "voters_up": userId },$set: { upvotes: upvotes+1 } },
+		{$push: { "voters_up": userId },$set: { "upvotes": upvotes+1 } },
 		{ new: true }, function(err, topic){
 			if(err){
 				console.log("Something wrong when updating data!");
