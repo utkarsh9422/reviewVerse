@@ -71,10 +71,10 @@ exports.update = function (req, res) {
 exports.upvote = function (req, res) {
 		var topicId = req.topic;
 		var userId = req.user;
-		Topic.findOneAndUpdate({"_id": topicId,"voters_up._id":{ $ne: userId }},
-		//Topic.findOneAndUpdate({"_id": topicId},
-		{$push: { "voters_up": userId }, $inc: { "upvotes": 1 } },
-		{ new: true }, function(err, topic){
+		var conditions = {"_id": topicId,"voters_up":{ $ne: userId }};
+		var update = {$push: { "voters_up": userId }, $inc: { "upvotes": 1 } };
+		var options = { new: true };
+		Topic.findOneAndUpdate(conditions,update,options, function(err, topic){
 			if(err){
 				console.log("Something wrong when updating data!");
 				return res.status(400).send({
