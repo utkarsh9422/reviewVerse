@@ -85,9 +85,10 @@ exports.upvote = function (req, res) {
 				res.json(topic);
 			}
 			else {
+				console.log("Topic already upvoted by this user:"+userId);
 				return res.status(409).send({
 				message: errorHandler.getErrorMessage(err)
-				}
+			});
 			}
 			
 				
