@@ -80,9 +80,16 @@ exports.upvote = function (req, res) {
 				return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-			}
+			}else if(!topic){
 				console.log(topic);
 				res.json(topic);
+			}
+			else {
+				return res.status(409).send({
+				message: errorHandler.getErrorMessage(err)
+			}
+			
+				
 });
 	/*topic.upvotes+=1;
 
