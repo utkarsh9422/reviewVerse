@@ -49,7 +49,8 @@ exports.read = function(req, res) {
  * Update a Topic
  */
 exports.update = function (req, res) {
-var topic = req.topic;
+	var topic = req.topic;
+	var user = req.user;
 
 	topic = _.extend(topic, req.body);
 
@@ -68,9 +69,22 @@ var topic = req.topic;
  * Upvote a Topic
  */
 exports.upvote = function (req, res) {
-var topic = req.topic;
-
-	topic.upvotes+=1;
+		var topicId = req.topic;
+		var userId = req.user;
+		Topic.findOneAndUpdate({"_id": topicId,"voters_up._id":{ $ne: userId }},
+		//Topic.findOneAndUpdate({"_id": topicId},
+		{$push: { "voters_up": userId },$set: { upvotes: upvotes+1 } },
+		{ new: true }, function(err, topic){
+			if(err){
+				console.log("Something wrong when updating data!");
+				return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+			}
+				console.log(topic);
+				res.json(topic);
+});
+	/*topic.upvotes+=1;
 
 	topic.save(function(err) {
 		if (err) {
@@ -80,7 +94,7 @@ var topic = req.topic;
 		} else {
 			res.json(topic);
 		}
-	});
+	});*/
 };
 /**
  * Delete an Topic

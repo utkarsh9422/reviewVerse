@@ -57,7 +57,12 @@ var TopicSchema = new Schema({
 		type: String,
 		default: '',
 		trim: true
-	}
+	},
+	voters_up: [{ 
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}]
+	
 });
 
 mongoose.model('Topic', TopicSchema);
