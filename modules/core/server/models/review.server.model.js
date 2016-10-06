@@ -44,7 +44,7 @@ var ReviewSchema = new Schema({
 	reviewerName: { 
 		type: String,
 		trim: true
-	}
+	},
 	upvotes: {
 		type: Number,
 		default: 0,

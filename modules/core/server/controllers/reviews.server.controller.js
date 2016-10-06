@@ -24,7 +24,7 @@ var ratingCount = 0;
 var userId = req.user;
 var userName = '';
 User.findById(userId).exec(function(err, user) {
-		if (err) return next(err);
+		if (err) console.log(errorHandler.getErrorMessage(err)) ;
 		if (!user) {
 			return res.status(401).send({
   				message: 'User not found'
