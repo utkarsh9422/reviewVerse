@@ -23,11 +23,11 @@ var totalRating = 0;
 var ratingCount = 0;
 var userId = req.user;
 var userName = '';
-console.log("Going to search user")
+console.log("Going to search user");
 User.findById(userId).exec(function(err, user) {
 		console.log("Searching user by UserId:"+userId);
 		if (err) {
-			console.log() ;
+			console.log(errorHandler.getErrorMessage(err));
 			return res.status(401).send({
   				message: errorHandler.getErrorMessage(err)
   			});
