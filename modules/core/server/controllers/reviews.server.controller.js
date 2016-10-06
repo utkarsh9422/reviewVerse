@@ -24,6 +24,7 @@ var ratingCount = 0;
 var userId = req.user;
 var userName = '';
 User.findById(userId).exec(function(err, user) {
+		console.log("Searching user by UserId:"+userId);
 		if (err) console.log(errorHandler.getErrorMessage(err)) ;
 		if (!user) {
 			return res.status(401).send({
@@ -32,10 +33,10 @@ User.findById(userId).exec(function(err, user) {
 		}
 			userName = user.local.name;
 	});
-	console.log(userId + " "+ userName);
+	console.log("UserDetails:"+ userId + " "+ userName);
 var review = new Review(req.body);
-	review.authorId= userId;
-	review.authorName = userName;
+	review.reviewerId= userId;
+	review.reviewerName = userName;
 	averageRating=req.topic.avgRating;
 	console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
 	console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
