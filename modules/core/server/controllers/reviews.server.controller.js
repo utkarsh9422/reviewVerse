@@ -32,12 +32,14 @@ User.findById(userId).exec(function(err, user) {
 		}
 			userName = user.local.name;
 	});
+	console.log(userId + " "+ userName);
 var review = new Review(req.body);
 	review.authorId= userId;
 	review.authorName = userName;
 	averageRating=req.topic.avgRating;
 	console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
 	console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
+	console.log("Review Payload:"+review);
 	Review.count({ownerTopicId: req.topic._id}, function(err, count){
 		if (err) {
 			console.log("error",err);
@@ -54,6 +56,7 @@ var review = new Review(req.body);
 					message: errorHandler.getErrorMessage(err)
 				});
 			  } else {
+				  console.log("Review Payload:"+review);
 					totalRating+=req.body.rating;
 					console.log( "Updated TotalRating: ", totalRating );
 					ratingCount+=1;
