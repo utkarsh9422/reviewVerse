@@ -23,9 +23,15 @@ var totalRating = 0;
 var ratingCount = 0;
 var userId = req.user;
 var userName = '';
+console.log("Going to search user")
 User.findById(userId).exec(function(err, user) {
 		console.log("Searching user by UserId:"+userId);
-		if (err) console.log(errorHandler.getErrorMessage(err)) ;
+		if (err) {
+			console.log() ;
+			return res.status(401).send({
+  				message: errorHandler.getErrorMessage(err)
+  			});
+		}
 		if (!user) {
 			return res.status(401).send({
   				message: 'User not found'
@@ -57,7 +63,6 @@ var review = new Review(req.body);
 					message: errorHandler.getErrorMessage(err)
 				});
 			  } else {
-				  console.log("Review Payload:"+review);
 					totalRating+=req.body.rating;
 					console.log( "Updated TotalRating: ", totalRating );
 					ratingCount+=1;
