@@ -37,12 +37,14 @@ var ReviewSchema = new Schema({
 		required: 'review body cannot be blank',
 		validate: [validateLength, 'review must be 1000 chars in length or less']
 	},
-	authorId: {
-    type: String,
-    default: '',
-        // types have specific functions e.g. trim, lowercase, uppercase (http://mongoosejs.com/docs/api.html#schema-string-js)
-    trim: true
-  },
+	reviewerId: { 
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	reviewerName: { 
+		type: String,
+		trim: true
+	}
 	upvotes: {
 		type: Number,
 		default: 0,

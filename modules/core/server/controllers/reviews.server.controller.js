@@ -9,6 +9,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   Review = mongoose.model('Review'),
   Topic = mongoose.model('Topic'),
+  User = mongoose.model('User'),
   _ = require('lodash');
   
   var topics = require('../controllers/topics.server.controller');
@@ -20,7 +21,20 @@ exports.create = function (req, res) {
 var averageRating = 0;
 var totalRating = 0;
 var ratingCount = 0;
+var userId = req.user;
+var userName = '';
+User.findById(userId).exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) {
+			return res.status(401).send({
+  				message: 'User not found'
+  			});
+		}
+			userName = user.local.name;
+	});
 var review = new Review(req.body);
+	review.authorId= userId;
+	review.authorName = userName;
 	averageRating=req.topic.avgRating;
 	console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
 	console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
@@ -46,7 +60,8 @@ var review = new Review(req.body);
 					console.log( "Updated Count: ", ratingCount );
 					averageRating=totalRating/ratingCount;
 					console.log( "Updated avgRating: ", averageRating );
-					Topic.findByIdAndUpdate(req.topic.id, { $set: { avgRating: averageRating }}, function (err, topic) {
+					var update = { $set: { avgRating: averageRating }};
+					Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
 						if (err) {
 							return res.status(400).send({
 							message: errorHandler.getErrorMessage(err)
