@@ -1,6 +1,17 @@
 app.controller("loginController", ['$scope', '$rootScope', '$location', '$http', 'authentication', '$modal', '$localStorage', '$auth',
     function($scope, $rootScope, $location, $http, authentication, $modal, $localStorage, $auth) {
         //  *********Satellizer*************8
+        $scope.inputType = 'password';
+
+        // Hide & show password function
+        $scope.hideShowPassword = function() {
+            if ($scope.inputType == 'password')
+                $scope.inputType = 'text';
+            else
+                $scope.inputType = 'password';
+        };
+
+
         $scope.authenticate = function(provider) {
             $auth.authenticate(provider)
                     .then(function() {
@@ -19,8 +30,8 @@ app.controller("loginController", ['$scope', '$rootScope', '$location', '$http',
                         }
                     });
         };
-        $scope.direct=function(){
-            if($auth.isAuthenticated()){
+        $scope.direct = function() {
+            if ($auth.isAuthenticated()) {
                 $location.path('/home');
             }
         };

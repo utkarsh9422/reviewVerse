@@ -27,29 +27,31 @@
         <div class="row">
             <form name="loginform" class="col s12 m12 l4 right animated bounceInDown">
                 <div class="input-field">
-                <input type="text"  ng-model="user.email" class="form-control" required>
-                <label  data-success="right">Email</label>
-                <div ng-messages="loginform.username.$error">								
-                </div>
+                    <input type="text"  ng-model="user.email" class="form-control" required>
+                    <label  data-success="right">Email</label>
+                    <div ng-messages="loginform.username.$error">								
+                    </div>
                 </div>
                 <div class="input-field">
-                <input type="password"  ng-model="user.password" class="form-control" required>
-                <label  data-success="right">Password</label>
-                <div ng-messages="loginform.password.$error">			
-                    <!--								<div ng-message="minlength">
-                                                                                            Password is too short
-                                                                                    </div>-->
+                    <input type="{{inputType}}"  ng-model="user.password" class="form-control" required>
+                    <label  data-success="right">Password</label>
+                    <div ng-messages="loginform.password.$error">
+                    </div>
                 </div>
+                <div class="input-field">
+                <input type="checkbox" id="checkbox" ng-model="passwordCheckbox" ng-click="hideShowPassword()" />
+                    <label for="checkbox" ng-if="passwordCheckbox">Hide password</label>
+                    <label for="checkbox" ng-if="!passwordCheckbox">Show password</label>
                 </div>
-                <div class="row" ng-click="forgetPassword()"><a>Forgot Password</a></div>
+                <div class="row" style="margin-top: 20px;"><button ng-click = "forgetPassword()" class="btn btn-info" >Forgot Password</button></div>
                 <div class="row"><button ng-click = "login()" class="btn btn-success" >LOGIN</button></div>
                 <div class="row" style="margin-top: 20px;">
                     <button class="btn btn-fb" ng-click="authenticate('facebook')">Login With  <i class="fa fa-facebook"></i></button></div>
                 <div class="row" style="margin-top: 20px;"><button class="btn btn-google" ng-click="authenticate('google')" >Login With <i class="fa fa-google"></i></button></div>
 
                 <div class="row">
-                    <div class="col-xs-6">Not a Member? </div>
-                    <div class="col-xs-6 textRit" ng-click="register()"><a >Register</a></div>
+                    <div class="col-xs-6" style="font-weight: Bolder;padding:5px;">Not a Member?</div>
+                    <div class="col-xs-6 textRit"><button  ng-click="register()" class="btn btn-info" >Register</button></div>
                 </div>
             </form>  
             <div class="col s12 m12 l8 left animated pulse">
