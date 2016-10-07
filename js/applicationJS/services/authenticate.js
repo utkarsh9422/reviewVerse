@@ -56,6 +56,7 @@
                 saveToken(data.token);
             });
         };
+        
          var getjwtToken = function() {
              var str1 = "JWT ";
              var str2 =getToken();

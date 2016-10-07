@@ -1,6 +1,22 @@
 app.controller("homeController", [
     '$scope', '$http', 'authentication', '$auth', '$location',
     function($scope, $http, authentication, $auth, $location) {
+        
+        $scope.getCategories = function() {
+            var headers = {'Authorization': authentication.getjwtToken()};
+            $http({method: 'GET',
+                url: getCategories,
+                headers: headers}).
+                    then(function(response) {
+                        $scope.status = response.status;
+                        $scope.categories = response.data;
+                    }, function(response) {
+                        $scope.categories = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getCategories();
+        
         //Logout
         $scope.logout = function() {
             console.log("Logout Button Clicked");

@@ -2,16 +2,18 @@ app.controller("restaurantController", [
     '$scope', '$http', 'authentication', '$auth', '$location', 'Upload', '$timeout',
     function($scope, $http, authentication, $auth, $location, Upload, $timeout) {
         $scope.isDisabled = false;
-
-        $scope.categories = [
-            {id: '57f1603c2b86bbe72c0f4980', name: 'Restaurant'},
-            {id: '57e92adbc3d49d3247c2f53a', name: 'Hospitals'},
-            {id: '3', name: 'Coaching Institutes'},
-            {id: '4', name: 'Sports Academies'},
-            {id: '5', name: 'Colleges'},
-            {id: '6', name: 'Movies'},
-            {id: '7', name: 'Electronics'},
-        ];
+        $scope.getCategories = function() {
+            $http({method: 'GET',
+                url: getCategories}).
+                    then(function(response) {
+                        $scope.status = response.status;
+                        $scope.categories = response.data;
+                    }, function(response) {
+                        $scope.categories = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getCategories();
 
         //File Upload  or Topic P{ost      
         $scope.uploadPic = function(file) {
@@ -54,7 +56,7 @@ app.controller("restaurantController", [
                         $location.path('/login');
                     });
         };
-        
+
         $scope.getProfile = function() {
             $http({method: 'GET',
                 url: getProfile}).
@@ -83,12 +85,10 @@ app.controller("restaurantController", [
         };
         $scope.getProfile();
 //Get Topics
-        //console.log(authentication.getjwtToken());
+
         $scope.getTopics = function() {
-            var headers = {'Authorization': authentication.getjwtToken()};
             $http({method: 'GET',
-                url: getTopics,
-                headers: headers}).
+                url: getTopics}).
                     then(function(response) {
                         $scope.status = response.status;
                         $scope.topics = response.data;
@@ -141,15 +141,17 @@ app.controller("restaurantController", [
         };
 
 //Get Reviews
-        $http({method: 'GET', url: getReviews}).
-                then(function(response) {
-                    $scope.status = response.status;
-                    $scope.reviews = response.data;
-                }, function(response) {
-                    $scope.reviews = response.data || "Request failed";
-                    $scope.status = response.status;
-                });
-
+        $scope.getReviews = function() {
+            $http({method: 'GET', url: getReviews}).
+                    then(function(response) {
+                        $scope.status = response.status;
+                        $scope.reviews = response.data;
+                    }, function(response) {
+                        $scope.reviews = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getReviews();
 //Add Review
         $scope.addReview = function(topicId, newReview, reviewRating) {
             var data = {
@@ -158,61 +160,56 @@ app.controller("restaurantController", [
                 authorId: "User Name",
                 rating: reviewRating
             };
-
             var url = getTopics.concat(topicId, "/reviews/");
             var config = {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             };
-
             $http.post(url, data, config)
                     .success(function(response) {
                         alert("Review Posted");
+                        $scope.getReviews();
                     }).error(function(response) {
                 alert("Failure");
             });
         };
 //Topic Upvote          
         $scope.incrementUpvotes = function(topicId) {
-//            var getTopics = getTopics;
-            //        var url = getTopics.concat(topicId, "/upvote");
-            $scope.disable = function(topic) {
-                return true;
-            };
-            var settings = {
+            $http({method: 'PUT',
+                url: getTopics.concat(topicId, "/upvote"),
                 "async": true,
                 "crossDomain": true,
-                "url": getTopics.concat(topicId, "/upvote"),
-                "method": "PUT",
-                "headers": {
-                    "cache-control": "no-cache",
-                    "postman-token": "ea81dd57-50bf-93cc-d9cb-6d8535a8a39c"
-                }
-            }
-
-            $.ajax(settings).done(function(response) {
-                console.log(response);
-                topic.upvotes++;
-            });
-
+            }).
+                    then(function(response) {
+                        console.log(response);
+                        var hasLiked = false;
+                        if (!hasLiked) {
+                            hasLiked = true;
+                            $scope.liked = 'Unlike';
+                            topic.upvotes++;
+                        } else {
+                            hasLiked = false;
+                            $scope.liked = 'Like';
+                            topic.upvotes--;
+                        }            
+                    }, function(response) {
+                        console.log(error);
+                    });
         };
 //Review Upvote
         $scope.incrementReviewUpvotes = function(reviewId) {
-            var settings = {
+            $http({method: 'PUT',
+                url: getReviews.concat(reviewId, "/upvote"),
                 "async": true,
                 "crossDomain": true,
-                "url": getReviews.concat(reviewId, "/upvote"),
-                "method": "PUT",
-                "headers": {
-                    "cache-control": "no-cache",
-                    "postman-token": "544e81c6-0332-5703-c91f-103d968ac32c"
-                }
-            }
-            $.ajax(settings).done(function(response) {
-                console.log(response);
-                review.upvotes++;
-            });
+            }).
+                    then(function(response) {
+                        console.log(response);
+                        review.upvotes++;
+                    }, function(response) {
+                        console.log(error);
+                    });
         };
 
         $scope.IsHidden = true;

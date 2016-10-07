@@ -17,14 +17,14 @@
     </div>
     <div class="container-fluid categories">
         <div class="row">
-            <div class="col l4 s12 m6">
+            <div class="col l4 s12 m6" ng-repeat="category in categories">
                 <div class="card animated fadeInDown">
                     <div class="card-image waves-effect waves-block waves-light">
                         <img class="activator" src="img/restaurant1.jpg">
                     </div>
                     <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Restaurants<i class="fa fa-toggle-up right"></i></span>
-                        <p><a ng-click="restaurant()">Review or Add Restaurants</a></p>
+                        <span class="card-title activator grey-text text-darken-4">{{category.name}}<i class="fa fa-toggle-up right"></i></span>
+                        <p><a ng-click="restaurant();">Go to {{category.name}}</a></p>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Restaurant<i class="fa fa-close right"></i></span>
@@ -32,112 +32,8 @@
                     </div>
                 </div>      
             </div>
-
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/hospitals.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Hospitals<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Restaurant<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
-
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/coachingInstitutes.jpeg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Coaching Institutes<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Coaching Institutes<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
         </div>
     </div>  
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/sportsAcademies.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Sports Academies<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Sports Academies<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
-
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/colleges.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Colleges<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Colleges<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
-
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/movies.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Movies<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Movies<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
-        </div>
-    </div>  
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col l4 s12 m6">
-                <div class="card animated fadeInDown">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="img/electronics.jpg">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Electronics<i class="fa fa-toggle-up right"></i></span>
-                        <p><a href="#">This is a link</a></p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Electronics<i class="fa fa-close right"></i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>      
-            </div>
-
-        </div>
-    </div>  
 </div>
 

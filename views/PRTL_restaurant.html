@@ -19,103 +19,55 @@
     </div>
 </div>
 
-<div class="modal-body">
-    <div class="container-fluid">
-        <div class="fixed-action-btn" style="bottom: 45px; right: 25px;">
-            <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
-        </div>
-        <!--Post Topic Details-->
-        <div class="row" id="topic" ng-repeat="topic in topics| orderBy : '-created' | filter: searchString ">
-            <div class="col-sm-6 ">
-                <div class="event-title">
-                    <h3>{{topic.name}}</h3></div>
-                <div class="event-content">
-                    <p>{{topic.description}}</p></div>
-                <div class="topicUpvotes"><button class="btn btn-primary" ng-disabled="disable(topic)" ng-click="incrementUpvotes(topic._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                    Upvotes: {{topic.upvotes}} </div>
-                {{topic.avgRating}}
-                <div class="average">
-                    <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating>   <br></div>
-                <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
-                {{topic._id}}
-                <!--Post Reviews-->
-                <form  >
-                    <div class="form-group">
-                        <!--                                <input type="text" class="form-control" placeholder="Topic Id" ng-model="topicId" />-->
-                        <input type="text" class="form-control" placeholder="Post Review" ng-model="newReview" />
-                        <star-rating ng-model="reviewRating" max="5"></star-rating>{{reviewRating.rating}}<br/>
+<div class="fixed-action-btn" style="bottom: 45px; right: 25px;">
+    <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
+</div>
+<!--Post Topic Details-->
+<div class="container-fluid" id="topic" ng-repeat="topic in topics| orderBy : '-created' | filter: searchString ">
+    <div class="col-sm-6 ">
+        <div class="event-title">
+            <h3>{{topic.name}}</h3></div>
+        <div class="event-content">
+            <p>{{topic.description}}</p></div>
+        <div class="topicUpvotes"><button class="btn btn-primary" ng-init="liked = 'Like';" ng-click="incrementUpvotes(topic._id)"><i class="fa fa-thumbs-o-up"></i>{{liked}}</button>
+            Upvotes: <span ng-bind="topic.upvotes"></span></div>
+        {{topic.avgRating}}
+        <div class="average">
+            <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating>   <br></div>
+        <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
+        {{topic._id}}
+        <!--Post Reviews-->
+        <form  >
+            <div class="form-group">
+                <!--                                <input type="text" class="form-control" placeholder="Topic Id" ng-model="topicId" />-->
+                <input type="text" class="form-control" placeholder="Post Review" ng-model="newReview" />
+                <star-rating ng-model="reviewRating" max="5"></star-rating>{{reviewRating.rating}}<br/>
 
-                        <!-- <div class="star-rating" star-rating rating-value="reviewRating" data-max="5" on-rating-selected="rateFunction(reviewRating)"></div>-->
+                <!-- <div class="star-rating" star-rating rating-value="reviewRating" data-max="5" on-rating-selected="rateFunction(reviewRating)"></div>-->
 
-                        <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
-                    </div>
-                </form>    
-
-                <!--Show Previous Reviews-->
-                <h4>Reviews</h4>
-                <ul ng-if="(topic._id == review.ownerTopicId)" ng-repeat="review in reviews| orderBy :'-created'">                               
-                    <li><p><span>{{review.body}}</span> by {{review.authorId}} <span> Upvotes -> {{review.upvotes}}</span>
-                    <average-star-rating ng-model="review.rating" max="5"></average-star-rating>     
-                    <div class="topicUpvotes"><button class="btn-small-2" ng-disabled="isDisabled" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                        Upvotes: {{review.upvotes}} </div></p></li>
-                </ul>
-
+                <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
             </div>
-            <div class="col-sm-6 event-thumb topicImage">
-                <img class="img-responsive" ng-src="{{topic.imageArray}}" width="500" height="400"/>
-            </div><br>
-            <div class="col-sm-12 emptySpace">
-            </div>
+        </form>    
 
-        </div>
+        <!--Show Previous Reviews-->
+        <h4>Reviews</h4>
+        <ul ng-if="(topic._id == review.ownerTopicId)" ng-repeat="review in reviews| orderBy :'-created'">                               
+            <li><p><span>{{review.body}}</span> by {{review.authorId}} <span> Upvotes -> {{review.upvotes}}</span>
+            <average-star-rating ng-model="review.rating" max="5"></average-star-rating>     
+            <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                Upvotes: {{review.upvotes}} </div></p></li>
+        </ul>
+
     </div>
-</div>     
+    <div class="col-sm-6 event-thumb topicImage">
+        <img class="img-responsive" ng-src="{{topic.imageArray}}" width="500" height="400"/>
+    </div><br>
+    <div class="col-sm-12 emptySpace">
+    </div>
 
-<!--Post Modal-->
-<!--<div class="modal fade" id="postTopic" role="dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add new Topic</h4>
-        </div>
-        <div class="modal-body">
-            <form name="myForm">
-                <div class="input-field">
-                    <input type="text" ng-model="newName"  required />
-                    <label  data-success="right">Title</label>
-                </div>
-                <div class="input-field">
-                    <input type="text" ng-model="newDescription"  required/>
-                    <label  data-success="right">Topic</label>
-                </div>
-                                <input type="text" ng-model="newCategory" placeholder="Category" required/>
-                <label>Category</label>
-                <div class="input-field">
-                                        <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
-                                            <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
-                                        </select> 
-                    <input type="text" ng-model="newCategory" placeholder="Category" required/>
-                </div>
+</div>
 
 
-                <div class="input-field">
-                    <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
-                    <i ng-show="myForm.file.$error.required">*required</i><br>
-                    <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-                    <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-                    <br>
-                    <button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>
-                    <span class="progress" ng-show="picFile.progress >= 0">
-                        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
-                    </span>
-                    <span ng-show="picFile.result">Upload Successful</span>
-                    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-                </div>
-            </form>        
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--Post Modal-->
 <div class="modal fade" id="postTopic" role="dialog">
     <div class="modal-content">
         <div class="modal-header">
@@ -135,9 +87,9 @@
                 <!--                <input type="text" ng-model="newCategory" placeholder="Category" required/>-->
                 <label>Category</label>
                 <div class="input-field">
-                <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
-                    <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
-                </select>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
+                        <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                    </select>
                 </div>
                 <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 <i ng-show="myForm.file.$error.required">*required</i><br>
