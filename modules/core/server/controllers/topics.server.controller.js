@@ -28,7 +28,7 @@ exports.create = function (req, res) {
 
 	topic.save(function(err) {
 		if (err) {
-			console.log(util.inspect(req, {showHidden: false, depth: null}));
+			//console.log(util.inspect(req, {showHidden: false, depth: null}));
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
