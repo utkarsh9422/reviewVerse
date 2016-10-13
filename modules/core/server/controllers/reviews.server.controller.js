@@ -7,6 +7,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  async = require('async'),
   Review = mongoose.model('Review'),
   Topic = mongoose.model('Topic'),
   User = mongoose.model('User'),
@@ -23,66 +24,80 @@ var totalRating = 0;
 var ratingCount = 0;
 var userId = req.user;
 var userName = '';
-console.log("Going to search user");
-User.findById(userId).exec(function(err, user) {
-		console.log("Searching user by UserId:"+userId);
-		if (err) {
-			console.log(errorHandler.getErrorMessage(err));
-			return res.status(401).send({
-  				message: errorHandler.getErrorMessage(err)
-  			});
-		}
-		if (!user) {
-			return res.status(401).send({
-  				message: 'User not found'
-  			});
-		}
-			userName = user.local.name;
-	});
-	console.log("UserDetails:"+ userId + " "+ userName);
 var review = new Review(req.body);
-	review.reviewerId= userId;
-	review.reviewerName = userName;
-	averageRating=req.topic.avgRating;
-	console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
-	console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
-	console.log("Review Payload:"+review);
-	Review.count({ownerTopicId: req.topic._id}, function(err, count){
-		if (err) {
-			console.log("error",err);
+	async.series([
+		function(callback){ 
+			async.parallel([
+				function(callback){
+				 getUserName(userId, function(err, userName) {
+                        if (err) return callback(err);
+                        review.reviewerId= userId;
+						review.reviewerName = userName;
+                        callback();
+                    });	
+			
+	},
+		function(callback){ 
+				averageRating=req.topic.avgRating;
+				console.log("Current Avg Rating of TopicId="+req.topic._id+" is "+averageRating);
+				console.log("Fetching Reviews Count by TopicId= "+req.topic._id);
+			Review.count({ownerTopicId: req.topic._id}, function(err, count){
+			if (err) {
+				console.log("error",err);
+				}
+			else{	
+				ratingCount = count;
+				console.log( "Number of Count: ", ratingCount );
+				totalRating = averageRating * ratingCount;	
+				console.log("Total Rating:"+totalRating);
+				totalRating+=req.body.rating;
+				console.log( "Updated TotalRating: ", totalRating );
+				ratingCount+=1;
+				console.log( "Updated Count: ", ratingCount );
+				averageRating=totalRating/ratingCount;
+				console.log( "Updated avgRating: ", averageRating );
+				callback();
 			}
-		else{	
-			ratingCount = count;
-			console.log( "Number of Count: ", ratingCount );
-			totalRating = averageRating * ratingCount;	
-			console.log("Total Rating:"+totalRating);
-			review.save(function(err) {
+		});		
+	}], callback);
+	 },
+	function(callback){
+		async.parallel([
+		function(callback){
+		var update = { $set: { avgRating: averageRating }};
+		Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
+		if (err) {
+			return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+			});				
+			}
+			callback();
+				
+		});
+	},
+	function(callback){
+		review.save(function(err) {
 				if (err) {
 					console.log(err);
 					return res.status(400).send({
 					message: errorHandler.getErrorMessage(err)
 				});
-			  } else {
-					totalRating+=req.body.rating;
-					console.log( "Updated TotalRating: ", totalRating );
-					ratingCount+=1;
-					console.log( "Updated Count: ", ratingCount );
-					averageRating=totalRating/ratingCount;
-					console.log( "Updated avgRating: ", averageRating );
-					var update = { $set: { avgRating: averageRating }};
-					Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
-						if (err) {
-							return res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-						}			 
-		});
-			res.status(201).json(review);
-		}
+			  }
+				else{
+					callback();
+				}
+			});
+	}],callback);			
+	}		 
+], function(err){
+		if (err) {
+			return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+			});				
+			}
+		res.status(201).json(review);		
 	});
-		}		
-		});	
-	
+
 };
 
 /**
@@ -185,3 +200,17 @@ exports.reviewByID = function(req, res, next, id) {
 	});	
 };
 
+
+function getUserName(id, callback) {
+	console.log("Searching user by UserId:"+id);
+	var userName = '';
+    User.findById(id).exec(function(err, user) {
+					if (err) return callback(err);
+					//Check that a user was found
+				if(user.local) userName = user.local.name;
+				else if(user.facebook) userName= user.facebook.name;
+				else if (user.google) userName = user.google.name;			
+				console.log("UserDetails:"+ id + " "+ userName);
+        callback(null, userName);
+    });
+}
