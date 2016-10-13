@@ -35,7 +35,7 @@ exports.ensureAuthenticated = function(req, res, next) {
   var payload = null;
   try {
     payload = jwt.decode(token, cfg.sessionSecret);
-	console.log("Payload:"+payload+ "    "+payload.sub);
+	console.log("RequestorId:"+payload.sub);
   }
   catch (err) {
     return res.status(401).send({ message: err.message });
