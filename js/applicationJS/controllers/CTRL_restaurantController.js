@@ -24,7 +24,7 @@ app.controller("restaurantController", [
                 url: getTopics,
                 data: {name: $scope.newName,
                     description: $scope.newDescription,
-                    category: $scope.newCategory,
+                    category: $scope.newCategory._id,
                     file: file},
                 processData: false,
                 contentType: false,
@@ -36,6 +36,7 @@ app.controller("restaurantController", [
                 console.log(response);
                 $timeout(function() {
                     file.result = response.data;
+                     $scope.getTopics();
                 });
             }, function(response) {
                 if (response.status > 0)
@@ -43,7 +44,7 @@ app.controller("restaurantController", [
             }, function(evt) {
                 // Math.min is to fix IE which reports 200% sometimes
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                $scope.getTopics();
+               
             });
         }
 
@@ -98,50 +99,21 @@ app.controller("restaurantController", [
                     });
         };
         $scope.getTopics();
-//Post Topics
-
-
-        // NOW UPLOAD THE FILES. Image Upload
-        $scope.uploadFiles = function() {
-            var formData = new FormData();
-            formData.append("name", $scope.newName);
-            formData.append("description", $scope.newDescription);
-            formData.append("category", $scope.newCategory);
-
-            $scope.getTheFiles = function($files) {
-                angular.forEach($files, function(value, key) {
-                    formData.append(key, value);
-                    consloe.log(key + value);
-                });
-
-            };
-            console.log(formData);
-            var request = {
-                method: 'POST',
-                url: getTopics,
-                data: formData,
-                headers: {
-                    'Content-Type': undefined
-                },
-                processData: false,
-                contentType: false,
-                mimeType: "multipart/form-data"
-            };
-
-            // SEND THE FILES.
-            $http(request)
-                    .success(function(response, request) {
-                        console.log(response);
-                        console.log(request);
-                    })
-                    .error(function(response, request) {
-                        console.log(response);
-                        console.log(request);
-                    });
-        };
 
 //Get Reviews
-        $scope.getReviews = function() {
+//        $scope.getReviews = function(topicId) {
+//            var url = getTopics.concat(topicId, "/reviews/");
+//            $http({method: 'GET', url: url}).
+//                    then(function(response) {
+//                        $scope.status = response.status;
+//                        $scope.reviews = response.data;
+//                    }, function(response) {
+//                        $scope.reviews = response.data || "Request failed";
+//                        $scope.status = response.status;
+//                    });
+//        };
+        
+        $scope.getReviews = function(topicId) {
             $http({method: 'GET', url: getReviews}).
                     then(function(response) {
                         $scope.status = response.status;
@@ -182,17 +154,11 @@ app.controller("restaurantController", [
                 "crossDomain": true,
             }).
                     then(function(response) {
-                        console.log(response);
-                        var hasLiked = false;
-                        if (!hasLiked) {
-                            hasLiked = true;
-                            $scope.liked = 'Unlike';
-                            topic.upvotes++;
-                        } else {
-                            hasLiked = false;
-                            $scope.liked = 'Like';
-                            topic.upvotes--;
-                        }            
+                        alert(response.data.upvotes);
+                        console.log(topic.upvotes);
+                        topic.upvotes=response.data.upvotes;
+
+
                     }, function(response) {
                         console.log(error);
                     });

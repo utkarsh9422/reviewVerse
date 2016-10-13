@@ -1,7 +1,7 @@
 app.controller("homeController", [
     '$scope', '$http', 'authentication', '$auth', '$location',
     function($scope, $http, authentication, $auth, $location) {
-        
+
         $scope.getCategories = function() {
             var headers = {'Authorization': authentication.getjwtToken()};
             $http({method: 'GET',
@@ -16,7 +16,7 @@ app.controller("homeController", [
                     });
         };
         $scope.getCategories();
-        
+
         //Logout
         $scope.logout = function() {
             console.log("Logout Button Clicked");
@@ -59,7 +59,7 @@ app.controller("homeController", [
 
         };
         $scope.getProfile();
-        
+
         $scope.menu = function() {
             jQuery(document).ready(function($) {
                 $('.button-collapse').sideNav({
@@ -67,40 +67,37 @@ app.controller("homeController", [
                     closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
                 }
                 );
-                // Show sideNav
-                $('.button-collapse').sideNav('show');
-                // Hide sideNav
-                $('.button-collapse').sideNav('hide');
+                $('.button-collapse').collapsible();
             });
         };
         $scope.menu();
 
 //Locations
-        $scope.restaurant= function() {
+        $scope.restaurant = function() {
             $location.path('/restaurant');
         };
-        $scope.hospitals= function() {
+        $scope.hospitals = function() {
             $location.path('/hospitals');
         };
-        $scope.coachingInstitutes= function() {
+        $scope.coachingInstitutes = function() {
             $location.path('/coachingInstitutes');
         }
-        $scope.sportsAcademies= function() {
+        $scope.sportsAcademies = function() {
             $location.path('/sportsAcademies');
         }
-        $scope.colleges= function() {
+        $scope.colleges = function() {
             $location.path('/colleges');
         }
-        $scope.movies= function() {
+        $scope.movies = function() {
             $location.path('/movies');
         }
-        $scope.automobiles= function() {
+        $scope.automobiles = function() {
             $location.path('/automobiles');
         }
-        $scope.electronics= function() {
+        $scope.electronics = function() {
             $location.path('/electronics');
         }
-        
+
     }]);
 
 

@@ -23,17 +23,17 @@
     <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
 </div>
 <!--Post Topic Details-->
-<div class="container-fluid" id="topic" ng-repeat="topic in topics| orderBy : '-created' | filter: searchString ">
+<div class="container-fluid" id="topic" ng-repeat="topic in topics | orderBy : '-created' | filter: searchString track by $index">
     <div class="col-sm-6 ">
         <div class="event-title">
             <h3>{{topic.name}}</h3></div>
         <div class="event-content">
             <p>{{topic.description}}</p></div>
         <div class="topicUpvotes"><button class="btn btn-primary" ng-init="liked = 'Like';" ng-click="incrementUpvotes(topic._id)"><i class="fa fa-thumbs-o-up"></i>{{liked}}</button>
-            Upvotes: <span ng-bind="topic.upvotes"></span></div>
-        {{topic.avgRating}}
+            Upvotes: <span>{{topic.upvotes}}</span></div>
+        
         <div class="average">
-            <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating>   <br></div>
+            <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating> {{topic.avgRating}}  <br></div>
         <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
         {{topic._id}}
         <!--Post Reviews-->
@@ -48,17 +48,21 @@
                 <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
             </div>
         </form>    
-
+<!--  {{getReviews(topic._id)}}-->
         <!--Show Previous Reviews-->
-        <h4>Reviews</h4>
-        <ul ng-if="(topic._id == review.ownerTopicId)" ng-repeat="review in reviews| orderBy :'-created'">                               
-            <li><p><span>{{review.body}}</span> by {{review.authorId}} <span> Upvotes -> {{review.upvotes}}</span>
+        <h4>Reviews </h4>
+        <ul ng-if="(topic._id == review.ownerTopicId)" ng-repeat="review in reviews | orderBy :'-created' ">                               
+            <li><p><span>{{review.body}}</span> by {{review.reviewerName}} <span> Upvotes -> {{review.upvotes}}</span>
             <average-star-rating ng-model="review.rating" max="5"></average-star-rating>     
             <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
                 Upvotes: {{review.upvotes}} </div></p></li>
         </ul>
 
     </div>
+    
+<!--    Load More button -->
+<!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
+      
     <div class="col-sm-6 event-thumb topicImage">
         <img class="img-responsive" ng-src="{{topic.imageArray}}" width="500" height="400"/>
     </div><br>
@@ -87,13 +91,12 @@
                 <!--                <input type="text" ng-model="newCategory" placeholder="Category" required/>-->
                 <label>Category</label>
                 <div class="input-field">
-                    <select name="repeatSelect" id="repeatSelect" ng-model="newCategory">
-                        <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="newCategory" ng-options="category.name for category in categories">
                     </select>
                 </div>
                 <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 <i ng-show="myForm.file.$error.required">*required</i><br>
-                <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: Max 2MB</i>
                 <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
                 <br>
                 <!--<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>-->
