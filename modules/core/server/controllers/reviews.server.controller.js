@@ -207,9 +207,15 @@ function getUserName(id, callback) {
     User.findById(id).exec(function(err, user) {
 					if (err) return callback(err);
 					//Check that a user was found
-				if(user.local) userName = user.local.name;
-				else if(user.facebook) userName= user.facebook.name;
-				else if (user.google) userName = user.google.name;			
+				if(!_.isEmpty(user.local.name)) {
+					userName = user.local.name;
+				}
+				else if(!_.isEmpty(user.facebook.name)){
+					userName= user.facebook.name;
+				} 
+				else if (!_.isEmpty(user.google.name)) {
+					userName = user.google.name;	
+				}					
 				console.log("UserDetails:"+ id + " "+ userName);
         callback(null, userName);
     });
