@@ -128,30 +128,30 @@ var topic = req.topic;
  */
 exports.list = function(req, res) {
 	console.log("Fetching Topics");
-	var categoryId=req.query.categoryId;
-	if(categoryId == null){
-		Topic.find().sort('name').exec(function(err, topics) {
+	var page = 1;
+	var pageSize = 20;
+	var query = {};
+	if(req.query.categoryId){query.category = req.query.categoryId}
+    if(req.query.page){page = req.query.page;}
+    if(req.query.pageSize){pageSize =req.query.pageSize;}
+	var options = {
+				//select: 'title date author',
+				sort: { created: -1 },
+				//populate: 'author',
+				//lean: true,
+				page: page, 
+				limit: Number(pageSize)
+				};
+	Topic.paginate(query, options,function(err,result) {
 		if (err) {
+			console.log(err);
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err.message
 			});
 		} else {
-			res.json(topics);
+			res.json(result.docs);
 		}
 	});
-	}
-	else{
-		console.log("Fetching Topics by categoryId="+categoryId);
-	Topic.find({category: categoryId}).exec(function(err, topics) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.json(topics);
-		}
-	});
-	}
 };
 
 /**

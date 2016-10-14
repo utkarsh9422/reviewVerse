@@ -5,6 +5,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+  mongoosePaginate = require('mongoose-paginate'),
   Schema = mongoose.Schema;
 
   
@@ -64,5 +65,5 @@ var TopicSchema = new Schema({
 	}]
 	
 });
-
+TopicSchema.plugin(mongoosePaginate);
 mongoose.model('Topic', TopicSchema);
