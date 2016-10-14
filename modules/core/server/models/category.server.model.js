@@ -44,6 +44,6 @@ var CategorySchema = new Schema({
     validate: [validateLength, 'name must be 15 chars in length or less']
   }
 });
-
+CategorySchema.plugin(mongoosePaginate);
 // Expose the model to other objects (similar to a 'public' setter).
 mongoose.model('Category', CategorySchema);

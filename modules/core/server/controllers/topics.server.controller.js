@@ -131,15 +131,22 @@ exports.list = function(req, res) {
 	var page = 1;
 	var pageSize = 20;
 	var query = {};
-	if(req.query.categoryId){query.category = req.query.categoryId}
+	var sortParams = '';
+	console.log(req.query);
+	if(req.query.categoryId){query.category = req.query.categoryId;}
+	if(req.query.avgRating){query.avgRating = req.query.avgRating;}
+	if(req.query.upvotes){query.upvotes = req.query.upvotes;}
     if(req.query.page){page = req.query.page;}
     if(req.query.pageSize){pageSize =req.query.pageSize;}
+	if(req.query.sortBy){
+		sortParams = req.query.sortBy;
+		}	
 	var options = {
 				//select: 'title date author',
-				sort: { created: -1 },
+				sort: sortParams,
 				//populate: 'author',
 				//lean: true,
-				page: page, 
+				page: Number(page), 
 				limit: Number(pageSize)
 				};
 	Topic.paginate(query, options,function(err,result) {

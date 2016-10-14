@@ -57,5 +57,5 @@ var ReviewSchema = new Schema({
 		required: 'rating cannot be null'
 	}
 });
-
+ReviewSchema.plugin(mongoosePaginate);
 mongoose.model('Review', ReviewSchema);
