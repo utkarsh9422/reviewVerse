@@ -162,25 +162,6 @@ exports.list = function(req, res) {
 };
 
 /**
- * List of Reviews for a topic
- */
-exports.getReviews = function(req, res) {
-	console.log("Fetching Topic Reviews");
-	var topicId = req.topic;
-
-	console.log("Fetching Reviews by TopicId="+topicId);
-	Review.find({ownerTopicId: topicId}).exec(function(err, reviews) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.json(reviews);
-		}
-	});
-};
-
-/**
  * topic middleware
  */
 exports.topicByID = function(req, res, next, id) {

@@ -37,9 +37,6 @@ var topics = require('../controllers/topics.server.controller');
 	app.route('/topics/:topicId')
    	.get(auth.ensureAuthenticated,topics.read);
 	
-	app.route('/topics/:topicId/reviews')
-   	.get(auth.ensureAuthenticated,topics.getReviews);
-	
 	 app.route('/reviews')
 	.get(auth.ensureAuthenticated,reviews.list);
 	
