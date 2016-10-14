@@ -166,13 +166,36 @@ var review = req.review;
  * List of Reviews
  */
 exports.list = function (req, res) {
-Review.find().exec(function(err, reviews) {
+console.log("Fetching Reviews");
+	var page = 1;
+	var pageSize = 20;
+	var query = {};
+	var sortParams = '';
+	console.log(req.query);
+	if(req.query.ownerTopicId){query.ownerTopicId = req.query.ownerTopicId;}
+	if(req.query.rating){query.rating = req.query.rating;}
+	if(req.query.upvotes){query.upvotes = req.query.upvotes;}
+    if(req.query.page){page = req.query.page;}
+    if(req.query.pageSize){pageSize =req.query.pageSize;}
+	if(req.query.sortBy){
+		sortParams = req.query.sortBy;
+		}	
+	var options = {
+				//select: 'title date author',
+				sort: sortParams,
+				//populate: 'author',
+				//lean: true,
+				page: Number(page), 
+				limit: Number(pageSize)
+				};
+	Review.paginate(query, options,function(err,result) {
 		if (err) {
+			console.log(err);
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err.message
 			});
 		} else {
-			res.json(reviews);
+			res.json(result.docs);
 		}
 	});
 };
