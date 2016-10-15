@@ -62,31 +62,30 @@ var review = new Review(req.body);
 	}], callback);
 	 },
 	function(callback){
-		async.parallel([
+		async.series([
 		function(callback){
-		var update = { $set: { avgRating: averageRating }};
-		Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
-		if (err) {
-			return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
-			});				
-			}
-			callback();
-				
-		});
-	},
-	function(callback){
-		review.save(function(err) {
-				if (err) {
-					console.log(err);
-					return res.status(400).send({
-					message: errorHandler.getErrorMessage(err)
+			review.save(function(err) {
+					if (err) {
+						console.log(err);
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+							});
+					}
+					else{
+						callback();
+					}
 				});
-			  }
-				else{
-					callback();
-				}
-			});
+		},
+		function(callback){
+			var update = { $set: { avgRating: averageRating }, $push:{reviews: review._id}};
+			Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
+					if (err) {
+						return res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});				
+					}
+					callback();	
+				});
 	}],callback);			
 	}		 
 ], function(err){

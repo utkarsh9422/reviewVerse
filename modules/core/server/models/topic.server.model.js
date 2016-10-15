@@ -62,7 +62,10 @@ var TopicSchema = new Schema({
 	voters_up: [{ 
 		type: Schema.Types.ObjectId,
 		ref: 'User'
-	}]
+	}],
+	reviews:[{
+		type:Schema.Types.ObjectId,
+		ref:'Review'}]
 	
 });
 TopicSchema.plugin(mongoosePaginate);

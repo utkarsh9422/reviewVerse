@@ -128,28 +128,13 @@ var topic = req.topic;
  */
 exports.list = function(req, res) {
 	console.log("Fetching Topics");
-	var page = 1;
-	var pageSize = 20;
-	var query = {};
-	var sortParams = '';
-	console.log(req.query);
-	if(req.query.categoryId){query.category = req.query.categoryId;}
-	if(req.query.avgRating){query.avgRating = req.query.avgRating;}
-	if(req.query.upvotes){query.upvotes = req.query.upvotes;}
-    if(req.query.page){page = req.query.page;}
-    if(req.query.pageSize){pageSize =req.query.pageSize;}
-	if(req.query.sortBy){
-		sortParams = req.query.sortBy;
-		}	
-	var options = {
-				//select: 'title date author',
-				sort: sortParams,
-				//populate: 'author',
-				//lean: true,
-				page: Number(page), 
-				limit: Number(pageSize)
-				};
-	Topic.paginate(query, options,function(err,result) {
+	var lquery  = {};
+	var loptions = {};
+	readQueryParams(req,function(query,options){
+		lquery = query;
+		loptions = options;
+	})
+	Topic.paginate(lquery, loptions,function(err,result) {
 		if (err) {
 			console.log(err);
 			return res.status(400).send({
@@ -183,3 +168,55 @@ exports.topicByID = function(req, res, next, id) {
 		next();
 	});
 };
+
+function readQueryParams(req, callback) {
+	console.log("Reading Query Parameters and converting to query and options field");
+	var page = 1;
+	var pageSize = 20;
+	var reviewCount = 5;
+	var reviewUpvotes;
+	var reviewRatings;
+	var query = {};
+	var sortParams = '';
+	var populateParams = [];
+	if(req.query.categoryId){query.category = req.query.categoryId;}
+	if(req.query.avgRating){query.avgRating = req.query.avgRating;}
+	if(req.query.upvotes){query.upvotes = req.query.upvotes;}
+    if(req.query.page){page = req.query.page;}
+    if(req.query.pageSize){pageSize =req.query.pageSize;}
+	if(req.query.sortBy){sortParams = req.query.sortBy;	}
+	if(req.query.reviewCount){reviewCount = req.query.reviewCount;}	
+	if(req.query.reviewUpvotes){reviewUpvotes = req.query.reviewUpvotes;}
+	if(req.query.reviewRatings){reviewRatings = req.query.reviewRatings;}	
+	if((req.get('x-fetchreviews')) === 'true'){
+			var populationFields ={};
+			var lmatchFields = {};			
+			populationFields.path = 'reviews';
+			populationFields.select = 'reviewerName rating upvotes body -_id';
+			populationFields.options = { limit: reviewCount };
+			//Setting Match Fields
+			getMatchFields(reviewRatings,reviewUpvotes,function(matchFields){
+				lmatchFields=matchFields;
+			});
+			populationFields.match=lmatchFields;	
+			populateParams.push(populationFields);
+			}
+	var options = {
+				//select: 'title date author',
+				sort: sortParams,
+				populate: populateParams,
+				//lean: true,
+				page: Number(page), 
+				limit: Number(pageSize)
+				};
+	callback(query,options);
+}
+
+function getMatchFields(reviewRatings,reviewUpvotes,callback){
+	var matchFields = {};
+	console.log("ReviewUpvotes:"+reviewUpvotes );
+	console.log("ReviewRatings:"+reviewRatings );
+	if(reviewUpvotes){matchFields.upvotes = {$eq : Number(reviewUpvotes)};}
+	if(reviewRatings){matchFields.rating = {$eq : Number(reviewRatings)};}
+	return callback(matchFields);
+}
