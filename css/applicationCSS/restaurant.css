@@ -54,6 +54,13 @@ h4{
     background:#80cbc4;
     border-radius: 4px;
 }
+.reviewBody{
+    color:#0059bc;
+    font-weight: bold;
+}
+.reviewerName{
+    color: #4db6ac;
+}
 /*rating CSS*/
 .rating {
     margin: 0;

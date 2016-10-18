@@ -89,7 +89,10 @@ app.controller("restaurantController", [
 
         $scope.getTopics = function() {
             $http({method: 'GET',
-                url: getTopics}).
+                url: getTopicsPage1,
+                headers: {
+            'x-fetchreviews': 'true'
+        } }).
                     then(function(response) {
                         $scope.status = response.status;
                         $scope.topics = response.data;
@@ -141,7 +144,7 @@ app.controller("restaurantController", [
             $http.post(url, data, config)
                     .success(function(response) {
                         alert("Review Posted");
-                        $scope.getReviews();
+                        $scope.getTopics();
                     }).error(function(response) {
                 alert("Failure");
             });
@@ -154,10 +157,7 @@ app.controller("restaurantController", [
                 "crossDomain": true,
             }).
                     then(function(response) {
-                        alert(response.data.upvotes);
-                        console.log(topic.upvotes);
-                        topic.upvotes=response.data.upvotes;
-
+                        $scope.getTopics();
 
                     }, function(response) {
                         console.log(error);
@@ -172,7 +172,7 @@ app.controller("restaurantController", [
             }).
                     then(function(response) {
                         console.log(response);
-                        review.upvotes++;
+                        $scope.getTopics();
                     }, function(response) {
                         console.log(error);
                     });

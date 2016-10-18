@@ -23,7 +23,7 @@
     <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
 </div>
 <!--Post Topic Details-->
-<div class="container-fluid" id="topic" ng-repeat="topic in topics | orderBy : '-created' | filter: searchString track by $index">
+<div class="container-fluid" id="topic" ng-repeat="topic in topics | filter: searchString track by $index">
     <div class="col-sm-6 ">
         <div class="event-title">
             <h3>{{topic.name}}</h3></div>
@@ -51,8 +51,8 @@
 <!--  {{getReviews(topic._id)}}-->
         <!--Show Previous Reviews-->
         <h4>Reviews </h4>
-        <ul ng-if="(topic._id == review.ownerTopicId)" ng-repeat="review in reviews | orderBy :'-created' ">                               
-            <li><p><span>{{review.body}}</span> by {{review.reviewerName}} <span> Upvotes -> {{review.upvotes}}</span>
+        <ul ng-repeat="review in topic.reviews ">                               
+            <li><p><span class="reviewBody">{{review.body}}</span> <br> by <span class="reviewerName">{{review.reviewerName}}</span>
             <average-star-rating ng-model="review.rating" max="5"></average-star-rating>     
             <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
                 Upvotes: {{review.upvotes}} </div></p></li>
