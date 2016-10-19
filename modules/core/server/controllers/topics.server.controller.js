@@ -193,7 +193,7 @@ function readQueryParams(req, callback) {
 	var populationFields ={};
 	var lmatchFields = {};			
 	populationFields.path = 'reviews';
-	populationFields.select = 'reviewerName rating upvotes body created -_id';
+	populationFields.select = 'reviewerName rating upvotes body created';
 	populationFields.options = { limit: reviewCount };
 	//Setting Match Fields
 	getMatchFields(reviewRatings,reviewUpvotes,function(matchFields){
