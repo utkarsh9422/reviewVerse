@@ -18,6 +18,8 @@
 exports.create = function (req, res) {
 	var imageUrl='';
 	if(req.files){
+		console.log(req.files);
+		console.log(req.files.thumbnail.path);
 		for(var i = 0, len = req.files.length; i < len; i++){
 			console.log(req.files[i].location);
 			imageUrl=req.files[i].location;
@@ -188,19 +190,18 @@ function readQueryParams(req, callback) {
 	if(req.query.reviewCount){reviewCount = req.query.reviewCount;}	
 	if(req.query.reviewUpvotes){reviewUpvotes = req.query.reviewUpvotes;}
 	if(req.query.reviewRatings){reviewRatings = req.query.reviewRatings;}	
-	if((req.get('x-fetchreviews')) === 'true'){
-			var populationFields ={};
-			var lmatchFields = {};			
-			populationFields.path = 'reviews';
-			populationFields.select = 'reviewerName rating upvotes body -_id';
-			populationFields.options = { limit: reviewCount };
-			//Setting Match Fields
-			getMatchFields(reviewRatings,reviewUpvotes,function(matchFields){
-				lmatchFields=matchFields;
-			});
-			populationFields.match=lmatchFields;	
-			populateParams.push(populationFields);
-			}
+	var populationFields ={};
+	var lmatchFields = {};			
+	populationFields.path = 'reviews';
+	populationFields.select = 'reviewerName rating upvotes body created -_id';
+	populationFields.options = { limit: reviewCount };
+	//Setting Match Fields
+	getMatchFields(reviewRatings,reviewUpvotes,function(matchFields){
+		lmatchFields=matchFields;
+		});
+	populationFields.match=lmatchFields;	
+	populateParams.push(populationFields);
+			
 	var options = {
 				//select: 'title date author',
 				sort: sortParams,
