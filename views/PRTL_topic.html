@@ -1,0 +1,47 @@
+<div class="container-fluid" id="topic" >
+    <div class="col-sm-6 ">
+        <div class="event-title">
+            <h3>{{topicDetails.name}}</h3></div>
+        <div class="event-content">
+            <p>{{topicDetails.description}}</p></div>
+        <div class="topicUpvotes"><button class="btn btn-primary" ng-disabled="topicDetails.voters_up == userId" ng-click="incrementUpvotes(topicDetails._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+            Upvotes: <span>{{topicDetails.upvotes}}</span></div>
+
+        <div class="average">
+            <average-star-rating ng-model="topicDetails.avgRating" max="5"></average-star-rating> {{topicDetails.avgRating}}  <br></div>
+        <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
+        <!--Post Reviews-->
+        <form  >
+            <div class="form-group">
+                <!--                                <input type="text" class="form-control" placeholder="Topic Id" ng-model="topicId" />-->
+                <input type="text" class="form-control" placeholder="Post Review" ng-model="newReview" />
+                <star-rating ng-model="reviewRating" max="5"></star-rating>{{reviewRating.rating}}<br/>
+
+                <!-- <div class="star-rating" star-rating rating-value="reviewRating" data-max="5" on-rating-selected="rateFunction(reviewRating)"></div>-->
+
+                <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
+            </div>
+        </form>    
+        <!--  {{getReviews(topic._id)}}-->
+        <!--Show Previous Reviews-->
+        <h4 ng-if="topicDetails.reviews !== undefined">Reviews </h4>
+        <ul ng-repeat="review in topicDetails.reviews">    
+
+            <li><p><span class="reviewBody">{{review.body}}</span> <br> by <span class="reviewerName">{{review.reviewerName}}</span>
+                <div class="row" style="display:inline-block;"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
+                <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                    Upvotes: {{review.upvotes}} </div></p></li>
+        </ul>
+
+    </div>
+
+    <!--    Load More button -->
+    <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
+
+    <div class="col-sm-6 event-thumb topicImage">
+        <img class="img-responsive" ng-src="{{topic.imageArray}}" width="500" height="400"/>
+    </div><br>
+    <div class="col-sm-12 emptySpace">
+    </div>
+
+</div>

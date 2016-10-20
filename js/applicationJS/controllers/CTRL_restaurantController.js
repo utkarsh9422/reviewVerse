@@ -65,15 +65,18 @@ app.controller("restaurantController", [
                         if (response.data.google) {
                             $scope.status = response.status;
                             $scope.username = response.data.google.name;
+                            $scope.userId = response.data._id;
                             $scope.img = response.data.google.picture;
                         }
                         else if (response.data.facebook) {
                             $scope.status = response.status;
                             $scope.username = response.data.facebook.name;
+                            $scope.userId = response.data._id;
                             var imgURL = response.data.facebook.picture;
                             $scope.img = response.data.facebook.picture;
                         }
                         else {
+                            $scope.userId = response.data._id;
                             $scope.status = response.status;
                             $scope.username = response.data.local.name;
                         }
@@ -184,6 +187,13 @@ app.controller("restaurantController", [
             $scope.IsHidden = $scope.IsHidden ? false : true;
         };
         $scope.reviewRating = {rating: 1};
+        
+        //See Full Story
+        $scope.seeFullStory = function(topicId) {
+            $location.path('/topic');
+            localStorage.setItem('topicId', topicId);
+        };
+        
     }]
         ).directive("starRating", function() {
     return {

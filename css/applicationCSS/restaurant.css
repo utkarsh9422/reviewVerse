@@ -28,6 +28,9 @@ h4{
     margin-top: 20px;
     width:70%;
 }
+.topicImage{
+    border-radius:10px;
+}
 /* stop the glowing blue shadow */
 .add-on .form-control:focus {
     box-shadow:none;
@@ -91,7 +94,7 @@ h4{
 .average-rating-container {
     position: relative;
     height: 31px;
-    width: 103px;
+    width: 105px;
     overflow: hidden;
 }
 

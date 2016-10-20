@@ -17,6 +17,10 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider',
             templateUrl: 'views/PRTL_restaurant.html',
             controller: 'restaurantController'
         });
+        $routeProvider.when('/topic', {
+            templateUrl: 'views/PRTL_topic.html',
+            controller: 'topicController'
+        });
         $routeProvider.otherwise({
             redirectTo: '/login'
         });
