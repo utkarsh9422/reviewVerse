@@ -57,12 +57,30 @@ h4{
     background:#80cbc4;
     border-radius: 4px;
 }
+.reviews{
+    background-color: rgba(0,0,0,0.12);
+    border-radius:10px;
+}
+.postReview{
+    background-color: rgba(0,0,0,0.06);
+    border-radius:10px;
+}
 .reviewBody{
     color:#0059bc;
     font-weight: bold;
+    padding:10px;
+}
+.reviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: white;
 }
 .reviewerName{
     color: #4db6ac;
+}
+.reviewUpvotes{
+    padding-left:10px;
 }
 /*rating CSS*/
 .rating {

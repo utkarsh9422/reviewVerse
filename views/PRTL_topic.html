@@ -10,23 +10,11 @@
         <div class="average">
             <average-star-rating ng-model="topicDetails.avgRating" max="5"></average-star-rating> {{topicDetails.avgRating}}  <br></div>
         <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
-        <!--Post Reviews-->
-        <form  >
-            <div class="form-group">
-                <!--                                <input type="text" class="form-control" placeholder="Topic Id" ng-model="topicId" />-->
-                <input type="text" class="form-control" placeholder="Post Review" ng-model="newReview" />
-                <star-rating ng-model="reviewRating" max="5"></star-rating>{{reviewRating.rating}}<br/>
 
-                <!-- <div class="star-rating" star-rating rating-value="reviewRating" data-max="5" on-rating-selected="rateFunction(reviewRating)"></div>-->
-
-                <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
-            </div>
-        </form>    
         <!--  {{getReviews(topic._id)}}-->
         <!--Show Previous Reviews-->
         <h4 ng-if="topicDetails.reviews !== undefined">Reviews </h4>
-        <ul ng-repeat="review in topicDetails.reviews">    
-
+        <ul ng-repeat="review in topicReviews">    
             <li><p><span class="reviewBody">{{review.body}}</span> <br> by <span class="reviewerName">{{review.reviewerName}}</span>
                 <div class="row" style="display:inline-block;"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
                 <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
@@ -38,8 +26,102 @@
     <!--    Load More button -->
     <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
 
-    <div class="col-sm-6 event-thumb topicImage">
-        <img class="img-responsive" ng-src="{{topic.imageArray}}" width="500" height="400"/>
+    <div class="col-sm-6 event-thumb ">
+        <img class="img-responsive topicImage" ng-src="{{topicDetails.imageArray}}" width="500" height="400"/>
+
+        <!--        Rating Card-->
+        <div class="row" id="ratingCard">
+            <div class="col-xs-12 col-md-7">
+                <div class="row rating-desc">
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star"></span>5
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star"></span>4
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class="sr-only">60%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star"></span>3
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                <span class="sr-only">40%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star"></span>2
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                <span class="sr-only">20%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star"></span>1
+                    </div>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                                <span class="sr-only">15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <div class="col-xs-12 col-md-5 text-center">
+                <h1 class="rating-num">{{topicDetails.avgRating}}</h1>
+                <div class="rating">
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star "></span>
+                    <span class="fa fa-star-half-empty"></span>
+                </div>
+                <div>
+                    <span class="fa fa-user"></span>{{topicDetails.upvotes}} total Upvotes
+                </div>
+            </div>
+        </div>
+        <!--Rating card Finish-->
+
+        <!--        Tabs for Featured Reviews-->
+
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#positive">Positive</a></li>
+                <li class="tab col s3"><a class="active" href="#negative">Negative</a></li>
+                <li class="tab col s3"><a href="#latest">Latest</a></li>
+                <li class="tab col s3"><a href="#topLiked">Top Liked</a></li>
+            </ul>
+        </div>
+        <div id="positive" class="col s12">review Cards</div>
+        <div id="negative" class="col s12">Test 2</div>
+        <div id="latest" class="col s12">Test 3</div>
+        <div id="topLiked" class="col s12">Test 4</div>
+
     </div><br>
     <div class="col-sm-12 emptySpace">
     </div>

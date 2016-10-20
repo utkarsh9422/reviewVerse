@@ -1,0 +1,43 @@
+.topicImage{
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+//rating Card CSS
+#raCard{
+    background-color: rgba(0,0,0,0.12);
+    border: 1px solid  black; 
+}
+.tab a{
+    font-size:12px;
+}
+.fa {
+        margin-right: 4px;
+    }
+
+    .rating .fa {
+        font-size: 15px;
+    }
+
+    .rating-num {
+        margin-top: 0px;
+        font-size: 60px;
+    }
+
+    .progress {
+        height:10px;
+        margin-bottom: 4px;
+    }
+
+    .progress-bar {
+        text-align: left;
+    }
+
+    .rating-desc .col-md-3 {
+        padding-right: 0px;
+    }
+
+    .sr-only {
+        margin-left: 4px;
+        overflow: visible;
+        clip: auto;
+    }

@@ -23,20 +23,20 @@
     <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
 </div>
 <!--Post Topic Details-->
-<div class="container-fluid" id="topic" ng-repeat="topic in topics | filter: searchString track by $index">
+<div class="container-fluid" id="topic" ng-repeat="topic in topics| filter: searchString track by $index">
     <div class="col-sm-6 ">
         <div class="event-title">
             <h3>{{topic.name}}</h3></div>
         <div class="event-content">
             <p>{{topic.description}}</p></div>
-        <div class="topicUpvotes"><button class="btn btn-primary" ng-disabled="topic.voters_up==userId" ng-click="incrementUpvotes(topic._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+        <div class="topicUpvotes"><button class="btn btn-primary" ng-disabled="topic.voters_up == userId" ng-click="incrementUpvotes(topic._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
             Upvotes: <span>{{topic.upvotes}}</span></div>
-        
+
         <div class="average">
             <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating> {{topic.avgRating}}  <br></div>
         <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
         <!--Post Reviews-->
-        <form  >
+        <form class="postReview" >
             <div class="form-group">
                 <!--                                <input type="text" class="form-control" placeholder="Topic Id" ng-model="topicId" />-->
                 <input type="text" class="form-control" placeholder="Post Review" ng-model="newReview" />
@@ -47,23 +47,29 @@
                 <button type="submit" class="btn-small" ng-click="addReview(topic._id, newReview, reviewRating.rating)" >Post Review</button>
             </div>
         </form>    
-<!--  {{getReviews(topic._id)}}-->
+        <!--  {{getReviews(topic._id)}}-->
         <!--Show Previous Reviews-->
-        <h4 ng-if="topic.reviews !== undefined">Reviews </h4>
-        <ul ng-repeat="review in topic.reviews ">    
-            
-            <li><p><span class="reviewBody">{{review.body}}</span> <br> by <span class="reviewerName">{{review.reviewerName}}</span>
-                <div class="row" style="display:inline-block;"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
-            <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                Upvotes: {{review.upvotes}} </div></p></li>
-        </ul>
+        <div class="reviews">
+            <h4 ng-if="topic.reviews !== undefined">Reviews </h4>
+            <div ng-repeat="review in topic.reviews" class="reviewCard">    
 
+                <div class="row ">
+                    <div class="col-sm-6 left">
+                        <span class="reviewerName">{{review.reviewerName}}</span><br>
+                        <span class="reviewBody">{{review.body}}</span>
+                    </div>
+                    <div class="col-sm-6 right"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
+                </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{review.upvotes}} </div>
+            </div>
+        </div>
         <button ng-click="seeFullStory(topic._id)">See Full Story</button>
     </div>
-    
-<!--    Load More button -->
-<!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
-      
+
+    <!--    Load More button -->
+    <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
+
     <div class="col-sm-6 event-thumb ">
         <img class="img-responsive topicImage" ng-src="{{topic.imageArray}}" width="500" height="400"/>
     </div><br>
