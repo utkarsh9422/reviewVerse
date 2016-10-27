@@ -16,17 +16,18 @@
  * Create a Topic
  */
 exports.create = function (req, res) {
+	var imageArray =[];
 	var imageUrl='';
 	if(req.files){
 		console.log(req.files);
-		console.log(req.files.thumbnail.path);
 		for(var i = 0, len = req.files.length; i < len; i++){
 			console.log(req.files[i].location);
 			imageUrl=req.files[i].location;
+			imageArray.push(imageUrl);
 			}
 	}		
 	var topic = new Topic(req.body);
-	topic.imageArray = imageUrl;
+	topic.imageArray = imageArray;
 
 	topic.save(function(err) {
 		if (err) {

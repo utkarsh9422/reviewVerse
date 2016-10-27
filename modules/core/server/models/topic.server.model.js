@@ -54,11 +54,11 @@ var TopicSchema = new Schema({
 		default: 0,
 		min: 0
 	},
-	imageArray:{
+	imageArray:[{
 		type: String,
 		default: '',
 		trim: true
-	},
+	}],
 	voters_up: [{ 
 		type: Schema.Types.ObjectId,
 		ref: 'User'
