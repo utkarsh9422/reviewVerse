@@ -19,7 +19,6 @@ exports.create = function (req, res) {
 	var imageUrl='';
 	if(req.files){
 		console.log(req.files);
-		console.log(req.files.thumbnail.path);
 		for(var i = 0, len = req.files.length; i < len; i++){
 			console.log(req.files[i].location);
 			imageUrl=req.files[i].location;
