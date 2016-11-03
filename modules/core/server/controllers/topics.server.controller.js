@@ -137,6 +137,7 @@ exports.list = function(req, res) {
 		lquery = query;
 		loptions = options;
 	})
+	console.log(lquery);
 	Topic.paginate(lquery, loptions,function(err,result) {
 		if (err) {
 			console.log(err);

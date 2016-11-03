@@ -77,7 +77,8 @@ var review = new Review(req.body);
 				});
 		},
 		function(callback){
-			var update = { $set: { avgRating: averageRating }, $push:{reviews: review._id}};
+			var update = { $set: { avgRating: averageRating },
+						   $push:{reviews: review._id}};
 			Topic.findByIdAndUpdate(req.topic.id, update , function (err, topic) {
 					if (err) {
 						return res.status(400).send({
@@ -129,19 +130,29 @@ var review = req.review;
  * Upvote a Review
  */
 exports.upvote = function (req, res) {
-var review = req.review;
-
-	review.upvotes+=1;
-
-	review.save(function(err) {
-		if (err) {
-			return res.status(400).send({
+		var reviewId = req.review;
+		var userId = req.user;
+		var conditions = {"_id": reviewId,"voters_up":{ $ne: userId }};
+		var update = {$push: { "voters_up": userId }, $inc: { "upvotes": 1 } };
+		var options = { new: true };
+		Review.findOneAndUpdate(conditions,update,options, function(err, review){
+			if(err){
+				console.log("Something wrong when updating data!");
+				return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
-		} else {
-			res.json(review);
-		}
-	});
+			}
+			if(review){
+				console.log(topic);
+				res.json(topic);
+			}
+			else {
+				console.log("Review already upvoted by this user:"+userId);
+				return res.status(409).send({
+				message: "Review already upvoted by this user:"+userId
+			});
+			}				
+});
 };
 
 /**

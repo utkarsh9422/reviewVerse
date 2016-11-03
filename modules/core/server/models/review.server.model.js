@@ -55,7 +55,11 @@ var ReviewSchema = new Schema({
 		type: Number,
 		default: 0,
 		required: 'rating cannot be null'
-	}
+	},
+	voters_up: [{ 
+		type: Schema.Types.ObjectId,
+		ref: 'User'
+	}]
 });
 ReviewSchema.plugin(mongoosePaginate);
 mongoose.model('Review', ReviewSchema);
