@@ -143,8 +143,8 @@ exports.upvote = function (req, res) {
 			});
 			}
 			if(review){
-				console.log(topic);
-				res.json(topic);
+				console.log(review);
+				res.json(review);
 			}
 			else {
 				console.log("Review already upvoted by this user:"+userId);
