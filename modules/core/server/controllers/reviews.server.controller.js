@@ -177,7 +177,7 @@ var review = req.review;
  */
 exports.list = function (req, res) {
 console.log("Fetching Reviews");
-	var page = 1;
+/*	var page = 1;
 	var pageSize = 20;
 	var query = {};
 	var sortParams = '';
@@ -207,7 +207,10 @@ console.log("Fetching Reviews");
 		} else {
 			res.json(result.docs);
 		}
-	});
+	});*/
+	Review.query(req.query, function(error, data){
+    res.json(error?{error: error}:data);
+  });
 };
 	
 /**

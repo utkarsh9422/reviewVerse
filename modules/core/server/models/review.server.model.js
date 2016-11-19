@@ -6,6 +6,7 @@
  */
 var mongoose = require('mongoose'),
   mongoosePaginate = require('mongoose-paginate'),
+  QueryPlugin = require('mongoose-query'),
   Schema = mongoose.Schema;
 
     /**
@@ -61,5 +62,6 @@ var ReviewSchema = new Schema({
 		ref: 'User'
 	}]
 });
-ReviewSchema.plugin(mongoosePaginate);
+//ReviewSchema.plugin(mongoosePaginate);
+ReviewSchema.plugin(QueryPlugin);
 mongoose.model('Review', ReviewSchema);
