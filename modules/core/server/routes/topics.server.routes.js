@@ -14,9 +14,9 @@ module.exports = function(app) {
 var reviews = require('../controllers/reviews.server.controller');
 	//app.route('/topics').post(auth.ensureAuthenticated,topics.create);  
 	  
-	app.route('/topics')
-	  .post(imageUpload.upload.array('file'),topics.create);
+	//app.route('/topics').post(imageUpload.upload.array('file'),topics.create);
 	  
+	 app.route('/topics').post(imageUpload.upload.any(),topics.create); 
 	app.route('/topics/:topicId')
 	.put(auth.ensureAuthenticated,topics.update)
 	.delete(auth.ensureAuthenticated,topics.delete);
