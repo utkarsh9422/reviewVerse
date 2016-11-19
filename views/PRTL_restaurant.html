@@ -116,18 +116,17 @@
                     <select name="repeatSelect" id="repeatSelect" ng-model="newCategory" ng-options="category.name for category in categories">
                     </select>
                 </div>
-                <input type="file" ngf-select ng-model="picFile" name="file" required accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+               <input type="file" ngf-select ng-model="picFile" name="file" required multiple accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
                 <i ng-show="myForm.file.$error.required">*required</i><br>
                 <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: Max 2MB</i>
                 <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
                 <br>
-                <!--<button ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">Submit</button>-->
+                
                 <span class="progress" ng-show="picFile.progress >= 0">
                     <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'"></div>
                 </span>
                 <span ng-show="picFile.result">Upload Successful</span>
                 <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-
 
             </div>
             <div class="modal-footer">
