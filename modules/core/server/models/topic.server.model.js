@@ -6,6 +6,8 @@
  */
 var mongoose = require('mongoose'),
   mongoosePaginate = require('mongoose-paginate'),
+  mongooseApiQuery = require('mongoose-api-query'),
+ QueryPlugin = require('mongoose-query'),
   Schema = mongoose.Schema;
 
   
@@ -68,5 +70,7 @@ var TopicSchema = new Schema({
 		ref:'Review'}]
 	
 });
-TopicSchema.plugin(mongoosePaginate);
+//TopicSchema.plugin(mongoosePaginate);
+//TopicSchema.plugin(mongooseApiQuery);
+TopicSchema.plugin(QueryPlugin);
 mongoose.model('Topic', TopicSchema);

@@ -45,7 +45,25 @@ exports.create = function (req, res) {
  * Show the current Topic
  */
 exports.read = function(req, res) {
-	res.json(req.topic);
+	var output=req.topic;
+	var o = {};
+	o.map = function () {
+		emit(this.rating, 1)
+	}
+	o.query={'ownerTopicId':req.topic._id}
+	o.reduce = function (k, vals) {
+		return vals.length
+	}
+	o.out={inline:1}
+	Review.mapReduce(o, function (err, results) {
+	if(err) throw err;
+		console.log(results)
+		req.topic.ratingCount=results;
+		console.log(output);
+		res.json(req.topic);
+	});
+	
+	
 };
 
 /**
@@ -138,7 +156,7 @@ exports.list = function(req, res) {
 		loptions = options;
 	})
 	console.log(lquery);
-	Topic.paginate(lquery, loptions,function(err,result) {
+	/*Topic.paginate(lquery, loptions,function(err,result) {
 		if (err) {
 			console.log(err);
 			return res.status(400).send({
@@ -147,7 +165,20 @@ exports.list = function(req, res) {
 		} else {
 			res.json(result.docs);
 		}
-	});
+	});*/
+	/*Topic.apiQuery(req.query).populate('reviews').exec(function(err, topics) {
+		if (err) {
+			console.log(err)
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(topics);
+		}
+	});*/
+	Topic.query(req.query, function(error, data){
+    res.json(error?{error: error}:data);
+  });
 };
 
 /**
@@ -170,7 +201,8 @@ exports.topicByID = function(req, res, next, id) {
 		}
 		req.topic = topic;
 		next();
-	});
+	});	
+		
 };
 
 function readQueryParams(req, callback) {
