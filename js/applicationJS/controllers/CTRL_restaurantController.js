@@ -90,10 +90,8 @@ app.controller("restaurantController", [
 
         $scope.getTopics = function () {
             $http({method: 'GET',
-                url: getTopicsPage1,
-                headers: {
-                    'x-fetchreviews': 'true'
-                }}).
+                url: getTopicsPage1
+            }).
                     then(function (response) {
                         $scope.status = response.status;
                         $scope.topics = response.data;
@@ -205,18 +203,18 @@ app.controller("restaurantController", [
         $scope.loadMore = function () {
             var sortBy=$scope.sortBy;
             if(sortBy==="avgRating"){
-                var url = getTopics.concat("?sortBy=-avgRating&pageSize=", noOfTopics, "&reviewCount=4");
+                var url = getTopics.concat('?s={"avgRating":-1}&l=', noOfTopics, '&p={ "path":"reviews", "select":"reviewerName rating upvotes body created", "options":{"limit":4}}');
 //                sortBy=-avgRating;
             }
             else if(sortBy==="upvotes"){
-                var url = getTopics.concat("?sortBy=-upvotes&pageSize=", noOfTopics, "&reviewCount=4");
+                var url = getTopics.concat('?s={"upvotes":-1}&l=', noOfTopics, '&p={ "path":"reviews", "select":"reviewerName rating upvotes body created", "options":{"limit":4}}');
 //                sortBy=-upvotes;
             }            
             else{
-                var url = getTopics.concat("?sortBy=-created&pageSize=", noOfTopics, "&reviewCount=4");
+                var url = getTopics.concat('?s={"created":-1}&l=', noOfTopics, '&p={ "path":"reviews", "select":"reviewerName rating upvotes body created", "options":{"limit":4}}');
 //                sortBy=-created;
             }
-            
+            console.log(url);
             $http({method: 'GET',
                 url: url})
                     .then(function (response) {
