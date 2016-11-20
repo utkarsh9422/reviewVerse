@@ -60,6 +60,7 @@ h4{
 .reviews{
     background-color: rgba(0,0,0,0.12);
     border-radius:10px;
+    color: blue;
 }
 .postReview{
     background-color: rgba(0,0,0,0.06);
@@ -74,10 +75,14 @@ h4{
     border: 0.5px solid rgba(0,0,0,0.3);
     margin:10px;
     border-radius:5px;
-    background: white;
+    background: #B0E5FB; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #B0E5FB, #63AFD5); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #B0E5FB, #63AFD5); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right,#B0E5FB, #63AFD5); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #B0E5FB, #63AFD5); /* Standard syntax */
 }
 .reviewerName{
-    color: #4db6ac;
+/*    color: #4db6ac;*/
 }
 .reviewUpvotes{
     padding-left:10px;
@@ -125,6 +130,27 @@ h4{
     white-space: nowrap;
 }
 select{display: block;}
+.carousel{
+    height:280px;
+}
+#sideBar{
+    width:15%;
+    float:left;
+}
+.seeMoreButton{
+    background:white;
+    padding:5px;
+    border-radius: 3px;
+}
 @media screen and (max-width: 768px) {
-    #topic{width:100%;}
+#topic{width:100%;
+margin-top:90px;}
+.carousel{
+    height:210px;
+}
+#sideBar{
+    width:45%;
+    float:right;
+    margin-right:4%;
+}
 }

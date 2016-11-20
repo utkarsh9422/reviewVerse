@@ -1,16 +1,16 @@
 app.controller("topicController", [
     '$scope', '$http', 'authentication', '$auth', '$location',
     function($scope, $http, authentication, $auth, $location) {
-
-        //Get Particular Topic Detail
+        
+        $scope.myInterval=3000;
         $scope.getTopicDetails = function() {
-            var topicId = localStorage.getItem('topicId');
+                    //Get Particular Topic Detail
+                    var topicId = localStorage.getItem('topicId');
             $http({method: 'GET',
                 url: getTopics.concat(topicId)}).
                     then(function(response) {
                         $scope.status = response.status;
                         $scope.topicDetails = response.data;
-                        alert(topicDetails);
                     }, function(response) {
                         $scope.topicDetails = response.data || "Request failed";
                         $scope.status = response.status;
@@ -54,6 +54,66 @@ app.controller("topicController", [
             });
         }
         $scope.tabs();
+        
+//        Positive Reviews
+        $scope.getPositiveReviews = function(topicId){
+            var topicId = localStorage.getItem('topicId');
+        $http({method: 'GET',
+                url: getReviews.concat("?ownerTopicId=", topicId, "&sortBy=-rating") })
+                    .then(function(response) {
+                        $scope.status = response.status;
+                        $scope.pReviews = response.data;
+                    }, function(response) {
+                        $scope.pReviews = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getPositiveReviews();
+        
+        //        Negative Reviews
+        $scope.getNegativeReviews = function(topicId){
+            var topicId = localStorage.getItem('topicId');
+        $http({method: 'GET',
+                url: getReviews.concat("?ownerTopicId=", topicId, "&sortBy=rating") })
+                    .then(function(response) {
+                        $scope.status = response.status;
+                        $scope.nReviews = response.data;
+                    }, function(response) {
+                        $scope.nReviews = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getNegativeReviews();
+        
+        //        Latest Reviews
+        $scope.getLatestReviews = function(topicId){
+            var topicId = localStorage.getItem('topicId');
+        $http({method: 'GET',
+                url: getReviews.concat("?ownerTopicId=", topicId, "&sortBy=-created") })
+                    .then(function(response) {
+                        $scope.status = response.status;
+                        $scope.lReviews = response.data;
+                    }, function(response) {
+                        $scope.lReviews = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getLatestReviews();
+        
+        //        Top Liked Reviews
+        $scope.getTopLikedReviews = function(topicId){
+            var topicId = localStorage.getItem('topicId');
+        $http({method: 'GET',
+                url: getReviews.concat("?ownerTopicId=", topicId, "&sortBy=-upvotes") })
+                    .then(function(response) {
+                        $scope.status = response.status;
+                        $scope.tlReviews = response.data;
+                    }, function(response) {
+                        $scope.tlReviews = response.data || "Request failed";
+                        $scope.status = response.status;
+                    });
+        };
+        $scope.getTopLikedReviews();
     }
 ]);
 

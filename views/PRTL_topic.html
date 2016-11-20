@@ -8,26 +8,37 @@
             Upvotes: <span>{{topicDetails.upvotes}}</span></div>
 
         <div class="average">
-            <average-star-rating ng-model="topicDetails.avgRating" max="5"></average-star-rating> {{topicDetails.avgRating}}  <br></div>
+            <average-star-rating ng-model="topicDetails.avgRating" max="5"></average-star-rating> {{topicDetails.avgRating | number:2}}  <br></div>
         <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
 
         <!--  {{getReviews(topic._id)}}-->
         <!--Show Previous Reviews-->
-        <h4 ng-if="topicDetails.reviews !== undefined">Reviews </h4>
-        <ul ng-repeat="review in topicReviews">    
-            <li><p><span class="reviewBody">{{review.body}}</span> <br> by <span class="reviewerName">{{review.reviewerName}}</span>
-                <div class="row" style="display:inline-block;"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
-                <div class="topicUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
-                    Upvotes: {{review.upvotes}} </div></p></li>
-        </ul>
+        <div class="reviews">
+            <h4 ng-if="topicDetails.reviews !== undefined">Reviews </h4>
+            <div ng-repeat="review in topicReviews" class="reviewCard">    
 
+                <div class="row ">
+                    <div class="col-sm-6 left">
+                        <span class="reviewerName">{{review.reviewerName}}</span><br>
+                        <span class="reviewBody">{{review.body}}</span>
+                    </div>
+                    <div class="col-sm-6 right"><average-star-rating ng-model="review.rating" max="5"></average-star-rating> {{review.rating}} </div>   
+                </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(review._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{review.upvotes}} </div>
+            </div>
+        </div>
     </div>
 
     <!--    Load More button -->
     <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
 
     <div class="col-sm-6 event-thumb ">
-        <img class="img-responsive topicImage" ng-src="{{topicDetails.imageArray}}" width="500" height="400"/>
+        <carousel interval="myInterval" width="auto" height="auto">
+        <slide ng-repeat="image in topicDetails.imageArray" >
+            <img class="img-responsive topicImage" ng-src="{{image}}" >
+        </slide>
+      </carousel><br>
 
         <!--        Rating Card-->
         <div class="row" id="ratingCard">
@@ -92,7 +103,7 @@
                 <!-- end row -->
             </div>
             <div class="col-xs-12 col-md-5 text-center">
-                <h1 class="rating-num">{{topicDetails.avgRating}}</h1>
+                <h1 class="rating-num">{{topicDetails.avgRating | number:2}}</h1>
                 <div class="rating">
                     <span class="fa fa-star "></span>
                     <span class="fa fa-star "></span>
@@ -111,16 +122,74 @@
 
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s3"><a href="#positive">Positive</a></li>
-                <li class="tab col s3"><a class="active" href="#negative">Negative</a></li>
+                <li class="tab col s3"><a class="active" href="#positive">Positive</a></li>
+                <li class="tab col s3"><a  href="#negative">Negative</a></li>
                 <li class="tab col s3"><a href="#latest">Latest</a></li>
                 <li class="tab col s3"><a href="#topLiked">Top Liked</a></li>
             </ul>
         </div>
-        <div id="positive" class="col s12">review Cards</div>
-        <div id="negative" class="col s12">Test 2</div>
-        <div id="latest" class="col s12">Test 3</div>
-        <div id="topLiked" class="col s12">Test 4</div>
+        <!--        Positive Reviews-->
+        <div id="positive" class="col s12">
+            <div class="reviews">
+                <div ng-repeat="pReview in pReviews" class="positiveReviewCard">    
+                    <div class="row ">
+                        <div class="col-sm-6 left">
+                            <span class="reviewerName">{{pReview.reviewerName}}</span><br>
+                            <span class="reviewBody">{{pReview.body}}</span>
+                        </div>
+                        <div class="col-sm-6 right"><average-star-rating ng-model="pReview.rating" max="5"></average-star-rating> {{pReview.rating}} </div>   
+                    </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(pReview._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{pReview.upvotes}} </div>
+                </div>
+            </div> 
+        </div>
+
+        <div id="negative" class="col s12">
+            <div class="reviews">
+                <div ng-repeat="nReview in nReviews" class="negativeReviewCard">    
+                    <div class="row ">
+                        <div class="col-sm-6 left">
+                            <span class="reviewerName">{{nReview.reviewerName}}</span><br>
+                            <span class="reviewBody">{{nReview.body}}</span>
+                        </div>
+                        <div class="col-sm-6 right"><average-star-rating ng-model="nReview.rating" max="5"></average-star-rating> {{nReview.rating}} </div>   
+                    </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(nReview._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{nReview.upvotes}} </div>
+                </div>
+            </div> 
+        </div>
+        <div id="latest" class="col s12">
+               <div class="reviews">
+                <div ng-repeat="lReview in lReviews" class="latestReviewCard">    
+                    <div class="row ">
+                        <div class="col-sm-6 left">
+                            <span class="reviewerName">{{lReview.reviewerName}}</span><br>
+                            <span class="reviewBody">{{lReview.body}}</span>
+                        </div>
+                        <div class="col-sm-6 right"><average-star-rating ng-model="lReview.rating" max="5"></average-star-rating> {{lReview.rating}} </div>   
+                    </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(lReview._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{lReview.upvotes}} </div>
+                </div>
+            </div> 
+        </div>
+        <div id="topLiked" class="col s12">
+            <div class="reviews">
+                <div ng-repeat="tlReview in tlReviews" class="topLikedReviewCard">    
+                    <div class="row ">
+                        <div class="col-sm-6 left">
+                            <span class="reviewerName">{{tlReview.reviewerName}}</span><br>
+                            <span class="reviewBody">{{tlReview.body}}</span>
+                        </div>
+                        <div class="col-sm-6 right"><average-star-rating ng-model="tlReview.rating" max="5"></average-star-rating> {{tlReview.rating}} </div>   
+                    </div>
+                    <div class="row reviewUpvotes"><button class="btn-small-2" ng-click="incrementReviewUpvotes(tlReview._id)"><i class="fa fa-thumbs-o-up"></i>Like</button>
+                        Upvotes: {{tlReview.upvotes}} </div>
+                </div>
+            </div> 
+        </div>
 
     </div><br>
     <div class="col-sm-12 emptySpace">

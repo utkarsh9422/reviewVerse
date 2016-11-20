@@ -1,5 +1,4 @@
 @charset "utf-8";
-/* CSS Document */
 html, body{
     min-height: 100% !important;
     height: 100%;
@@ -393,8 +392,6 @@ footer button{
 	line-height:40px;
 	width:100%;
 }
-
-//Restaurant
 .event-title {
     color: #555;
     font-size: 14px;

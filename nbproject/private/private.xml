@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/views/PRTL_topic.html</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/js/applicationJS/config.js</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/index.html</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/css/applicationCSS/restaurant.css</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/js/applicationJS/controllers/CTRL_restaurantController.js</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/js/applicationJS/controllers/CTRL_topicController.js</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/views/PRTL_restaurant.html</file>
-            <file>file:/C:/Users/fareed/Documents/GitHub/reviewVerse/reviewVerse/js/applicationJS/app.js</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/css/applicationCSS/restaurant.css</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/js/applicationJS/controllers/CTRL_topicController.js</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/css/applicationCSS/topic.css</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/views/PRTL_topic.html</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/js/applicationJS/app.js</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/views/PRTL_restaurant.html</file>
+            <file>file:/C:/Users/TARA/Documents/NetBeansProjects/reviewVerse-AnuragParihar-front-end/js/applicationJS/controllers/CTRL_restaurantController.js</file>
         </group>
     </open-files>
 </project-private>

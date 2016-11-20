@@ -2,7 +2,46 @@
     border-radius: 10px;
     margin-bottom: 60px;
 }
-//rating Card CSS
+.positiveReviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+}
+.negativeReviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: #5a5c51; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #5a5c51, #ba9077); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #5a5c51,#ba9077); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #5a5c51, #ba9077); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #5a5c51,#ba9077); /* Standard syntax */
+}
+.latestReviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+}
+.topLikedReviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+}
 #raCard{
     background-color: rgba(0,0,0,0.12);
     border: 1px solid  black; 

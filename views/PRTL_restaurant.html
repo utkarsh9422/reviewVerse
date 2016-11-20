@@ -22,7 +22,19 @@
 <div class="fixed-action-btn" style="bottom: 45px; right: 25px;">
     <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
 </div>
+
+<div id="sideBar" class="input-field ">
+    <label for="sortSelect">Sort By</label><br><br>
+    <select name="sortSelect" id="singleSelect" ng-model="sortBy" ng-change="loadMore()">
+      <option  value="avgRating">Average Rating</option>
+      <option  value="upvotes">Maximum Upvotes</option>
+      <option value="created">Time</option>
+    </select>
+</div>
+
 <!--Post Topic Details-->
+<div infinite-scroll="loadMore()">
+
 <div class="container-fluid" id="topic" ng-repeat="topic in topics| filter: searchString track by $index">
     <div class="col-sm-6 ">
         <div class="event-title">
@@ -33,7 +45,7 @@
             Upvotes: <span>{{topic.upvotes}}</span></div>
 
         <div class="average">
-            <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating> {{topic.avgRating}}  <br></div>
+            <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating> {{topic.avgRating | number :2}}  <br></div>
         <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
         <!--Post Reviews-->
         <form class="postReview" >
@@ -64,20 +76,23 @@
                         Upvotes: {{review.upvotes}} </div>
             </div>
         </div>
-        <button ng-click="seeFullStory(topic._id)">See Full Story</button>
+        <button class="seeMoreButton" ng-click="seeFullStory(topic._id)">See Full Story  <span style="font-size: 10px;">>><span></button>
     </div>
 
     <!--    Load More button -->
     <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
-
-    <div class="col-sm-6 event-thumb ">
-        <img class="img-responsive topicImage" ng-src="{{topic.imageArray}}" width="500" height="400"/>
-    </div><br>
+    <div class="col-sm-6">
+        <carousel interval="myInterval" width="auto" height="auto">
+        <slide ng-repeat="image in topic.imageArray" >
+            <img class="img-responsive topicImage" ng-src="{{image}}" >
+        </slide>
+      </carousel>
+    </div>
     <div class="col-sm-12 emptySpace">
     </div>
 
 </div>
-
+</div>
 
 <div class="modal fade" id="postTopic" role="dialog">
     <div class="modal-content">
