@@ -1,7 +1,13 @@
 app.controller("restaurantController", [
-    '$scope', '$http', 'authentication', '$auth', '$location', 'Upload', '$timeout',
-    function ($scope, $http, authentication, $auth, $location, Upload, $timeout) {
+    '$scope', '$http', 'authentication', '$auth', '$location', 'Upload', '$timeout','$location',
+    function ($scope, $http, authentication, $auth, $location, Upload, $timeout, $location) {
         $scope.isDisabled = false;
+        
+//        Navigation Link
+        $scope.home = function() {
+            $location.path('/home');
+        };
+        
         $scope.getCategories = function () {
             $http({method: 'GET',
                 url: getCategories}).
