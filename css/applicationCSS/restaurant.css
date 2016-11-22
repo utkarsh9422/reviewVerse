@@ -25,21 +25,23 @@ h4{
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .navigationLinks{
-    margin-top: 12px;
     cursor: pointer;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 #topic{
     margin-top: 50px;
     width:70%;
 }
+#topic:first-child{
+    margin-top:110px;
+}
 .madalHeader{
     height:15px;
 }
 .userImg{
-    height:8px;
-    width:8px;
+    height:6px;
+    width:6px;
 }
 .topicImage{
     border-radius:10px;
@@ -57,7 +59,7 @@ h4{
     color:rgba(0,0,0,0.8);
     background:transparent;
     margin-top:10px;
-    margin-left:-20px;
+    margin-left: 10px;
     border-radius: 12px;    
 }
 .btn-logout:hover{
@@ -190,10 +192,14 @@ select{display: block;}
     width:100%;
     margin-top:50px;
 }
+#topic:first-child{
+    margin-top: 130px;
+}
 .carousel{
     height:210px;
 }
 #sideBar{
+    margin-top:-70px;
     width:45%;
     float:right;
     margin-right:4%;

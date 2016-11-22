@@ -1,29 +1,34 @@
-<div class="modalHeader">
-    <div class="row">
-        <div class="col-md-3">
-            <h3>{{username}}<img class="img-circle img-responsive userImg" src={{img}} /></h3>
+<div class="row" id="header">
+    <div id="navbar" class="navbar navbar-default">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="logo" href="index.html"><img src="img/logo1.png" alt="logo"/></a>
         </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-sm-10">
-                    <form class="navbar-form right-aligned" role="search">
-                        <input class="form-control right-aligned" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;float:right;height:30px;" ng-model="searchString" name="srch-term" id="srch-term" type="text">
-                        <a ng-click="home()"><i class="fa fa-indent navigationLinks" > Categories </i></a>
-                        <a ng-click="home()"><i class="fa fa-bell-o navigationLinks"> Noticifications </i></a>                       
-                    </form>
-                </div>
-                <div class="col-sm-2">
-                    <button class="btn-logout right-aligned" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button>
-                </div>
-            </div>
+        <div class="collapse navbar-collapse ">
+            <ul class="nav navbar-nav textRit">                   
+                <li class="active"><a ng-click="home()"><i class="fa fa-indent navigationLinks" >  </i>Categories</a></li>
+                <li><a ng-click="home()"><i class="fa fa-bell-o navigationLinks">  </i>Notifications</a>  </li>
+                <li><form class="navbar-form right-aligned" role="search">
+                        <input class="form-control right-aligned" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;float:right;height:30px;" ng-model="searchString" name="srch-term" id="srch-term" type="text">            
+                    </form></li>
+                <li><img class="img-circle img-responsive userImg" src={{img}} />{{username}}</li>
+                <li><button class="btn-logout right-aligned" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button></li>
+            </ul>
         </div>
     </div>
 </div>
-<hr>
+
+<!--Post Topic Floating Action Button-->
 <div class="fixed-action-btn" style="bottom: 45px; right: 25px;">
     <button type="button" class="btn-floating btn-large red" data-toggle="modal" data-target="#postTopic"><i class="large material-icons fa fa-pencil"></i></button>
 </div>
 
+<!--Side Filters-->
 <div id="sideBar" class="input-field ">
     <label for="sortSelect">Sort By</label><br><br>
     <select name="sortSelect" id="singleSelect" ng-model="sortBy" ng-change="loadMore()">
@@ -33,9 +38,8 @@
     </select>
 </div>
 
-<!--Post Topic Details-->
+<!-- Topic Details-->
 <div infinite-scroll="loadMore()">
-
     <div class="container-fluid" id="topic" ng-repeat="topic in topics| filter: searchString track by $index">
         <div class="col-sm-6 " ng-class-odd="'topicLeft'"  ng-class-even="'topicRight'">
             <div class="event-title">
@@ -47,7 +51,7 @@
 
             <div class="average">
                 <average-star-rating ng-model="topic.avgRating" max="5"></average-star-rating> {{topic.avgRating| number :2}}  <br></div>
-            <!--                        <div class="star-rating" star-rating  rating-value="topic.avgRating" data-max="5" on-rating-selected="rateFunction(topic.avgRating)"></div>-->
+
             <!--Post Reviews-->
             <form class="postReview" >
                 <div class="form-group">
