@@ -6,41 +6,41 @@
     border: 0.5px solid rgba(0,0,0,0.3);
     margin:10px;
     border-radius:5px;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+    background: #f4812e; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top,#fff, #f4812e); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #fff, #f4812e); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #fff, #f4812e); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #fff, #f4812e); /* Standard syntax */
 }
 .negativeReviewCard{
     border: 0.5px solid rgba(0,0,0,0.3);
     margin:10px;
     border-radius:5px;
-    background: #5a5c51; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, #5a5c51, #ba9077); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #5a5c51,#ba9077); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #5a5c51, #ba9077); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #5a5c51,#ba9077); /* Standard syntax */
+    background:#7f6d4f; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top,#fff, #7f6d4f); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #fff, #7f6d4f); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #fff, #7f6d4f); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #fff, #7f6d4f); /* Standard syntax */
 }
 .latestReviewCard{
     border: 0.5px solid rgba(0,0,0,0.3);
     margin:10px;
     border-radius:5px;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+    background: #db5586; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #fff, #db5586); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #fff, #db5586); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #fff, #db5586); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #fff, #db5586); /* Standard syntax */
 }
 .topLikedReviewCard{
     border: 0.5px solid rgba(0,0,0,0.3);
     margin:10px;
     border-radius:5px;
-    background: red; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+    background: #e8dd0d; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #fff, #e8dd0d); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #fff,#e8dd0d); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #fff, #e8dd0d); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #fff, #e8dd0d); /* Standard syntax */
 }
 #raCard{
     background-color: rgba(0,0,0,0.12);

@@ -37,7 +37,7 @@
 <div infinite-scroll="loadMore()">
 
     <div class="container-fluid" id="topic" ng-repeat="topic in topics| filter: searchString track by $index">
-        <div class="col-sm-6 ">
+        <div class="col-sm-6 " ng-class-odd="'topicLeft'"  ng-class-even="'topicRight'">
             <div class="event-title">
                 <h3>{{topic.name}}</h3></div>
             <div class="event-content">
@@ -63,7 +63,7 @@
             <!--  {{getReviews(topic._id)}}-->
             <!--Show Previous Reviews-->
             <div class="reviews">
-                <h4 ng-if="topic.reviews !== undefined">Reviews </h4>
+                <h4 ng-hide="topic.reviews == null || topic.reviews.length == 0">Reviews </h4>
                 <div ng-repeat="review in topic.reviews" class="reviewCard">    
                     <div class="row">
                         <div class="col-sm-6 left">
@@ -81,8 +81,8 @@
 
         <!--    Load More button -->
         <!--      <button ng-click="loadMore($index)" ng-hide="node.limit >= node.childs.length">Load more</button>-->
-        <div class="col-sm-6">
-            <carousel interval="myInterval" width="auto" height="auto">
+        <div class="col-sm-6" ng-hide="topic.imageArray == null || topic.imageArray.length == 0">
+            <carousel interval="myInterval" >
                 <slide ng-repeat="image in topic.imageArray" >
                     <img class="img-responsive topicImage" ng-src="{{image}}" >
                 </slide>

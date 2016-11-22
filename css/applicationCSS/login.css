@@ -107,7 +107,10 @@
     background: #fff;
     padding-left:5px;
 }
-
+.messageTextarea{
+    background: white;
+    height:120px;
+}
 footer{
     background: #fff; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(top,  #fff,rgba(0,0,0,0.4) ); /* For Safari 5.1 to 6.0 */
