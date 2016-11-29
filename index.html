@@ -9,11 +9,12 @@
         <title>ReviewVerse</title>
 
         <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+		<link rel="manifest" href="manifest.json">
         <link href="css/fixedCSS/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link href="css/fixedCSS/materialize.min.css" rel="stylesheet">
         <link href="css/fixedCSS/animate.css" rel="stylesheet">
-        <link href="css/fixedCSS/hover.css" rel="stylesheet">
+        <!--<link href="css/fixedCSS/hover.css" rel="stylesheet">-->
 
         <!-- Custom CSS -->
         <link href="css/applicationCSS/login.css" rel="stylesheet">
@@ -25,7 +26,8 @@
         <!-- Custom Fonts -->
 
         <link href="css/fixedCSS/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <script src="js/fixedJS/angular.min.js"></script>
+        <!--<script src="js/fixedJS/angular.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -93,6 +95,185 @@
         <!-- user web-service for http POST  -->
         <script src="js/applicationJS/services/webService.js"></script>
         <!-- Inline Template -->
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB14mOYqkv3f1TAOsfKbsclDe2K2aea_j4",
+    authDomain: "reviewverse-a5e38.firebaseapp.com",
+    databaseURL: "https://reviewverse-a5e38.firebaseio.com",
+    storageBucket: "reviewverse-a5e38.appspot.com",
+    messagingSenderId: "832077017234"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  // [START get_messaging_object]
+  // Retrieve Firebase Messaging object.
+  const messaging = firebase.messaging();
+  // [END get_messaging_object]
+  // IDs of divs that display Instance ID token UI or request permission UI.
+  const tokenDivId = 'token_div';
+  const permissionDivId = 'permission_div';
+  // [START refresh_token]
+  // Callback fired if Instance ID token is updated.
+  messaging.onTokenRefresh(function() {
+    messaging.getToken()
+    .then(function(refreshedToken) {
+      console.log('Token refreshed.');
+      // Indicate that the new Instance ID token has not yet been sent to the
+      // app server.
+      setTokenSentToServer(false);
+      // Send Instance ID token to app server.
+      sendTokenToServer(refreshedToken);
+      // [START_EXCLUDE]
+      // Display new Instance ID token and clear UI of all previous messages.
+      resetUI();
+      // [END_EXCLUDE]
+    })
+    .catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+    });
+  });
+  // [END refresh_token]
+  // [START receive_message]
+  // Handle incoming messages. Called when:
+  // - a message is received while the app has focus
+  // - the user clicks on an app notification created by a sevice worker
+  //   `messaging.setBackgroundMessageHandler` handler.
+  messaging.onMessage(function(payload) {
+    console.log("Message received. ", payload);
+    // [START_EXCLUDE]
+    // Update the UI to include the received message.
+    appendMessage(payload);
+    // [END_EXCLUDE]
+  });
+  // [END receive_message]
+  function resetUI() {
+    console.log('loading...');
+    // [START get_token]
+    // Get Instance ID token. Initially this makes a network call, once retrieved
+    // subsequent calls to getToken will return from cache.
+    messaging.getToken()
+    .then(function(currentToken) {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+        console.log(currentToken);
+      } else {
+        // Show permission request.
+        console.log('No Instance ID token available. Request permission to generate one.');
+        // Show permission UI.
+        updateUIForPushPermissionRequired();
+        setTokenSentToServer(false);
+      }
+    })
+    .catch(function(err) {
+      console.log('An error occurred while retrieving token. ', err);
+      setTokenSentToServer(false);
+    });
+  }
+  // [END get_token]
+  
+  // Send the Instance ID token your application server, so that it can:
+  // - send messages back to this app
+  // - subscribe/unsubscribe the token from topics
+  function sendTokenToServer(currentToken) {
+    if (!isTokenSentToServer()) {
+      console.log('Sending token to server...');
+		var data={
+			registrationToken: currentToken
+			}
+		var dataString=JSON.stringify(data);
+		console.log(dataString);
+		 $.ajax({
+            type: 'POST',
+            url: 'http://52.66.112.123/tokens',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            traditional: true,
+            success: function (data) {
+                console.log('Sent Successfully');
+				setTokenSentToServer(true);
+            }
+        });      
+    } else {
+      console.log('Token already sent to server so won\'t send it again ' +
+          'unless it changes');
+    }
+  }
+  function isTokenSentToServer() {
+    if (window.localStorage.getItem('sentToServer') == 1) {
+          return true;
+    }
+    return false;
+  }
+  function setTokenSentToServer(sent) {
+    if (sent) {
+      window.localStorage.setItem('sentToServer', 1);
+    } else {
+      window.localStorage.setItem('sentToServer', 0);
+    }
+  }
+  function requestPermission() {
+    console.log('Requesting permission...');
+    // [START request_permission]
+    messaging.requestPermission()
+    .then(function() {
+      console.log('Notification permission granted.');
+      // TODO(developer): Retrieve an Instance ID token for use with FCM.
+      // [START_EXCLUDE]
+      // In many cases once an app has been granted notification permission, it
+      // should update its UI reflecting this.
+      resetUI();
+      // [END_EXCLUDE]
+    })
+    .catch(function(err) {
+      console.log('Unable to get permission to notify.', err);
+    });
+    // [END request_permission]
+  }
+  function deleteToken() {
+    // Delete Instance ID token.
+    // [START delete_token]
+    messaging.getToken()
+    .then(function(currentToken) {
+      messaging.deleteToken(currentToken)
+      .then(function() {
+        console.log('Token deleted.');
+        setTokenSentToServer(false);
+        // [START_EXCLUDE]
+        // Once token is deleted update UI.
+        resetUI();
+        // [END_EXCLUDE]
+      })
+      .catch(function(err) {
+        console.log('Unable to delete token. ', err);
+      });
+      // [END delete_token]
+    })
+    .catch(function(err) {
+      console.log('Error retrieving Instance ID token. ', err);
+    });
+  }
+  // Add a message to the messages element.
+  function appendMessage(payload) {
+    const messagesElement = document.querySelector('#messages');
+    const dataHeaderELement = document.createElement('h5');
+    const dataElement = document.createElement('pre');
+    dataElement.style = 'overflow-x:hidden;'
+    dataHeaderELement.textContent = 'Received message:';
+    dataElement.textContent = JSON.stringify(payload, null, 2);
+    messagesElement.appendChild(dataHeaderELement);
+    messagesElement.appendChild(dataElement);
+  }
+  requestPermission();
+  resetUI();
+</script>
 
     </body>
 </html>
