@@ -11,6 +11,7 @@ module.exports = function(app) {
   var categories = require('../controllers/categories.server.controller');
 var topics = require('../controllers/topics.server.controller');
  var reviews = require('../controllers/reviews.server.controller');
+ var tokens = require('../controllers/tokens.server.controller');
  
  /*app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -43,6 +44,12 @@ var topics = require('../controllers/topics.server.controller');
 	app.route('/reviews/:reviewId')
    	.get(auth.ensureAuthenticated,reviews.read);
 	
+	app.route('/tokens')
+	.get(tokens.list);
+	  
+	app.route('/tokens/:tokenId')
+	.get(tokens.read);
+	
 	// Finish by binding the article middleware
 	// What's this? Where the categoryId is present in the URL
 	// the logic to 'get by id' is handled by this single function
@@ -50,5 +57,6 @@ var topics = require('../controllers/topics.server.controller');
 	app.param('categoryId', categories.categoryByID);
 	app.param('topicId', topics.topicByID);
 	app.param('reviewId', reviews.reviewByID);
+	app.param('tokenId', tokens.tokenByID);
 };
 
