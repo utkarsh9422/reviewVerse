@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>ReviewVerse</title>
+
+        <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+		<link rel="manifest" href="manifest.json">
+        <link href="css/fixedCSS/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link href="css/fixedCSS/materialize.min.css" rel="stylesheet">
+        <link href="css/fixedCSS/animate.css" rel="stylesheet">
+        <!--<link href="css/fixedCSS/hover.css" rel="stylesheet">-->
+
+        <!-- Custom CSS -->
+        <link href="css/applicationCSS/login.css" rel="stylesheet">
+        <link href="css/applicationCSS/restaurant.css" rel="stylesheet">
+        <link href="css/applicationCSS/home.css" rel="stylesheet">
+        <link href="css/applicationCSS/topic.css" rel="stylesheet">
+        <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" -->
+
+        <!-- Custom Fonts -->
+
+        <link href="css/fixedCSS/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <!--<script src="js/fixedJS/angular.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body ng-app="gascoApp">
+        <div class="height100" ng-app="gascoApp"  ng-controller="mainController">
+            <div ng-show="AILoading" style="opacity: 0.5;z-index: 100;height: 100%;width:100%; position: absolute; background: #FEE;"><img style="margin:50%;"src="img/ajax-loader.gif">
+            </div>
+            <div  class="height100" ng-view="app-content" lang= "{{lang}}"  dir="{{default_direction}}">
+
+            </div>
+        </div>
+        <script src="js/applicationJS/config.js"></script>
+        <script src="js/applicationJS/app.js"></script>
+        <script src="js/fixedJS/angular.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+        <script src="js/fixedJS/angular-route.js"></script>
+        <script src="js/fixedJS/angular-messages.min.js"></script>
+        <script src="js/fixedJS/angular-translate.js"></script>
+        <script src="js/fixedJS/angular-animate.js"></script>
+        <script src="js/fixedJS/angular-translate-loader-static-files.js"></script>
+        <script src="js/fixedJS/angular-translate-handler-log.js"></script>
+        <script src="js/fixedJS/angular-translate-loader-url.js"></script>
+        <script src="js/fixedJS/angular-translate-storage-local.js"></script>
+        <script src="js/fixedJS/angular-translate-storage-cookie.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ngInfiniteScroll/1.3.0/ng-infinite-scroll.min.js"></script>
+        <script src="js/fixedJS/ui-bootstrap-tpls.js"></script>
+        <script src="js/fixedJS/ng-map.js"></script>
+        <script src="js/fixedJS/ngActivityIndicator.min.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBx7i_ZJ1xZDEd6t474cZwwwl0f9-RGIsE&libraries=places"></script>
+        <script type="text/javascript" src="js/fixedJS/jquery.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/jquery.easing.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/materialize.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/nav.js"></script>
+        <script type="text/javascript" src="js/fixedJS/ngStorage.js"></script>
+        <script type="text/javascript" src="js/fixedJS/satellizer.js"></script>
+        <script type="text/javascript" src="js/fixedJS/skel.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/util.js"></script>
+        <script type="text/javascript" src="js/fixedJS/jquery.scrollex.min.js"></script>
+        <script type="text/javascript" src="js/fixedJS/jquery.scrolly.min.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_mainController.js"></script> 
+        <script src="js/applicationJS/controllers/CTRL_loginController.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_home.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_restaurantController.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_topicController.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_forgetPasswordController.js"></script>
+        <script src="js/applicationJS/controllers/CTRL_changePasswordController.js"></script>
+        <!--ng-file-upload-->
+        <script src="js/fixedJS/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+        <script src="js/fixedJS/ng-file-upload.min.js"></script>
+        <!--/ng-file-upload-->
+        <script src="js/applicationJS/directives/header/DRCTV_header.js"></script>
+        <script src="js/applicationJS/services/authenticate.js"></script>
+        <script src="js/applicationJS/services/webService.js"></script>
+        <script src="js/applicationJS/services/sharedService.js"></script>
+        <script src="js/applicationJS/services/saveFormDataService.js"></script>
+        <script src="js/applicationJS/services/modalUtils.js"></script>
+        <!-- user web-service for http POST  -->
+        <script src="js/applicationJS/services/webService.js"></script>
+        <!-- Inline Template -->
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-app.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-database.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyB14mOYqkv3f1TAOsfKbsclDe2K2aea_j4",
+    authDomain: "reviewverse-a5e38.firebaseapp.com",
+    databaseURL: "https://reviewverse-a5e38.firebaseio.com",
+    storageBucket: "reviewverse-a5e38.appspot.com",
+    messagingSenderId: "832077017234"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  // [START get_messaging_object]
+  // Retrieve Firebase Messaging object.
+  const messaging = firebase.messaging();
+  // [END get_messaging_object]
+  // IDs of divs that display Instance ID token UI or request permission UI.
+  const tokenDivId = 'token_div';
+  const permissionDivId = 'permission_div';
+  // [START refresh_token]
+  // Callback fired if Instance ID token is updated.
+  messaging.onTokenRefresh(function() {
+    messaging.getToken()
+    .then(function(refreshedToken) {
+      console.log('Token refreshed.');
+      // Indicate that the new Instance ID token has not yet been sent to the
+      // app server.
+      setTokenSentToServer(false);
+      // Send Instance ID token to app server.
+      sendTokenToServer(refreshedToken);
+      // [START_EXCLUDE]
+      // Display new Instance ID token and clear UI of all previous messages.
+      resetUI();
+      // [END_EXCLUDE]
+    })
+    .catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+    });
+  });
+  // [END refresh_token]
+  // [START receive_message]
+  // Handle incoming messages. Called when:
+  // - a message is received while the app has focus
+  // - the user clicks on an app notification created by a sevice worker
+  //   `messaging.setBackgroundMessageHandler` handler.
+  messaging.onMessage(function(payload) {
+    console.log("Message received. ", payload);
+    // [START_EXCLUDE]
+    // Update the UI to include the received message.
+    appendMessage(payload);
+    // [END_EXCLUDE]
+  });
+  // [END receive_message]
+  function resetUI() {
+    console.log('loading...');
+    // [START get_token]
+    // Get Instance ID token. Initially this makes a network call, once retrieved
+    // subsequent calls to getToken will return from cache.
+    messaging.getToken()
+    .then(function(currentToken) {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+        console.log(currentToken);
+      } else {
+        // Show permission request.
+        console.log('No Instance ID token available. Request permission to generate one.');
+        // Show permission UI.
+        updateUIForPushPermissionRequired();
+        setTokenSentToServer(false);
+      }
+    })
+    .catch(function(err) {
+      console.log('An error occurred while retrieving token. ', err);
+      setTokenSentToServer(false);
+    });
+  }
+  // [END get_token]
+  
+  // Send the Instance ID token your application server, so that it can:
+  // - send messages back to this app
+  // - subscribe/unsubscribe the token from topics
+  function sendTokenToServer(currentToken) {
+    if (!isTokenSentToServer()) {
+      console.log('Sending token to server...');
+		var data={
+			registrationToken: currentToken
+			}
+		var dataString=JSON.stringify(data);
+		console.log(dataString);
+		 $.ajax({
+            type: 'POST',
+            url: 'http://52.66.112.123/tokens',
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            traditional: true,
+            success: function (data) {
+                console.log('Sent Successfully');
+				setTokenSentToServer(true);
+            }
+        });      
+    } else {
+      console.log('Token already sent to server so won\'t send it again ' +
+          'unless it changes');
+    }
+  }
+  function isTokenSentToServer() {
+    if (window.localStorage.getItem('sentToServer') == 1) {
+          return true;
+    }
+    return false;
+  }
+  function setTokenSentToServer(sent) {
+    if (sent) {
+      window.localStorage.setItem('sentToServer', 1);
+    } else {
+      window.localStorage.setItem('sentToServer', 0);
+    }
+  }
+  function requestPermission() {
+    console.log('Requesting permission...');
+    // [START request_permission]
+    messaging.requestPermission()
+    .then(function() {
+      console.log('Notification permission granted.');
+      // TODO(developer): Retrieve an Instance ID token for use with FCM.
+      // [START_EXCLUDE]
+      // In many cases once an app has been granted notification permission, it
+      // should update its UI reflecting this.
+      resetUI();
+      // [END_EXCLUDE]
+    })
+    .catch(function(err) {
+      console.log('Unable to get permission to notify.', err);
+    });
+    // [END request_permission]
+  }
+  function deleteToken() {
+    // Delete Instance ID token.
+    // [START delete_token]
+    messaging.getToken()
+    .then(function(currentToken) {
+      messaging.deleteToken(currentToken)
+      .then(function() {
+        console.log('Token deleted.');
+        setTokenSentToServer(false);
+        // [START_EXCLUDE]
+        // Once token is deleted update UI.
+        resetUI();
+        // [END_EXCLUDE]
+      })
+      .catch(function(err) {
+        console.log('Unable to delete token. ', err);
+      });
+      // [END delete_token]
+    })
+    .catch(function(err) {
+      console.log('Error retrieving Instance ID token. ', err);
+    });
+  }
+  // Add a message to the messages element.
+  function appendMessage(payload) {
+    const messagesElement = document.querySelector('#messages');
+    const dataHeaderELement = document.createElement('h5');
+    const dataElement = document.createElement('pre');
+    dataElement.style = 'overflow-x:hidden;'
+    dataHeaderELement.textContent = 'Received message:';
+    dataElement.textContent = JSON.stringify(payload, null, 2);
+    messagesElement.appendChild(dataHeaderELement);
+    messagesElement.appendChild(dataElement);
+  }
+  requestPermission();
+  resetUI();
+</script>
+
+    </body>
+</html>

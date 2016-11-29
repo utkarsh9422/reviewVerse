@@ -1,0 +1,39 @@
+<!-- Page Wrapper -->
+<div>
+    <ul id="slide-out" class="side-nav">
+        <li class="userView">
+            <a ><img class="img-circle img-responsive userImg" src={{img}}></a>
+            <a ><span style="color:black;">{{username}}</span></a>
+            <a ><span style="color:black;">{{email}}</span></a>
+        </li>
+        <li><a ng-click="restaurant()"><i class="fa fa-user"></i>Profile</a></li>
+        <li><a ng-click="settings()"><i class="fa fa-cogs"></i>Settings</a></li>
+        <li><a ng-click="help()"><i class="fa fa-question-circle"></i>Help</a></li>
+        <li><div class="divider"></div></li>
+        <li><a><button class="btn btn-logout right-aligned waves-effect" ng-click="logout()" >Log Out  <i class="glyphicon glyphicon-log-out"></i></button></a></li>
+    </ul>
+    <div id="headerHome"> 
+        <a  data-activates="slide-out" class="button-collapse menuSideBar"><i style="font-size:30px;" class="fa fa-bars"></i></a>
+    </div>
+    <div class="container-fluid categories">
+        <div class="row">
+            <div class="col l4 s12 m6" ng-repeat="category in categories">
+                <div class="card animated fadeInDown">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="img/restaurant1.jpg">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{category.name}}<i class="fa fa-toggle-up right"></i></span>
+                        <p><a ng-click="restaurant();">Go to {{category.name}}</a></p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">Restaurant<i class="fa fa-close right"></i></span>
+                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    </div>
+                </div>      
+            </div>
+        </div>
+    </div>  
+
+</div>
+

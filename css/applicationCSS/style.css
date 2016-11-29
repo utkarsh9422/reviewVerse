@@ -1,0 +1,423 @@
+@charset "utf-8";
+html, body{
+    min-height: 100% !important;
+    height: 100%;
+}
+body{
+	margin:0px;
+	padding:0px;
+	font-family: 'LatoLight';
+	font-size:14px;
+	color:#333f4f;
+	background:#f4f4f4;
+	min-height:100%;
+	position:relative;
+	}
+
+h1, h2, h3, h4, h5, h6, ul, p{ margin:0px; padding:0px;}
+a:hover{
+	text-decoration:none;
+	}
+
+/********** Common Classes *******/
+
+.floatRit{float:right;}
+.width100{width:100%;}
+.minHeight{min-height:480px;}
+.marginTop20{margin-top:20px;}
+.marginLft10{margin-left:10px;}
+.marginTop40{margin-top:40px;}
+.marginBot35{margin-bottom:35px;}
+.marginBot10{margin-bottom:10px;}	
+.topBorder{border-top:1px solid #40ac99;}
+.ritBorder{border-right:1px solid #40ac99;}
+.paddingTop30{padding-top:30px;}
+.paddingTop6{padding-top:6px;}
+.paddingBottom40{padding-bottom:40px;}
+.marginBottom100{margin-bottom:100px;}
+.paddingLeftRight{padding:0px 30px;}
+.paddingLftRit10{padding:0px 10px;}
+.paddingLftRit15{padding:0px 15px;}
+.paddingTB15{ padding:15px 0;}
+.paddingTB{ padding:5px 0 15px;}
+.textCenter{ text-align:center;}
+.textRit{ text-align:right;}
+.paddingRight{padding-right:0px!important;}
+.height100{height:100%;}
+.colorOrange{color:#ff7c35;}
+.colorGreen{color:#00be6d!important;}
+.colorGray{color:#484444;}
+.borderlft{ border-left:1px solid #ccc;}
+.borderbtm{ border-bottom:1px solid #abbabc;}
+.borderbtm0{ border-bottom:0px!important;}
+.bordertop0{ border-top:0px;}
+.borderbtmdashed{ border-bottom:1px dashed #888;}
+.lineheight25{ line-height:25px!important;}
+.overflow{ overflow:hidden;}
+.whitebg{background:#fff; border-bottom:1px solid #ccc;}
+.padding0{ padding:0px!important;}
+.padding20{ padding:20px!important;}
+.padding5{ padding:5px!important;}
+.topRit{top:7px!important;right:6px!important;}
+.disTable{display:table;}
+.disTableCell{display:table-cell; vertical-align:middle;}
+
+@font-face {
+    font-family: 'LatoLight';
+    src: url('../fonts/LatoLight_0.eot');
+    src: url('../fonts/LatoLight_0.eot') format('embedded-opentype'),
+         url('../fonts/LatoLight_0.woff2') format('woff2'),
+         url('../fonts/LatoLight_0.woff') format('woff'),
+         url('../fonts/LatoLight_0.ttf') format('truetype'),
+         url('../fonts/LatoLight_0.svg#LatoLight_0') format('svg');
+}
+
+@font-face {
+    font-family: 'RalewayRegular';
+    src: url('../fonts/RalewayRegular.eot');
+    src: url('../fonts/RalewayRegular.eot') format('embedded-opentype'),
+         url('../fonts/RalewayRegular.woff2') format('woff2'),
+         url('../fonts/RalewayRegular.woff') format('woff'),
+         url('../fonts/RalewayRegular.ttf') format('truetype'),
+         url('../fonts/RalewayRegular.svg#RalewayRegular') format('svg');
+}
+
+@font-face {
+    font-family: 'RalewayLight';
+    src: url('../fonts/RalewayLight.eot');
+    src: url('../fonts/RalewayLight.eot') format('embedded-opentype'),
+         url('../fonts/RalewayLight.woff2') format('woff2'),
+         url('../fonts/RalewayLight.woff') format('woff'),
+         url('../fonts/RalewayLight.ttf') format('truetype'),
+         url('../fonts/RalewayLight.svg#RalewayLight') format('svg');
+}
+
+/************* Login Screen Starts ************/
+
+.login-bg{
+	background:url(../../img/login-body-bg.jpg) left top no-repeat;
+	background-size:cover;
+	}
+h1.logo{
+	text-align:center;
+	}
+h1.logo img{
+	display:inline;
+	padding:120px 0;
+	}
+.select-user{
+	width:100%;
+	overflow:hidden;
+	}
+.select-user p{
+	font-size:16px;
+	color:#fff;
+	font-family:LatoLight;
+	text-align:center;
+	}
+.select-user p span{
+	display:block;
+	border-bottom:1px solid #fff;
+	width:30%;
+	padding-top:10px;
+	text-align:center;
+	margin:0 auto;
+	}
+.user button{
+	font-family: 'RalewayRegular';
+	width:100%;
+	background:none;
+	border:1px solid #fff;
+	border-radius:50px;
+	color:#fff;
+	text-align:center;
+	margin-top:20px;
+	padding:10px;
+	text-transform:uppercase;
+	outline:none;
+	}
+.user button:focus{
+	color:#00be6d;
+	border:1px solid #00be6d;
+	}
+/****** Language Button ********/
+
+.language{
+	margin-top:10px;
+	}
+.language-btn{
+	width:80px; 
+	margin:0 auto; 
+	padding:20px 0;
+	}
+.language .btn{
+	padding:3px 10px;
+	border-radius:0px;
+	}
+.language .btn{
+	padding-bottom:0px;
+	}
+.language .btn-primary{
+	color:#afb1b2;
+	background: url(../../img/language-bg.png) left top repeat;
+	border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+	outline:none;
+	border:none;
+	font-family: 'LatoLight';
+	font-size:13px;
+	line-height:25px;
+	}
+.language .btn{padding: 0px 10px;}
+.btn-primary:focus,.btn-primary.focus{
+	color:#ff7c35;
+	}
+.btn-primary:hover{
+	background: url(../../img/language-bg.png) left top repeat;
+	}
+.btn-primary:active,.btn-primary.active,.open>.dropdown-toggle.btn-primary{
+	color:#ff7c35;
+	border:none;
+	}
+.btn-primary:active:hover,.btn-primary.active:hover,.open>.dropdown-toggle.btn-primary:hover,.btn-primary:active:focus,.btn-primary.active:focus,.open>.dropdown-toggle.btn-primary:focus,.btn-primary:active.focus,.btn-primary.active.focus,.open>.dropdown-toggle.btn-primary.focus{color:#ff7c35;background: url(../../img/language-bg.png) left top repeat;border:none;}.btn-primary:active,.btn-primary.active,.open>.dropdown-toggle.btn-primary{background-image:none}.btn-primary.disabled,.btn-primary[disabled],fieldset[disabled] .btn-primary,.btn-primary.disabled:hover,.btn-primary[disabled]:hover,fieldset[disabled] .btn-primary:hover,.btn-primary.disabled:focus,.btn-primary[disabled]:focus,fieldset[disabled] .btn-primary:focus,.btn-primary.disabled.focus,.btn-primary[disabled].focus,fieldset[disabled] .btn-primary.focus,.btn-primary.disabled:active,.btn-primary[disabled]:active,fieldset[disabled] .btn-primary:active,.btn-primary.disabled.active,.btn-primary[disabled].active,fieldset[disabled] .btn-primary.active{color:#ff7c35;}
+.btn:active, .btn.active{ box-shadow:none;background: url(../../img/language-bg.png) left top repeat;}
+
+/********** Modal Box ********/
+
+.modal-content {
+    position: relative;
+    background:url(../../img/login-bg.jpg) left top no-repeat;
+	background-size:cover;
+    border: 0px;
+    border: 0px;
+    border-radius:0px;
+    -webkit-box-shadow:none;
+    box-shadow:none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    outline: 0;
+}
+.modal-title{
+	font-family: 'RalewayRegular';
+	font-size:24px;
+	color:#fff;
+	text-align:center;
+	display:block;
+	}
+.modal-title span{
+	display:block;
+	font-size:14px;
+	font-family: 'RalewayLight';
+	text-align:center;
+	padding-left:22px;
+	}
+.close {
+    float: left;
+    font-size: 42px;
+    font-weight: normal!important;
+    color: #fff!important;
+}
+.modal-header{
+	border-bottom:0px;
+	margin-bottom:50px;
+	padding-top:30px;
+	}
+.modal-body input{
+	width:100%;
+	background:none;
+	border:none;
+	border-bottom:1px solid #ecefed;
+	color:#ecefed;
+	padding:5px 0;
+	font-family: 'LatoLight';
+	font-size:16px;
+	}
+.modal-body input:focus{
+	outline:none;
+	}
+.modal-body input::-webkit-input-placeholder {
+   color:#ecefed;
+}
+.modal-body input:-moz-placeholder { /* Firefox 18- */
+   color:#ecefed;
+}
+.modal-body input::-moz-placeholder {  /* Firefox 19+ */
+   color:#ecefed;
+}
+.modal-body input:-ms-input-placeholder {  
+   color:#ecefed;
+}
+form a{
+	color:#ff7c35;
+	font-size:12px;
+	font-family: 'RalewayRegular';
+	padding-top:25px;
+	display:block;
+	}
+form button{
+	border-radius:50px;
+	width:100%;
+	margin-top:30px;
+	background:#00be6d!important;
+	font-size:20px!important;
+	font-family: 'RalewayRegular'!important;
+	border-radius:50px!important;
+	}
+form button:hover{
+	background:#068d53!important;
+	}
+form button:focus{
+	outline:none!important;
+	}
+.dilog-footer{
+	text-align:center;
+	color:#ecefed;
+	font-size:15px;
+	font-family: 'RalewayLight';
+	padding-top:30px;
+	}
+.dilog-footer a{
+	color:#ff7c35;
+	}
+	
+/******* Register Page Starts **********/
+
+header{
+	height:60px;
+	background-color:#01353c;
+	overflow:hidden;
+	color:#fff;
+	text-align:center;
+	font-family:'RalewayRegular';
+	font-size:20px;
+	padding:15px;
+	}
+
+.register label{
+	width:100%;
+	padding:15px 3px 0 3px;
+	font-size:14px;
+	font-family: 'LatoLight';
+	color:#1c4030;
+	}
+
+.register label span a{
+	text-decoration:underline;
+	}
+.register input{
+	width:100%;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding:0 10px;
+	height:32px;
+	line-height:32px;
+	font-family: 'LatoLight';
+	font-size:14px;
+	color:#939e99;
+	}
+.register select{
+	width:100%;
+	border-radius:5px;
+	border:1px solid #ccc;
+	padding:0 10px;
+	height:32px;
+	line-height:32px;
+	font-family: 'LatoLight';
+	font-size:14px;
+	color:#939e99;
+	}
+.fa-map-marker{
+	color:#ff7c35;
+	font-size:18px;
+	font-weight:bold;
+	}
+/********* Checkbox **********/
+.custom-radio label.btn.active{ width:auto;}
+.custom-radio input[type="radio"]{ display:none;}
+.custom-radio label input[type="radio"]:checked ~ i.fa.fa-check-circle-o{
+	color:#00be6d!important;
+	}
+
+.custom-radio label.btn span {
+  font-size: 1.5em ;
+  color:#1c4030;
+}
+
+.custom-radio label input[type="radio"] ~ i.fa.fa-circle-o{
+    color: #c8c8c8;    display: inline;
+}
+.custom-radio label input[type="radio"] ~ i.fa.fa-check-circle-o{
+    display: none;
+}
+.custom-radio label input[type="radio"]:checked ~ i.fa.fa-circle-o{
+    display: none;
+}
+.custom-radio label input[type="radio"]:checked ~ i.fa.fa-check-circle-o{
+    color: #7AA3CC;    display: inline;
+}
+
+.addmore{
+	border:1px solid #ff7c35;
+	border-radius:8px;
+	background:#FFC;
+	padding:5px;
+	text-align:center;
+	font-size:18px;
+	width:230px;
+	margin-top:20px;
+	}
+.addmore a{
+	color:#ff7c35;
+	text-decoration:none;
+	display:block;
+	}
+.addmore a strong{
+	font-size:25px;
+	}
+
+footer{
+	position:fixed;
+	bottom:0px;
+	width:100%;
+	}
+footer button{
+	border:0px;
+	background:#00be6d;
+	height:60px;
+	font-family:'RalewayRegular';
+	color:#fff;
+	font-size:20px;
+	line-height:40px;
+	width:100%;
+}
+.event-title {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 40px;
+    margin-top: 60px;
+    text-align: center;
+}
+.event-title p { margin-bottom: 5px }
+.event-title h2 {
+    color: #212121;
+    font-size: 24px;
+}
+.event-content {
+    padding: 0 50px;
+    text-align: center;
+}
+.topicUpvotes{
+    position: absolute;
+    bottom:0;
+}
+.event-thumb img{
+  width: 50px;
+  height: 100px;
+}
+.emptySpace{
+    height :50px;
+    background: transparent;
+    width:100%;
+}

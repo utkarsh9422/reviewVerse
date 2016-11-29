@@ -1,0 +1,216 @@
+/*TextStyle CSS*/
+h1 {
+    font-size:40px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.5) 3px 2px 3px;
+}
+h2 {
+    font-size:30px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.5) 3px 2px 3px;
+}
+h3{
+    font-size:25px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.8) -1px -1px 1px,rgba(0,0,0,.5) 1px 1px 1px;
+}
+h4{
+    font-size:22px;
+    color: #ef5350;
+    text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+}
+.add-on .input-group-btn > .btn {
+    border-left-width:0;left:-2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.navigationLinks{
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+#topic{
+    margin-top: 50px;
+    width:70%;
+}
+#topic:first-child{
+    margin-top:110px;
+}
+.madalHeader{
+    height:15px;
+}
+.userImg{
+    height:6px;
+    width:6px;
+}
+.topicImage{
+    border-radius:10px;
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+    box-shadow:none;
+    -webkit-box-shadow:none; 
+    border-color:#cccccc; 
+}
+.form-control{width:20%}
+.btn-logout{
+    height:34px;
+    font-size:14px;
+    color:rgba(0,0,0,0.8);
+    background:transparent;
+    margin-top:10px;
+    margin-left: 10px;
+    border-radius: 12px;    
+}
+.btn-logout:hover{
+    background:rgba(0,0,0,0.2);
+}
+.btn-small{
+    color:rgba(0,0,0,0.8);
+    background:white;
+    border-radius: 10px;
+}
+.btn-smalll:hover{
+    background:rgba(0,0,0,0.2);
+}
+.btn-small-2{
+    color:rgba(0,0,0,0.8);
+    background:#80cbc4;
+    border-radius: 4px;
+}
+.reviews{
+    background-color: transparent;
+    border-radius:10px;
+    color: #ef5350;
+}
+.postReview{
+    background-color: transparent;
+    border-radius:10px;
+}
+.reviewBody{
+    color:#0059bc;
+    font-weight: bold;
+    padding:5px;
+}
+.reviewCard{
+    border: 0.5px solid rgba(0,0,0,0.3);
+    margin:10px;
+    border-radius:5px;
+    background: #fff; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(left top, #fff, #B0E5FB); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #fff, #B0E5FB); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right,#fff, #B0E5FB); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #fff, #B0E5FB); /* Standard syntax */
+}
+.reviewerName{
+/*    color: #4db6ac;*/
+}
+.reviewUpvotes{
+}
+/*rating CSS*/
+.rating {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.rating li {
+    padding: 1px;
+    color: #ddd;
+    font-size: 20px;
+    text-shadow: .05em .05em #aaa;
+    list-style-type: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.rating li :hover:before {
+    color:#6699ff;
+}
+.rating li.filled {
+    color: #fd0;
+}
+
+.rating.readonly li.filled {
+    color: #666;
+}
+
+.average-rating-container {
+    position: relative;
+    height: 31px;
+    width: 105px;
+    overflow: hidden;
+}
+
+.average-rating-container .background,
+.average-rating-container .foreground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+select{display: block;}
+.carousel{
+    height:auto;
+}
+#sideBar{
+    width:15%;
+    float:left;
+}
+.emptySpace{
+    height:45px;
+    text-align: center;
+}
+.seeMoreButton{
+    text-align: center;
+    background:white;
+    padding:5px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+.seeMoreButton:hover{
+    background:rgba(0,0,0,0.2);
+}
+.likeButton{
+    background:transparent;
+    border:none;
+    color:black;
+    cursor: pointer;
+}
+.likeButton:disabled{
+    color:#aaa;
+    cursor: no-drop;
+}
+.topicLeft{
+    float:left;
+}
+.topicRight{
+    float:right;
+}
+@media screen and (max-width: 768px) {
+#topic{
+    width:100%;
+    margin-top:50px;
+}
+#topic:first-child{
+    margin-top: 130px;
+}
+.carousel{
+    height:210px;
+}
+#sideBar{
+    margin-top:-70px;
+    width:45%;
+    float:right;
+    margin-right:4%;
+}
+.emptySpace{
+    height:10px;
+}
+.topicLeft{
+    float:none;
+}
+.topicRight{
+    float:none;
+}
+}
